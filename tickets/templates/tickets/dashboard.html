@@ -1,0 +1,254 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Dashboard - TIX AI
+{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+
+        <h1 class="mb-1">
+            Dashboard
+        </h1>
+
+        <p class="text-muted">
+            Resumen general del sistema de soporte TI
+        </p>
+
+    </div>
+
+    <a
+        href="{% url 'nuevo_ticket' %}"
+        class="btn btn-primary"
+    >
+        + Nuevo Ticket
+    </a>
+
+</div>
+
+
+<!-- TARJETAS -->
+
+<div class="row g-4 mb-5">
+
+    <div class="col-md-3">
+
+        <div class="card shadow-sm h-100">
+
+            <div class="card-body">
+
+                <h6 class="text-muted">
+                    Total Tickets
+                </h6>
+
+                <h2>
+                    {{ total_tickets }}
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="col-md-3">
+
+        <div class="card shadow-sm h-100">
+
+            <div class="card-body">
+
+                <h6 class="text-muted">
+                    Abiertos
+                </h6>
+
+                <h2>
+                    {{ tickets_abiertos }}
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="col-md-3">
+
+        <div class="card shadow-sm h-100">
+
+            <div class="card-body">
+
+                <h6 class="text-muted">
+                    En proceso
+                </h6>
+
+                <h2>
+                    {{ tickets_proceso }}
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="col-md-3">
+
+        <div class="card shadow-sm h-100">
+
+            <div class="card-body">
+
+                <h6 class="text-muted">
+                    Cerrados
+                </h6>
+
+                <h2>
+                    {{ tickets_cerrados }}
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- GRÁFICOS -->
+
+<div class="row g-4">
+
+
+    <!-- GRÁFICO CATEGORÍAS -->
+
+    <div class="col-lg-7">
+
+        <div class="card shadow-sm h-100">
+
+            <div class="card-body">
+
+                <h5 class="mb-4">
+                    Tickets por categoría
+                </h5>
+
+                <canvas id="categoriasChart"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- GRÁFICO ESTADOS -->
+
+    <div class="col-lg-5">
+
+        <div class="card shadow-sm h-100">
+
+            <div class="card-body">
+
+                <h5 class="mb-4">
+                    Estado de los tickets
+                </h5>
+
+                <canvas id="estadosChart"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block extra_js %}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+{{ categorias_labels|json_script:"categorias-labels" }}
+{{ categorias_data|json_script:"categorias-data" }}
+{{ estados_labels|json_script:"estados-labels" }}
+{{ estados_data|json_script:"estados-data" }}
+
+<script>
+
+    const categoriasLabels = JSON.parse(
+        document.getElementById('categorias-labels').textContent
+    );
+
+    const categoriasData = JSON.parse(
+        document.getElementById('categorias-data').textContent
+    );
+
+    const estadosLabels = JSON.parse(
+        document.getElementById('estados-labels').textContent
+    );
+
+    const estadosData = JSON.parse(
+        document.getElementById('estados-data').textContent
+    );
+
+
+    new Chart(
+        document.getElementById('categoriasChart'),
+        {
+            type: 'bar',
+
+            data: {
+                labels: categoriasLabels,
+
+                datasets: [{
+                    label: 'Cantidad de tickets',
+                    data: categoriasData
+                }]
+            },
+
+            options: {
+                responsive: true,
+
+                scales: {
+                    y: {
+                        beginAtZero: true,
+
+                        ticks: {
+                            precision: 0
+                        }
+                    }
+                }
+            }
+        }
+    );
+
+
+    new Chart(
+        document.getElementById('estadosChart'),
+        {
+            type: 'doughnut',
+
+            data: {
+                labels: estadosLabels,
+
+                datasets: [{
+                    data: estadosData
+                }]
+            },
+
+            options: {
+                responsive: true
+            }
+        }
+    );
+
+</script>
+
+{% endblock %}

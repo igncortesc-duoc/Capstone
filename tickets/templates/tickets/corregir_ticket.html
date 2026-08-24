@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Corregir clasificación - TIX AI
+{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+    <div class="col-lg-7">
+
+        <div class="card shadow-sm">
+
+            <div class="card-body p-4">
+
+                <h1>
+                    Corregir clasificación
+                </h1>
+
+                <p class="text-muted">
+
+                    Corrige la categoría si la predicción realizada por el modelo no es correcta.
+
+                </p>
+
+                <hr>
+
+
+                <h5>
+                    {{ ticket.asunto }}
+                </h5>
+
+                <p>
+                    {{ ticket.descripcion }}
+                </p>
+
+
+                <div class="alert alert-info">
+
+                    <strong>
+                        Predicción de la IA:
+                    </strong>
+
+                    {{ ticket.categoria_predicha }}
+
+                </div>
+
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+
+                    <div class="mb-4">
+
+                        <label class="form-label">
+
+                            Categoría correcta
+
+                        </label>
+
+
+                        <select
+                            name="categoria_corregida"
+                            class="form-select"
+                            required
+                        >
+
+                            <option value="">
+
+                                Selecciona una categoría
+
+                            </option>
+
+
+                            {% for valor, nombre in ticket.CATEGORIAS %}
+
+                                <option
+                                    value="{{ valor }}"
+
+                                    {% if ticket.categoria_corregida == valor %}
+
+                                        selected
+
+                                    {% endif %}
+
+                                >
+
+                                    {{ nombre }}
+
+                                </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="d-flex gap-2">
+
+                        <button
+                            type="submit"
+                            class="btn btn-success"
+                        >
+
+                            Guardar corrección
+
+                        </button>
+
+
+                        <a
+                            href="{% url 'detalle_ticket' ticket.id %}"
+                            class="btn btn-outline-secondary"
+                        >
+
+                            Cancelar
+
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

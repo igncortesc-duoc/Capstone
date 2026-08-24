@@ -1,0 +1,66 @@
+asunto,descripcion,categoria
+Olvide mi contraseña,No puedo ingresar a mi cuenta porque olvide mi contraseña,Accesos
+No puedo iniciar sesión,El sistema indica que mi usuario o contraseña es incorrecto,Accesos
+Cuenta bloqueada,Mi cuenta fue bloqueada después de varios intentos,Accesos
+Necesito restablecer mi clave,Quiero cambiar la contraseña de mi cuenta,Accesos
+No tengo acceso al sistema,Mi usuario no tiene permisos para ingresar a la plataforma,Accesos
+Problema con mi usuario,No puedo acceder a mi cuenta institucional,Accesos
+Contraseña vencida,El sistema me solicita cambiar mi contraseña porque venció,Accesos
+No puedo entrar al correo,Mi cuenta de correo no permite iniciar sesión,Accesos
+Usuario bloqueado,Mi usuario aparece bloqueado en el sistema,Accesos
+Necesito permisos,Necesito acceso a una carpeta compartida,Accesos
+
+Computador no enciende,Mi computador no prende al presionar el botón,Hardware
+Notebook lento,Mi notebook tarda demasiado tiempo en iniciar,Hardware
+Problema con el teclado,Algunas teclas de mi teclado dejaron de funcionar,Hardware
+Mouse no funciona,El mouse dejó de responder correctamente,Hardware
+Pantalla negra,El computador enciende pero la pantalla permanece negra,Hardware
+Impresora no imprime,La impresora recibe el documento pero no imprime,Hardware
+Computador se apaga,Mi computador se apaga inesperadamente,Hardware
+Problema con monitor,El monitor no muestra imagen,Hardware
+Disco duro lleno,Mi computador indica que no tiene espacio disponible,Hardware
+Notebook se calienta,El equipo se calienta demasiado después de algunos minutos,Hardware
+
+Excel se cierra,Microsoft Excel se cierra inesperadamente mientras trabajo,Software
+Word no abre,Microsoft Word no inicia correctamente,Software
+Error en programa,Una aplicación muestra un mensaje de error al ejecutarse,Software
+Programa lento,El software tarda demasiado tiempo en responder,Software
+Aplicación no funciona,Un programa dejó de funcionar después de una actualización,Software
+Error al instalar programa,No puedo instalar una aplicación en mi computador,Software
+Sistema se congela,La aplicación queda congelada y no responde,Software
+Problema con navegador,Google Chrome se cierra inesperadamente,Software
+Actualización con error,Después de actualizar el programa comenzó a fallar,Software
+Licencia de software,El sistema indica que la licencia del programa expiró,Software
+
+No tengo internet,Mi computador no puede conectarse a internet,Red
+WiFi no funciona,No puedo conectarme a la red inalámbrica,Red
+Internet lento,La conexión a internet está demasiado lenta,Red
+No detecta WiFi,Mi notebook no encuentra ninguna red inalámbrica,Red
+Sin conexión,El equipo indica que no tiene conexión de red,Red
+VPN no conecta,No puedo conectarme a la red mediante VPN,Red
+Problema con red,No puedo acceder a los recursos de la red interna,Red
+Cable de red,El computador no detecta el cable Ethernet,Red
+Internet se desconecta,La conexión se corta constantemente,Red
+No puedo acceder al servidor,El servidor no responde desde mi computador,Red
+
+Correo sospechoso,Recibí un correo electrónico con un enlace sospechoso,Seguridad
+Posible phishing,Recibí un mensaje que solicita mis datos personales,Seguridad
+Archivo sospechoso,Descargué un archivo que parece contener un virus,Seguridad
+Actividad extraña,Detecté actividad sospechosa en mi cuenta,Seguridad
+Cuenta comprometida,Creo que alguien ingresó a mi cuenta sin autorización,Seguridad
+Mensaje fraudulento,Recibí un mensaje que parece ser una estafa,Seguridad
+Posible virus,Mi computador muestra señales de estar infectado,Seguridad
+Alerta de seguridad,El antivirus detectó una amenaza en mi equipo,Seguridad
+Acceso desconocido,Veo un inicio de sesión que no reconozco,Seguridad
+Enlace peligroso,Abrí un enlace que podría ser malicioso,Seguridad
+
+Solicitar cuenta,Necesito crear una cuenta para utilizar el sistema,Consulta general
+Consulta sobre sistema,Quiero saber cómo funciona la plataforma,Consulta general
+Información de soporte,Necesito información sobre el servicio de soporte técnico,Consulta general
+Horario de atención,Quiero conocer el horario de atención del área TI,Consulta general
+Solicitar información,Tengo una consulta sobre los servicios disponibles,Consulta general
+Cómo usar el sistema,Necesito ayuda para aprender a utilizar la plataforma,Consulta general
+Consulta general,Tengo una duda sobre el funcionamiento del sistema,Consulta general
+Información sobre servicio,Quiero conocer qué servicios ofrece el área de informática,Consulta general
+Solicitud de ayuda,Necesito orientación sobre un procedimiento,Consulta general
+Pregunta sobre plataforma,Tengo una pregunta relacionada con el sistema institucional,Consulta general

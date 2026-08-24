@@ -1,0 +1,234 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Detalle del Ticket - TIX AI
+{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+
+        <h1>
+            Detalle del Ticket
+        </h1>
+
+        <p class="text-muted">
+            Información y resultado de clasificación
+        </p>
+
+    </div>
+
+    <a href="{% url 'lista_tickets' %}" class="btn btn-outline-secondary">
+        Volver
+    </a>
+
+</div>
+
+
+<div class="row g-4">
+
+    <div class="col-lg-8">
+
+        <div class="card shadow-sm">
+
+            <div class="card-body p-4">
+
+                <h3>
+                    {{ ticket.asunto }}
+                </h3>
+
+                <hr>
+
+                <h6 class="text-muted">
+                    Descripción
+                </h6>
+
+                <p>
+                    {{ ticket.descripcion }}
+                </p>
+
+                <hr>
+
+                <p>
+
+                    <strong>
+                        Estado:
+                    </strong>
+
+                    {% if ticket.estado == "Abierto" %}
+
+                    <span class="badge bg-danger">
+                        Abierto
+                    </span>
+
+                    {% elif ticket.estado == "En proceso" %}
+
+                    <span class="badge bg-warning text-dark">
+                        En proceso
+                    </span>
+
+                    {% else %}
+
+                    <span class="badge bg-success">
+                        Cerrado
+                    </span>
+
+                    {% endif %}
+
+                </p>
+
+
+                <p>
+
+                    <strong>
+                        Fecha:
+                    </strong>
+
+                    {{ ticket.fecha_creacion|date:"d/m/Y H:i" }}
+
+                </p>
+
+                <p>
+
+                    <strong>
+                        Última actualización:
+                    </strong>
+
+                    {{ ticket.fecha_actualizacion|date:"d/m/Y H:i" }}
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="col-lg-4">
+
+        <div class="card shadow-sm border-primary">
+
+            <div class="card-body p-4">
+
+                <h5 class="mb-4">
+                    Resultado IA
+                </h5>
+
+
+                <p class="text-muted mb-1">
+                    Categoría predicha
+                </p>
+
+                <h3>
+
+                    {% if ticket.categoria_predicha %}
+
+                    {{ ticket.categoria_predicha }}
+
+                    {% else %}
+
+                    Sin clasificación
+
+                    {% endif %}
+
+                </h3>
+
+
+                <hr>
+
+
+                <p class="text-muted mb-1">
+                    Confianza
+                </p>
+
+                <h4>
+
+                    {% if ticket.confianza %}
+
+                    {{ ticket.confianza|floatformat:2 }}%
+
+                    {% else %}
+
+                    --
+
+                    {% endif %}
+
+                </h4>
+
+
+                <hr>
+
+
+                <p class="text-muted mb-1">
+                    Categoría final
+                </p>
+
+                <h4>
+
+                    {% if ticket.categoria_corregida %}
+
+                    {{ ticket.categoria_corregida }}
+
+                    {% else %}
+
+                    {{ ticket.categoria_predicha }}
+
+                    {% endif %}
+
+                </h4>
+
+                <hr>
+
+                <h5 class="mb-3">
+                    Estado del ticket
+                </h5>
+
+                <form method="POST" action="{% url 'cambiar_estado' ticket.id %}">
+
+                    {% csrf_token %}
+
+                    <select name="estado" class="form-select mb-3">
+
+                        <option value="Abierto" {% if ticket.estado=='Abierto' %} selected {% endif %}>
+                            Abierto
+                        </option>
+
+                        <option value="En proceso" {% if ticket.estado=="En proceso" %} selected {% endif %}>
+                            En proceso
+                        </option>
+
+                        <option value="Cerrado" {% if ticket.estado=="Cerrado" %} selected {% endif %}>
+                            Cerrado
+                        </option>
+
+                    </select>
+
+                    <button type="submit" class="btn btn-primary w-100">
+                        Actualizar estado
+                    </button>
+
+                </form>
+
+
+                <a href="{% url 'corregir_ticket' ticket.id %}" class="btn btn-outline-primary w-100 mt-3">
+                    Corregir clasificación
+                </a>
+
+            </div>
+
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+</div>
+
+{% endblock %}
