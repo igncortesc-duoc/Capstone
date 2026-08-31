@@ -36,9 +36,10 @@ Nuevo Ticket - TIX AI
 
                         <input
                             type="text"
-                            name="asunto"
+                            name="titulo"
                             class="form-control"
                             placeholder="Ejemplo: No puedo conectarme al WiFi"
+                            maxlength="150"
                             required
                         >
 
@@ -56,6 +57,7 @@ Nuevo Ticket - TIX AI
                             class="form-control"
                             rows="7"
                             placeholder="Describe detalladamente el problema..."
+                            maxlength="1000"
                             required
                         ></textarea>
 
@@ -72,8 +74,8 @@ Nuevo Ticket - TIX AI
                         </button>
 
 
-                        <a
-                            href="{% url 'dashboard' %}"
+                        
+                        <a href="{% url 'dashboard' %}"
                             class="btn btn-outline-secondary"
                         >
                             Cancelar

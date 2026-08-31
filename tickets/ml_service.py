@@ -3,46 +3,36 @@ import joblib
 from django.conf import settings
 
 
-# Ruta principal del proyecto
 BASE_DIR = settings.BASE_DIR
 
+# Modelo de categoría
+MODELO_PATH = os.path.join(BASE_DIR, 'machine_learning', 'modelos', 'modelo_ticket.joblib')
+VECTORIZADOR_PATH = os.path.join(BASE_DIR, 'machine_learning', 'modelos', 'vectorizador.joblib')
 
-# Rutas de los archivos del modelo
-MODELO_PATH = os.path.join(
-    BASE_DIR,
-    'machine_learning',
-    'modelos',
-    'modelo_ticket.joblib'
-)
-
-VECTORIZADOR_PATH = os.path.join(
-    BASE_DIR,
-    'machine_learning',
-    'modelos',
-    'vectorizador.joblib'
-)
+# Modelo de prioridad
+MODELO_PRIORIDAD_PATH = os.path.join(BASE_DIR, 'machine_learning', 'modelos', 'modelo_prioridad.joblib')
+VECTORIZADOR_PRIORIDAD_PATH = os.path.join(BASE_DIR, 'machine_learning', 'modelos', 'vectorizador_prioridad.joblib')
 
 
-# Cargar modelo y vectorizador
 modelo = joblib.load(MODELO_PATH)
-
 vectorizador = joblib.load(VECTORIZADOR_PATH)
 
+modelo_prioridad = joblib.load(MODELO_PRIORIDAD_PATH)
+vectorizador_prioridad = joblib.load(VECTORIZADOR_PRIORIDAD_PATH)
 
-def predecir_categoria(asunto, descripcion):
 
-    # Unir asunto y descripción
-    texto = f"{asunto} {descripcion}"
+def predecir_categoria(titulo, descripcion):
 
-    # Transformar texto usando TF-IDF
+    texto = f"{titulo} {descripcion}"
+
+    # --- Categoría ---
     texto_vectorizado = vectorizador.transform([texto])
-
-    # Realizar predicción
     categoria = modelo.predict(texto_vectorizado)[0]
-
-    # Obtener confianza
     probabilidades = modelo.predict_proba(texto_vectorizado)[0]
-
     confianza = max(probabilidades) * 100
 
-    return categoria, confianza
+    # --- Prioridad ---
+    texto_vectorizado_prioridad = vectorizador_prioridad.transform([texto])
+    prioridad = modelo_prioridad.predict(texto_vectorizado_prioridad)[0]
+
+    return categoria, confianza, prioridad

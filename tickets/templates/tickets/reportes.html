@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Reportes - TIX AI
+{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1>Reportes y Análisis</h1>
+        <p class="text-muted mb-0">
+            Métricas de rendimiento operativo, tiempos de resolución e impacto de la Inteligencia Artificial.
+        </p>
+    </div>
+</div>
+
+<div class="row g-4 mb-4">
+
+    <div class="col-lg-6">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h6 class="mb-3">Tickets por Mes</h6>
+
+                {% if tickets_por_mes_data %}
+                <canvas id="chartTicketsMes" height="140"></canvas>
+                {% else %}
+                <p class="text-muted mb-0">Aún no hay tickets suficientes para graficar.</p>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h6 class="mb-3">Tiempo Promedio de Resolución (Horas)</h6>
+
+                {% if resolucion_data %}
+                <canvas id="chartResolucion" height="140"></canvas>
+                {% else %}
+                <p class="text-muted mb-0">Aún no hay tickets cerrados para calcular este promedio.</p>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row g-4">
+
+    <div class="col-lg-6">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+
+                <h6 class="mb-3">Rendimiento por Técnico</h6>
+
+                {% if rendimiento_tecnicos %}
+
+                {% for t in rendimiento_tecnicos %}
+                <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                    <span>{{ t.nombre }}</span>
+                    <span class="text-muted small">{{ t.resueltos }} resueltos</span>
+                    <span class="badge bg-success">{{ t.porcentaje }}%</span>
+                </div>
+                {% endfor %}
+
+                {% else %}
+
+                <p class="text-muted mb-0">
+                    No hay tickets asignados a técnicos todavía.
+                </p>
+
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+
+                <h6 class="mb-3">Rendimiento IA vs Analistas</h6>
+
+                {% if total_con_ia %}
+
+                <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                    <span>Precisión de Diagnóstico</span>
+                    <span class="badge bg-primary">IA: {{ precision_ia }}%</span>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                    <span>Tiempo Promedio de Respuesta</span>
+                    <span>
+                        <span class="badge bg-primary">
+                            IA: {% if tiempo_ia_prom_seg %}{{ tiempo_ia_prom_seg }}s{% else %}--{% endif %}
+                        </span>
+                        <span class="badge bg-secondary">
+                            Humano: {% if tiempo_humano_prom_horas %}{{ tiempo_humano_prom_horas }}h{% else %}--{% endif %}
+                        </span>
+                    </span>
+                </div>
+
+                <p class="text-muted small mt-3 mb-0">
+                    Basado en {{ total_con_ia }} tickets clasificados por IA.
+                </p>
+
+                {% else %}
+
+                <p class="text-muted mb-0">
+                    Aún no hay suficientes tickets clasificados por IA para calcular estas métricas.
+                </p>
+
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+<script>
+
+    {% if tickets_por_mes_data %}
+    new Chart(document.getElementById('chartTicketsMes'), {
+        type: 'line',
+        data: {
+            labels: {{ tickets_por_mes_labels | safe }},
+        datasets: [{
+            label: 'Tickets',
+            data: {{ tickets_por_mes_data | safe }},
+        borderColor: '#6366f1',
+        backgroundColor: 'rgba(99,102,241,0.1)',
+        tension: 0.3,
+        fill: true,
+        }]
+    },
+        options: { plugins: { legend: { display: false } } }
+});
+    {% endif %}
+
+    {% if resolucion_data %}
+    new Chart(document.getElementById('chartResolucion'), {
+        type: 'bar',
+        data: {
+            labels: {{ resolucion_labels| safe }},
+        datasets: [{
+            label: 'Horas promedio',
+            data: {{ resolucion_data| safe }},
+        backgroundColor: ['#6366f1', '#22c55e', '#f97316', '#ef4444', '#0ea5e9', '#a855f7'],
+        }]
+    },
+        options: { plugins: { legend: { display: false } } }
+});
+    {% endif %}
+
+</script>
+
+{% endblock %}

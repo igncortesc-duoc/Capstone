@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Bienvenido - TIX AI
+{% endblock %}
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/style.css' %}"
+>
+
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="tix-layout">
+
+    
+
+    <main class="tix-main">
+
+        <div class="tix-header">
+
+            <div>
+                <h2 class="fw-bold mb-1">
+                    Bienvenido al Sistema de Soporte TixAI
+                </h2>
+                <p class="text-muted mb-0">
+                    Gestión inteligente de incidentes, automatización de solicitudes y resolución asistida por IA.
+                </p>
+            </div>
+
+            <div class="tix-date-pill">
+                <i class="bi bi-calendar3"></i>
+                {% now "l, j \d\e F" %}
+            </div>
+
+        </div>
+
+        <div class="tix-card-dark">
+
+            <h5>
+                <span class="tix-icon-badge"><i class="bi bi-gear-fill"></i></span>
+                Descripción de la Plataforma
+            </h5>
+
+            <p>
+                TixAI centraliza la atención de soporte técnico mediante clasificación automática por IA,
+                seguimiento en tiempo real de incidentes y asignación inteligente según carga de trabajo.
+            </p>
+
+        </div>
+
+        <div class="tix-card-dark">
+
+            <h5>
+                <span class="tix-icon-badge"><i class="bi bi-shield-lock-fill"></i></span>
+                Acceso al Sistema
+            </h5>
+
+            <p>
+                Ingresa con tus credenciales corporativas para acceder a las funciones correspondientes a tu rol.
+            </p>
+
+        </div>
+
+        <div class="tix-roles-card">
+
+            <div class="tix-role-row">
+                <div class="tix-role-name">Clientes</div>
+                <div class="tix-role-desc">Permite la creación y seguimiento continuo de tickets de soporte.</div>
+            </div>
+
+            <div class="tix-role-row">
+                <div class="tix-role-name">Técnicos</div>
+                <div class="tix-role-desc">Facilita la resolución de incidencias con diagnósticos y sugerencias de IA.</div>
+            </div>
+
+            <div class="tix-role-row">
+                <div class="tix-role-name">Administradores</div>
+                <div class="tix-role-desc">Proporciona visibilidad global, reportes de rendimiento y control de SLAs.</div>
+            </div>
+
+        </div>
+
+        <p class="tix-footer-text mb-1">
+            Conexión encriptada mediante protocolo SSL corporativo.
+        </p>
+
+        <p class="tix-footer-text mb-0">
+            <strong>Estado de Servicios:</strong>
+            <span class="tix-status-dot"></span>
+            Todos los sistemas operativos (SLA 99.9%)
+        </p>
+
+    </main>
+
+</div>
+
+{% endblock %}
+
+
+{% block extra_js %}
+
+
+{% endblock %}

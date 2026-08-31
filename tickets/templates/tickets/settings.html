@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Configuración - TIX AI
+{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+    <div class="col-lg-8">
+
+        <div class="card shadow-sm">
+
+            <div class="card-body p-4">
+
+                <h1 class="mb-1">
+                    Configuración
+                </h1>
+
+                <p class="text-muted mb-4">
+                    Personaliza tu experiencia dentro de TIX AI.
+                </p>
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+
+                        <label class="form-label" for="id_tema">
+                            Tema
+                        </label>
+
+                        <select name="tema" id="id_tema" class="form-select">
+
+                            <option value="Claro" {% if settings.tema == "Claro" %} selected {% endif %}>
+                                Claro
+                            </option>
+
+                            <option value="Oscuro" {% if settings.tema == "Oscuro" %} selected {% endif %}>
+                                Oscuro
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <label class="form-label" for="id_idioma">
+                            Idioma
+                        </label>
+
+                        <select name="idioma" id="id_idioma" class="form-select">
+
+                            <option value="Español" {% if settings.idioma == "Español" %} selected {% endif %}>
+                                Español
+                            </option>
+
+                            <option value="English" {% if settings.idioma == "English" %} selected {% endif %}>
+                                English
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="mb-4">
+
+                        <label class="form-label" for="id_interfaz">
+                            Densidad de interfaz
+                        </label>
+
+                        <select name="interfaz" id="id_interfaz" class="form-select">
+
+                            <option value="Cómoda" {% if settings.interfaz == "Cómoda" %} selected {% endif %}>
+                                Cómoda
+                            </option>
+
+                            <option value="Compacta" {% if settings.interfaz == "Compacta" %} selected {% endif %}>
+                                Compacta
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="d-flex gap-2">
+
+                        <button type="submit" class="btn btn-primary">
+                            Guardar cambios
+                        </button>
+
+                        <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary">
+                            Cancelar
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <div class="card shadow-sm mt-4">
+
+            <div class="card-body p-4">
+
+                <h5 class="mb-3">
+                    Cuenta
+                </h5>
+
+                <p class="mb-1">
+                    <strong>Nombre:</strong> {{ settings.usuario.first_name }} {{ settings.usuario.last_name }}
+                </p>
+
+                <p class="mb-3">
+                    <strong>Correo:</strong> {{ settings.usuario.email }}
+                </p>
+
+                <a href="{% url 'logout' %}" class="btn btn-outline-danger btn-sm">
+                    Cerrar sesión
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

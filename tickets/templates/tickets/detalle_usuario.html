@@ -1,0 +1,237 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{{ usuario.first_name }} {{ usuario.last_name }} - TIX AI
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/detalle_usuario.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<a href="{% url 'lista_usuarios' %}" class="text-decoration-none text-muted mb-3 d-inline-block">
+    <i class="bi bi-arrow-left"></i>
+    Volver a usuarios
+</a>
+
+<div class="du-header">
+
+    <div class="du-avatar">
+        {{ usuario.first_name|first|upper }}{{ usuario.last_name|first|upper }}
+    </div>
+
+    <div class="du-header-info">
+        <h2>
+            {{ usuario.first_name }} {{ usuario.last_name }}
+        </h2>
+        <p>
+            <i class="bi bi-envelope"></i>
+            {{ usuario.email }}
+        </p>
+
+        {% if usuario.is_superuser %}
+        <span class="du-badge-rol">Administrador</span>
+        {% elif rol_actual %}
+        <span class="du-badge-rol">{{ rol_actual }}</span>
+        {% else %}
+        <span class="du-badge-rol">Sin rol</span>
+        {% endif %}
+
+    </div>
+
+</div>
+
+<div class="row">
+
+    <div class="col-lg-4">
+
+        <div class="du-card">
+
+            <h6>
+                <i class="bi bi-person-badge"></i>
+                Información de la cuenta
+            </h6>
+
+            <div class="du-info-row">
+                <span class="du-info-label">ID Usuario</span>
+                <span class="du-info-value">{{ usuario.id }}</span>
+            </div>
+
+            <div class="du-info-row">
+                <span class="du-info-label">Fecha de registro</span>
+                <span class="du-info-value">{{ usuario.date_joined|date:"d/m/Y" }}</span>
+            </div>
+
+            <div class="du-info-row">
+                <span class="du-info-label">Último acceso</span>
+                <span class="du-info-value">{{ usuario.last_login|date:"d/m/Y H:i"|default:"Nunca" }}</span>
+            </div>
+
+            <div class="du-info-row">
+                <span class="du-info-label">Estado</span>
+                <span class="du-info-value">
+
+                    {% if usuario.is_active %}
+                    <span class="du-status-dot du-status-activo"></span>Activo
+                    {% else %}
+                    <span class="du-status-dot du-status-inactivo"></span>Inactivo
+                    {% endif %}
+
+                </span>
+            </div>
+
+        </div>
+
+        {% if es_admin %}
+
+        <div class="du-card">
+
+            <h6>
+                <i class="bi bi-shield-lock"></i>
+                Gestionar rol y especialidades
+            </h6>
+
+            <form method="POST" action="{% url 'gestionar_usuario' usuario.id %}">
+
+                {% csrf_token %}
+
+                <label class="form-label small">Rol</label>
+
+                <select name="rol" id="selectRol" class="form-select mb-3" onchange="mostrarCategorias()">
+
+                    <option value="Usuario" {% if rol_actual == "Usuario" %}selected{% endif %}>
+                        Usuario
+                    </option>
+
+                    <option value="Tecnico" {% if rol_actual == "Tecnico" %}selected{% endif %}>
+                        Técnico
+                    </option>
+
+                </select>
+
+                <div id="bloqueCategorias" {% if rol_actual == 'Tecnico' %}{% endif %}>
+
+                    <label class="form-label small">Categorías que atiende</label>
+
+                    {% for categoria in todas_categorias %}
+
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            name="categorias"
+                            value="{{ categoria.id_categoria }}"
+                            id="cat-{{ categoria.id_categoria }}"
+                            {% if categoria.id_categoria in categorias_usuario_ids %}checked{% endif %}
+                        >
+                        <label class="form-check-label" for="cat-{{ categoria.id_categoria }}">
+                            {{ categoria.nombre }}
+                        </label>
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 mt-3">
+                    Guardar cambios
+                </button>
+
+            </form>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+    <div class="col-lg-8">
+
+        <div class="du-card">
+
+            <h6>
+                <i class="bi bi-ticket-perforated"></i>
+                Tickets recientes
+            </h6>
+
+            {% if tickets_usuario %}
+
+            <div class="table-responsive">
+
+                <table class="table table-sm align-middle mb-0">
+
+                    <thead>
+                        <tr class="text-muted" style="font-size: 0.8rem;">
+                            <th>Asunto</th>
+                            <th>Estado</th>
+                            <th>Fecha</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for ticket in tickets_usuario %}
+
+                        <tr>
+                            <td>{{ ticket.titulo }}</td>
+                            <td>
+
+                                {% if ticket.id_estado.nombre == "Abierto" %}
+                                <span class="badge bg-danger">Abierto</span>
+                                {% elif ticket.id_estado.nombre == "En proceso" %}
+                                <span class="badge bg-warning text-dark">En proceso</span>
+                                {% elif ticket.id_estado.nombre == "Cerrado" %}
+                                <span class="badge bg-success">Cerrado</span>
+                                {% else %}
+                                <span class="badge bg-secondary">Sin estado</span>
+                                {% endif %}
+
+                            </td>
+                            <td>{{ ticket.fecha_creacion|date:"d/m/Y" }}</td>
+                            <td class="text-end">
+                                <a href="{% url 'detalle_ticket' ticket.id_ticket %}" class="btn btn-sm btn-outline-primary">
+                                    Ver
+                                </a>
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            {% else %}
+
+            <p class="text-muted mb-0">
+                Este usuario no tiene tickets registrados.
+            </p>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script>
+
+function mostrarCategorias() {
+    const rol = document.getElementById('selectRol').value;
+    const bloque = document.getElementById('bloqueCategorias');
+    bloque.style.display = (rol === 'Tecnico') ? 'block' : 'none';
+}
+
+</script>
+
+{% endblock %}

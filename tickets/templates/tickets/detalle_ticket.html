@@ -36,7 +36,7 @@ Detalle del Ticket - TIX AI
             <div class="card-body p-4">
 
                 <h3>
-                    {{ ticket.asunto }}
+                    {{ ticket.titulo }}
                 </h3>
 
                 <hr>
@@ -57,22 +57,28 @@ Detalle del Ticket - TIX AI
                         Estado:
                     </strong>
 
-                    {% if ticket.estado == "Abierto" %}
+                    {% if ticket.id_estado.nombre == "Abierto" %}
 
                     <span class="badge bg-danger">
                         Abierto
                     </span>
 
-                    {% elif ticket.estado == "En proceso" %}
+                    {% elif ticket.id_estado.nombre == "En proceso" %}
 
                     <span class="badge bg-warning text-dark">
                         En proceso
                     </span>
 
-                    {% else %}
+                    {% elif ticket.id_estado.nombre == "Cerrado" %}
 
                     <span class="badge bg-success">
                         Cerrado
+                    </span>
+
+                    {% else %}
+
+                    <span class="badge bg-secondary">
+                        Sin estado
                     </span>
 
                     {% endif %}
@@ -86,17 +92,17 @@ Detalle del Ticket - TIX AI
                         Fecha:
                     </strong>
 
-                    {{ ticket.fecha_creacion|date:"d/m/Y H:i" }}
+                    {{ ticket.fecha_creacion|date:"d/m/Y" }}
 
                 </p>
 
-                <p>
+                <p class="mb-0">
 
                     <strong>
-                        Última actualización:
+                        Fecha de cierre:
                     </strong>
 
-                    {{ ticket.fecha_actualizacion|date:"d/m/Y H:i" }}
+                    {{ ticket.fecha_cierre|date:"d/m/Y"|default:"Sin cerrar" }}
 
                 </p>
 
@@ -117,6 +123,7 @@ Detalle del Ticket - TIX AI
                     Resultado IA
                 </h5>
 
+                {% with ultima_clasificacion=ticket.clasificaciones_ia.last %}
 
                 <p class="text-muted mb-1">
                     Categoría predicha
@@ -124,9 +131,9 @@ Detalle del Ticket - TIX AI
 
                 <h3>
 
-                    {% if ticket.categoria_predicha %}
+                    {% if ultima_clasificacion %}
 
-                    {{ ticket.categoria_predicha }}
+                    {{ ultima_clasificacion.id_categoria.nombre }}
 
                     {% else %}
 
@@ -146,9 +153,9 @@ Detalle del Ticket - TIX AI
 
                 <h4>
 
-                    {% if ticket.confianza %}
+                    {% if ultima_clasificacion %}
 
-                    {{ ticket.confianza|floatformat:2 }}%
+                    {{ ultima_clasificacion.nivel_confianza|floatformat:2 }}%
 
                     {% else %}
 
@@ -158,6 +165,7 @@ Detalle del Ticket - TIX AI
 
                 </h4>
 
+                {% endwith %}
 
                 <hr>
 
@@ -168,13 +176,18 @@ Detalle del Ticket - TIX AI
 
                 <h4>
 
-                    {% if ticket.categoria_corregida %}
+                    {% if ticket.id_categoria %}
 
-                    {{ ticket.categoria_corregida }}
+                    {{ ticket.id_categoria.nombre }}
+
+                    {% elif ticket.clasificaciones_ia.last %}
+
+                    {{ ticket.clasificaciones_ia.last.id_categoria.nombre }}
+                    <small class="text-muted d-block" style="font-size: 0.7rem;">(predicha, sin confirmar)</small>
 
                     {% else %}
 
-                    {{ ticket.categoria_predicha }}
+                    Sin clasificar
 
                     {% endif %}
 
@@ -182,25 +195,111 @@ Detalle del Ticket - TIX AI
 
                 <hr>
 
+                <p class="text-muted mb-1">
+                    Prioridad
+                </p>
+
+                <h4>
+
+                    {% if ticket.id_prioridad %}
+
+                    {{ ticket.id_prioridad.nombre }}
+
+                    {% elif ticket.clasificaciones_ia.last %}
+
+                    {{ ticket.clasificaciones_ia.last.id_prioridad.nombre }}
+                    <small class="text-muted d-block" style="font-size: 0.7rem;">(predicha, sin confirmar)</small>
+
+                    {% else %}
+
+                    Sin clasificar
+
+                    {% endif %}
+
+                </h4>
+
+                <hr>
+
+                <p class="text-muted mb-1">
+                    Técnico asignado
+                </p>
+
+                {% if ticket.id_tecnico %}
+
+                <div class="d-flex align-items-center gap-2 mb-1">
+                    <span class="d-inline-flex align-items-center justify-content-center rounded-circle bg-primary text-white" style="width: 28px; height: 28px; font-size: 0.8rem;">
+                        {{ ticket.id_tecnico.first_name|first|upper }}
+                    </span>
+                    <span>
+                        {{ ticket.id_tecnico.first_name }} {{ ticket.id_tecnico.last_name }}
+                    </span>
+                </div>
+
+                {% if ticket.fecha_asignacion %}
+                <p class="text-muted small mb-2">
+                    Asignado el {{ ticket.fecha_asignacion|date:"d/m/Y H:i" }}
+                </p>
+                {% endif %}
+
+                {% else %}
+
+                <h4 class="mb-2">
+                    Sin asignar
+                </h4>
+
+                {% endif %}
+
+                {% if es_tecnico_o_admin %}
+
+                <form method="POST" action="{% url 'asignar_tecnico' ticket.id_ticket %}">
+
+                    {% csrf_token %}
+
+                    <div class="input-group input-group-sm">
+
+                        <select name="tecnico" class="form-select">
+
+                            <option value="">Reasignar...</option>
+
+                            {% for tecnico in tecnicos_disponibles %}
+                            <option value="{{ tecnico.id }}" {% if ticket.id_tecnico_id == tecnico.id %}selected{% endif %}>
+                                {{ tecnico.first_name }} {{ tecnico.last_name }}
+                            </option>
+                            {% endfor %}
+
+                        </select>
+
+                        <button type="submit" class="btn btn-outline-primary">
+                            Asignar
+                        </button>
+
+                    </div>
+
+                </form>
+
+                {% endif %}
+
+                <hr>
+
                 <h5 class="mb-3">
                     Estado del ticket
                 </h5>
 
-                <form method="POST" action="{% url 'cambiar_estado' ticket.id %}">
+                <form method="POST" action="{% url 'cambiar_estado' ticket.id_ticket %}">
 
                     {% csrf_token %}
 
                     <select name="estado" class="form-select mb-3">
 
-                        <option value="Abierto" {% if ticket.estado=='Abierto' %} selected {% endif %}>
+                        <option value="Abierto" {% if ticket.id_estado.nombre == 'Abierto' %} selected {% endif %}>
                             Abierto
                         </option>
 
-                        <option value="En proceso" {% if ticket.estado=="En proceso" %} selected {% endif %}>
+                        <option value="En proceso" {% if ticket.id_estado.nombre == "En proceso" %} selected {% endif %}>
                             En proceso
                         </option>
 
-                        <option value="Cerrado" {% if ticket.estado=="Cerrado" %} selected {% endif %}>
+                        <option value="Cerrado" {% if ticket.id_estado.nombre == "Cerrado" %} selected {% endif %}>
                             Cerrado
                         </option>
 
@@ -213,21 +312,15 @@ Detalle del Ticket - TIX AI
                 </form>
 
 
-                <a href="{% url 'corregir_ticket' ticket.id %}" class="btn btn-outline-primary w-100 mt-3">
+                <a href="{% url 'corregir_ticket' ticket.id_ticket %}" class="btn btn-outline-primary w-100 mt-3">
                     Corregir clasificación
                 </a>
 
             </div>
 
-
-
         </div>
 
-
-
     </div>
-
-
 
 </div>
 

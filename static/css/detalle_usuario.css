@@ -1,0 +1,96 @@
+.du-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: linear-gradient(135deg, #1c1e29 0%, #23252f 100%);
+    border-radius: 16px;
+    padding: 28px 32px;
+    color: #fff;
+    margin-bottom: 24px;
+}
+
+.du-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: #6366f1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.du-header-info h2 {
+    margin-bottom: 4px;
+    font-weight: 700;
+}
+
+.du-header-info p {
+    margin-bottom: 0;
+    color: #cbd5e1;
+    font-size: 0.9rem;
+}
+
+.du-badge-rol {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: rgba(99, 102, 241, 0.25);
+    color: #c7d2fe;
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin-top: 8px;
+}
+
+.du-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 22px 26px;
+    margin-bottom: 20px;
+}
+
+.du-card h6 {
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.du-info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #f1f2f4;
+    font-size: 0.9rem;
+}
+
+.du-info-row:last-child {
+    border-bottom: none;
+}
+
+.du-info-label {
+    color: #6b7280;
+}
+
+.du-info-value {
+    color: #111827;
+    font-weight: 600;
+    text-align: right;
+}
+
+.du-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 6px;
+}
+
+.du-status-activo { background-color: #22c55e; }
+.du-status-inactivo { background-color: #9ca3af; }
+.du-status-bloqueado { background-color: #ef4444; }

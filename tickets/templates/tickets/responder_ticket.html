@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Responder Ticket - TIX AI
+{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+    <div class="col-lg-8">
+
+        <div class="card shadow-sm">
+
+            <div class="card-body p-4">
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Asunto
+                        </label>
+
+                        <h3>
+                            {{ ticket.titulo }}
+                        </h3>
+
+
+                        <div class="mb-4">
+
+                            <label class="form-label">
+                                Descripción
+                            </label>
+
+                            <p>
+                                {{ ticket.descripcion }}
+                            </p>
+
+                        </div>
+
+                        <div class="mb-4">
+
+                            <label class="form-label">
+                                Respuesta
+                            </label>
+
+                            <textarea name="respuesta" class="form-control" rows="7"
+                                placeholder="Describe detalladamente el problema..." maxlength="1000"
+                                required></textarea>
+
+                        </div>
+
+
+                        <div class="d-flex gap-2">
+
+                            <button type="submit" class="btn btn-primary">
+                                Responder Ticket
+                            </button>
+
+
+
+                            <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary">
+                                Cancelar
+                            </a>
+
+                        </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
