@@ -6,81 +6,744 @@ Configuración - TIX AI
 
 {% block content %}
 
-<div class="row justify-content-center">
+<style>
+    .cfg-card {
+        border: 1px solid #e5e7eb;
+        border-radius: 14px;
+        background: #fff;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
 
-    <div class="col-lg-8">
+    .cfg-title {
+        font-weight: 700;
+        font-size: 1.05rem;
+        display: flex;
+        align-items: center;
+        gap: .6rem;
+        color: #1e293b;
+    }
 
-        <div class="card shadow-sm">
+    .cfg-title i {
+        color: #6366f1;
+        font-size: 1.2rem;
+    }
 
-            <div class="card-body p-4">
+    .cfg-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: .85rem 0;
+        border-top: 1px solid #f1f5f9;
+    }
 
-                <h1 class="mb-1">
-                    Configuración
-                </h1>
+    .cfg-row:first-of-type {
+        border-top: 0;
+    }
 
-                <p class="text-muted mb-4">
-                    Personaliza tu experiencia dentro de TIX AI.
+    .cfg-label {
+        font-weight: 600;
+        font-size: .92rem;
+        margin: 0;
+        color: #1e293b;
+    }
+
+    .cfg-desc {
+        font-size: .8rem;
+        color: #64748b;
+        margin: 0;
+    }
+
+    .cfg-meta {
+        font-size: .72rem;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: #94a3b8;
+        letter-spacing: 0.05em;
+        margin: 0 0 2px 0;
+    }
+
+    .cfg-value {
+        font-weight: 700;
+        font-size: .95rem;
+        margin: 0;
+        color: #1e293b;
+    }
+
+    .form-check-input:checked {
+        background-color: #6366f1;
+        border-color: #6366f1;
+    }
+
+    .form-switch .form-check-input {
+        width: 2.75em;
+        height: 1.45em;
+        cursor: pointer;
+    }
+
+    .form-range::-webkit-slider-thumb {
+        background: #6366f1;
+    }
+
+    .form-range::-moz-range-thumb {
+        background: #6366f1;
+    }
+
+    .form-range {
+        accent-color: #6366f1;
+    }
+
+    .avatar-cfg {
+        width: 76px;
+        height: 76px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f1f5f9;
+        border: 2px solid #e2e8f0;
+        overflow: hidden;
+        flex-shrink: 0;
+    }
+
+    .tix-role-switcher {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 0.75rem 1rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+</style>
+
+
+<div class="container-fluid py-3" style="max-width: 1100px;">
+
+    <!-- ENCABEZADO -->
+    <h1 class="fw-bold mb-1"
+        style="font-size: 1.75rem; color: #0f172a;">
+        Configuración
+    </h1>
+
+    <p class="text-muted mb-4">
+        Personaliza tu experiencia en la plataforma y mantén segura tu cuenta.
+    </p>
+
+
+    <form method="POST">
+        {% csrf_token %}
+
+
+        {% if es_admin %}
+
+        <!-- ================================================= -->
+        <!-- VISTA: ADMINISTRADOR -->
+        <!-- ================================================= -->
+
+        <!-- Apariencia -->
+        <div class="cfg-card p-4 mb-4">
+
+            <div class="cfg-title mb-2">
+                <i class="bi bi-brush"></i>
+                Apariencia
+            </div>
+
+            <div class="cfg-row">
+
+                <p class="cfg-label">
+                    Modo Oscuro
                 </p>
 
-                <form method="POST">
+                <div class="form-check form-switch m-0">
 
-                    {% csrf_token %}
+                    <input type="hidden"
+                           name="tema"
+                           value="Claro">
 
-                    <div class="mb-3">
+                    <input class="form-check-input"
+                           type="checkbox"
+                           role="switch"
+                           name="tema"
+                           value="Oscuro"
+                           id="modo_oscuro"
+                           {% if settings.tema == "Oscuro" %}checked{% endif %}>
 
-                        <label class="form-label" for="id_tema">
-                            Tema
-                        </label>
+                </div>
 
-                        <select name="tema" id="id_tema" class="form-select">
+            </div>
 
-                            <option value="Claro" {% if settings.tema == "Claro" %} selected {% endif %}>
-                                Claro
-                            </option>
 
-                            <option value="Oscuro" {% if settings.tema == "Oscuro" %} selected {% endif %}>
-                                Oscuro
-                            </option>
+            <div class="cfg-row">
 
-                        </select>
+                <p class="cfg-label">
+                    Tema de Color
+                </p>
+
+                <select name="tema_color"
+                        class="form-select form-select-sm w-auto">
+
+                    <option value="Púrpura"
+                            {% if settings.tema_color == "Púrpura" %}
+                            selected
+                            {% endif %}>
+                        Púrpura
+                    </option>
+
+                    <option value="Azul"
+                            {% if settings.tema_color == "Azul" %}
+                            selected
+                            {% endif %}>
+                        Azul
+                    </option>
+
+                    <option value="Verde"
+                            {% if settings.tema_color == "Verde" %}
+                            selected
+                            {% endif %}>
+                        Verde
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="cfg-row">
+
+                <p class="cfg-label">
+                    Modo Compacto
+                </p>
+
+                <div class="form-check form-switch m-0">
+
+                    <input type="hidden"
+                           name="interfaz"
+                           value="Cómoda">
+
+                    <input class="form-check-input"
+                           type="checkbox"
+                           role="switch"
+                           name="interfaz"
+                           value="Compacta"
+                           id="modo_compacto"
+                           {% if settings.interfaz == "Compacta" %}checked{% endif %}>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <input type="hidden"
+               name="idioma"
+               value="{{ settings.idioma|default:'Español' }}">
+
+
+        <!-- Notificaciones -->
+        <div class="cfg-card p-4 mb-4">
+
+            <div class="cfg-title mb-2">
+                <i class="bi bi-bell"></i>
+                Notificaciones
+            </div>
+
+
+            <div class="cfg-row">
+
+                <div>
+
+                    <p class="cfg-label">
+                        Push
+                    </p>
+
+                    <p class="cfg-desc">
+                        Notificaciones en la aplicación
+                    </p>
+
+                </div>
+
+                <div class="form-check form-switch m-0">
+
+                    <input class="form-check-input"
+                           type="checkbox"
+                           role="switch"
+                           name="notif_push"
+                           {% if settings.notif_push %}checked{% endif %}>
+
+                </div>
+
+            </div>
+
+
+            <div class="cfg-row">
+
+                <div>
+
+                    <p class="cfg-label">
+                        Alertas Críticas
+                    </p>
+
+                    <p class="cfg-desc">
+                        Alertas de alta prioridad
+                    </p>
+
+                </div>
+
+                <div class="form-check form-switch m-0">
+
+                    <input class="form-check-input"
+                           type="checkbox"
+                           role="switch"
+                           name="alertas_criticas"
+                           {% if settings.alertas_criticas %}checked{% endif %}>
+
+                </div>
+
+            </div>
+
+
+            <div class="cfg-row">
+
+                <p class="cfg-label">
+                    Resumen Diario
+                </p>
+
+                <div class="form-check form-switch m-0 d-flex align-items-center gap-2">
+
+                    <span class="small fw-semibold text-muted"
+                          id="resumen_estado">
+                        {% if settings.resumen_diario %}
+                            Activado
+                        {% else %}
+                            Desactivado
+                        {% endif %}
+                    </span>
+
+                    <input class="form-check-input"
+                           type="checkbox"
+                           role="switch"
+                           name="resumen_diario"
+                           id="resumen_diario"
+                           {% if settings.resumen_diario %}checked{% endif %}>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Seguridad -->
+        <div class="cfg-card p-4 mb-4">
+
+            <div class="cfg-title mb-2">
+                <i class="bi bi-shield-check"></i>
+                Seguridad
+            </div>
+
+
+            <div class="cfg-row">
+
+                <div>
+
+                    <p class="cfg-label">
+                        2FA Obligatorio
+                    </p>
+
+                    <p class="cfg-desc">
+                        Fuerza el uso de doble factor a todos los usuarios
+                    </p>
+
+                </div>
+
+                <div class="form-check form-switch m-0">
+
+                    <input class="form-check-input"
+                           type="checkbox"
+                           role="switch"
+                           name="dos_factores_obligatorio"
+                           {% if settings.dos_factores_obligatorio %}checked{% endif %}>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Inteligencia Artificial -->
+        <div class="cfg-card p-4 mb-4">
+
+            <div class="cfg-title mb-2">
+                <i class="bi bi-cpu"></i>
+                Inteligencia Artificial
+            </div>
+
+
+            <div class="cfg-row">
+
+                <div>
+
+                    <p class="cfg-label">
+                        Asignación Automática
+                    </p>
+
+                    <p class="cfg-desc">
+                        IA delega el ticket según carga de trabajo
+                    </p>
+
+                </div>
+
+                <div class="form-check form-switch m-0">
+
+                    <input class="form-check-input"
+                           type="checkbox"
+                           role="switch"
+                           name="asignacion_automatica"
+                           {% if settings.asignacion_automatica %}checked{% endif %}>
+
+                </div>
+
+            </div>
+
+
+            <div class="cfg-row">
+
+                <div>
+
+                    <p class="cfg-label">
+                        Sugerencias de Respuesta
+                    </p>
+
+                    <p class="cfg-desc">
+                        IA sugiere borradores automáticos a los agentes
+                    </p>
+
+                </div>
+
+                <div class="form-check form-switch m-0">
+
+                    <input class="form-check-input"
+                           type="checkbox"
+                           role="switch"
+                           name="sugerencias_respuesta"
+                           {% if settings.sugerencias_respuesta %}checked{% endif %}>
+
+                </div>
+
+            </div>
+
+
+            <div class="cfg-row d-block">
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <p class="cfg-label">
+                        Umbral de Confianza IA
+                    </p>
+
+                    <span class="fw-bold"
+                          style="color: #6366f1;"
+                          id="umbral_valor">
+                        {{ settings.umbral_ia|default:"85" }}%
+                    </span>
+
+                </div>
+
+                <input type="range"
+                       class="form-range mt-2"
+                       min="0"
+                       max="100"
+                       name="umbral_ia"
+                       id="umbral_ia"
+                       value="{{ settings.umbral_ia|default:'85' }}"
+                       oninput="document.getElementById('umbral_valor').textContent = this.value + '%'">
+
+            </div>
+
+        </div>
+
+
+        {% else %}
+
+        <!-- ================================================= -->
+        <!-- VISTA: TÉCNICO Y USUARIO -->
+        <!-- ================================================= -->
+
+
+        <!-- PERFIL DE USUARIO -->
+        <div class="cfg-card p-4 mb-4"
+             style="border: 1.5px dashed #cbd5e1;">
+
+            <div class="cfg-title mb-3">
+
+                <i class="bi bi-person-badge"></i>
+
+                Perfil de Usuario
+
+            </div>
+
+
+            <div class="row align-items-center g-3">
+
+
+                <!-- Avatar -->
+                <div class="col-auto">
+
+                    <div class="avatar-cfg"
+                         style="
+                         background:
+                         {% if es_tecnico %}
+                         #e0f2fe;
+                         {% else %}
+                         #fef9c3;
+                         {% endif %}
+
+                         border-color:
+                         {% if es_tecnico %}
+                         #bae6fd;
+                         {% else %}
+                         #fde047;
+                         {% endif %}
+                         ">
+
+                        {% if es_tecnico %}
+
+                            <i class="bi bi-person-gear text-primary"
+                               style="font-size: 2.4rem;">
+                            </i>
+
+                        {% else %}
+
+                            <i class="bi bi-person-check text-warning"
+                               style="font-size: 2.4rem;">
+                            </i>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+                <!-- INFORMACIÓN REAL DEL USUARIO -->
+                <div class="col">
+
+                    <div class="row g-3">
+
+
+                        <!-- Nombre -->
+                        <div class="col-md-6">
+
+                            <p class="cfg-meta">
+                                Nombre completo
+                            </p>
+
+                            <p class="cfg-value">
+
+                                {% if request.user.first_name or request.user.last_name %}
+
+                                    {{ request.user.first_name|upper }}
+                                    {{ request.user.last_name|upper }}
+
+                                {% else %}
+
+                                    {{ request.user.username|upper }}
+
+                                {% endif %}
+
+                            </p>
+
+                        </div>
+
+
+                        <!-- Correo -->
+                        <div class="col-md-6">
+
+                            <p class="cfg-meta">
+                                Correo electrónico
+                            </p>
+
+                            <p class="cfg-value">
+
+                                {% if request.user.email %}
+
+                                    {{ request.user.email }}
+
+                                {% else %}
+
+                                    No registrado
+
+                                {% endif %}
+
+                            </p>
+
+                        </div>
+
+
+                        <!-- Rol -->
+                        <div class="col-md-6">
+
+                            <p class="cfg-meta">
+                                Rol
+                            </p>
+
+                            <p class="cfg-value">
+
+                                <span class="badge
+                                    {% if es_tecnico %}
+                                        bg-info-subtle text-info-emphasis
+                                    {% else %}
+                                        bg-warning-subtle text-warning-emphasis
+                                    {% endif %}
+                                    px-2 py-1">
+
+                                    {{ rol_nombre }}
+
+                                </span>
+
+                            </p>
+
+                        </div>
+
+
+                        <!-- Teléfono -->
+                        <div class="col-md-6">
+
+                            <p class="cfg-meta">
+                                Teléfono
+                            </p>
+
+                            <p class="cfg-value">
+
+                                {% if request.user.telefono %}
+
+                                    {{ request.user.telefono }}
+
+                                {% else %}
+
+                                    No registrado
+
+                                {% endif %}
+
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+                <!-- Botón -->
+                <div class="col-auto">
+
+                    <button type="button"
+                            class="btn btn-outline-secondary btn-sm px-3 rounded-2">
+
+                        Editar Perfil
+
+                    </button>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- APARIENCIA Y NOTIFICACIONES -->
+        <div class="row g-4 mb-4">
+
+
+            <!-- Apariencia -->
+            <div class="col-lg-6">
+
+                <div class="cfg-card p-4 h-100">
+
+                    <div class="cfg-title mb-2">
+
+                        <i class="bi bi-brush"></i>
+
+                        Apariencia
 
                     </div>
 
 
-                    <div class="mb-3">
+                    <!-- Modo oscuro -->
+                    <div class="cfg-row">
 
-                        <label class="form-label" for="id_idioma">
-                            Idioma
-                        </label>
+                        <div>
 
-                        <select name="idioma" id="id_idioma" class="form-select">
+                            <p class="cfg-label">
+                                Modo Oscuro
+                            </p>
 
-                            <option value="Español" {% if settings.idioma == "Español" %} selected {% endif %}>
-                                Español
-                            </option>
+                            <p class="cfg-desc">
+                                Cambia a una interfaz de colores oscuros
+                            </p>
 
-                            <option value="English" {% if settings.idioma == "English" %} selected {% endif %}>
-                                English
-                            </option>
+                        </div>
 
-                        </select>
+
+                        <div class="form-check form-switch m-0">
+
+                            <input type="hidden"
+                                   name="tema"
+                                   value="Claro">
+
+                            <input class="form-check-input"
+                                   type="checkbox"
+                                   role="switch"
+                                   name="tema"
+                                   value="Oscuro"
+                                   id="user_modo_oscuro"
+                                   {% if settings.tema == "Oscuro" %}checked{% endif %}>
+
+                        </div>
 
                     </div>
 
 
-                    <div class="mb-4">
+                    <!-- Tamaño -->
+                    <div class="cfg-row">
 
-                        <label class="form-label" for="id_interfaz">
-                            Densidad de interfaz
-                        </label>
+                        <div>
 
-                        <select name="interfaz" id="id_interfaz" class="form-select">
+                            <p class="cfg-label">
+                                Tamaño de Interfaz
+                            </p>
 
-                            <option value="Cómoda" {% if settings.interfaz == "Cómoda" %} selected {% endif %}>
+                            <p class="cfg-desc">
+                                Ajusta el tamaño del texto y controles
+                            </p>
+
+                        </div>
+
+
+                        <select name="interfaz"
+                                class="form-select form-select-sm w-auto">
+
+                            <option value="Normal"
+                                    {% if settings.interfaz == "Normal" or not settings.interfaz %}
+                                    selected
+                                    {% endif %}>
+                                Normal
+                            </option>
+
+                            <option value="Cómoda"
+                                    {% if settings.interfaz == "Cómoda" %}
+                                    selected
+                                    {% endif %}>
                                 Cómoda
                             </option>
 
-                            <option value="Compacta" {% if settings.interfaz == "Compacta" %} selected {% endif %}>
+                            <option value="Compacta"
+                                    {% if settings.interfaz == "Compacta" %}
+                                    selected
+                                    {% endif %}>
                                 Compacta
                             </option>
 
@@ -89,50 +752,289 @@ Configuración - TIX AI
                     </div>
 
 
-                    <div class="d-flex gap-2">
+                    <!-- Idioma -->
+                    <div class="cfg-row">
 
-                        <button type="submit" class="btn btn-primary">
-                            Guardar cambios
-                        </button>
+                        <div>
 
-                        <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary">
-                            Cancelar
-                        </a>
+                            <p class="cfg-label">
+                                Idioma
+                            </p>
+
+                            <p class="cfg-desc">
+                                Selecciona el idioma del portal
+                            </p>
+
+                        </div>
+
+
+                        <select name="idioma"
+                                class="form-select form-select-sm w-auto">
+
+                            <option value="Español"
+                                    {% if settings.idioma == "Español" or not settings.idioma %}
+                                    selected
+                                    {% endif %}>
+                                Español
+                            </option>
+
+                            <option value="English"
+                                    {% if settings.idioma == "English" %}
+                                    selected
+                                    {% endif %}>
+                                English
+                            </option>
+
+                        </select>
 
                     </div>
 
-                </form>
+
+                </div>
+
+            </div>
+
+
+            <!-- Notificaciones -->
+            <div class="col-lg-6">
+
+                <div class="cfg-card p-4 h-100">
+
+                    <div class="cfg-title mb-2">
+
+                        <i class="bi bi-bell"></i>
+
+                        Notificaciones
+
+                    </div>
+
+
+                    <!-- Push -->
+                    <div class="cfg-row">
+
+                        <div>
+
+                            <p class="cfg-label">
+                                Notificaciones Push
+                            </p>
+
+                            <p class="cfg-desc">
+                                Recibe alertas instantáneas en tu navegador
+                            </p>
+
+                        </div>
+
+
+                        <div class="form-check form-switch m-0">
+
+                            <input class="form-check-input"
+                                   type="checkbox"
+                                   role="switch"
+                                   name="notif_push"
+                                   {% if settings.notif_push %}checked{% endif %}>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Estado ticket -->
+                    <div class="cfg-row">
+
+                        <div>
+
+                            <p class="cfg-label">
+                                Alertas de Estado de Ticket
+                            </p>
+
+                            <p class="cfg-desc">
+                                Notificaciones cuando cambie un estado
+                            </p>
+
+                        </div>
+
+
+                        <div class="form-check form-switch m-0">
+
+                            <input class="form-check-input"
+                                   type="checkbox"
+                                   role="switch"
+                                   name="alertas_estado"
+                                   {% if settings.alertas_estado %}checked{% endif %}>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Resumen -->
+                    <div class="cfg-row">
+
+                        <div>
+
+                            <p class="cfg-label">
+                                Resumen Semanal
+                            </p>
+
+                            <p class="cfg-desc">
+                                Informe periódico con métricas de soporte
+                            </p>
+
+                        </div>
+
+
+                        <div class="form-check form-switch m-0">
+
+                            <input class="form-check-input"
+                                   type="checkbox"
+                                   role="switch"
+                                   name="resumen_semanal"
+                                   {% if settings.resumen_semanal %}checked{% endif %}>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
 
             </div>
 
         </div>
 
-        <div class="card shadow-sm mt-4">
 
-            <div class="card-body p-4">
+        <!-- SEGURIDAD -->
+        <div class="cfg-card p-4 mb-4">
 
-                <h5 class="mb-3">
-                    Cuenta
-                </h5>
+            <div class="cfg-title mb-2">
 
-                <p class="mb-1">
-                    <strong>Nombre:</strong> {{ settings.usuario.first_name }} {{ settings.usuario.last_name }}
-                </p>
+                <i class="bi bi-shield-check"></i>
 
-                <p class="mb-3">
-                    <strong>Correo:</strong> {{ settings.usuario.email }}
-                </p>
+                Seguridad
 
-                <a href="{% url 'logout' %}" class="btn btn-outline-danger btn-sm">
-                    Cerrar sesión
-                </a>
+            </div>
+
+
+            <!-- Contraseña -->
+            <div class="cfg-row">
+
+                <div>
+
+                    <p class="cfg-label">
+                        Contraseña de Acceso
+                    </p>
+
+                    <p class="cfg-desc">
+                        Mantén tu cuenta protegida cambiando tu contraseña regularmente
+                    </p>
+
+                </div>
+
+
+                <button type="button"
+                        class="btn btn-outline-secondary btn-sm px-3 rounded-2">
+
+                    Cambiar Contraseña
+
+                </button>
+
+            </div>
+
+
+            <!-- 2FA -->
+            <div class="cfg-row">
+
+                <div>
+
+                    <p class="cfg-label">
+                        Autenticación de Dos Factores (2FA)
+                    </p>
+
+                    <p class="cfg-desc">
+                        Agrega un nivel extra de seguridad utilizando tu teléfono celular
+                    </p>
+
+                </div>
+
+
+                <div class="form-check form-switch m-0">
+
+                    <input class="form-check-input"
+                           type="checkbox"
+                           role="switch"
+                           name="dos_factores"
+                           {% if settings.dos_factores %}checked{% endif %}>
+
+                </div>
 
             </div>
 
         </div>
 
-    </div>
+
+        {% endif %}
+
+
+        <!-- BOTONES -->
+        <div class="d-flex justify-content-end gap-2 mb-4">
+
+            <a href="{% url 'dashboard' %}"
+               class="btn btn-outline-secondary px-4">
+
+                Cancelar
+
+            </a>
+
+
+            <button type="submit"
+                    class="btn btn-primary px-4"
+                    style="
+                    background-color: #6366f1;
+                    border-color: #6366f1;
+                    ">
+
+                Guardar cambios
+
+            </button>
+
+        </div>
+
+
+    </form>
 
 </div>
+
+
+<script>
+
+    // ============================================
+    // RESUMEN DIARIO
+    // ============================================
+
+    const resumen =
+        document.getElementById('resumen_diario');
+
+    if (resumen) {
+
+        resumen.addEventListener('change', function () {
+
+            const estadoSpan =
+                document.getElementById('resumen_estado');
+
+            if (estadoSpan) {
+
+                estadoSpan.textContent =
+                    this.checked
+                    ? 'Activado'
+                    : 'Desactivado';
+
+            }
+
+        });
+
+    }
+
+</script>
+
 
 {% endblock %}

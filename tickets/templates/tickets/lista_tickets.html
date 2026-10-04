@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Tickets - TIX AI
+{% if es_tecnico %}Mis Tickets Asignados{% elif es_admin %}Todos los Tickets{% else %}Mis Tickets{% endif %} - TIX AI
 {% endblock %}
 
 {% block content %}
@@ -9,92 +9,105 @@ Tickets - TIX AI
 <div class="d-flex justify-content-between align-items-center mb-4">
 
     <div>
-        <h1>
-            Tickets
+        <h1 class="h3 fw-bold mb-1">
+            {% if es_tecnico %}
+                Mis Tickets Asignados
+            {% elif es_admin %}
+                Todos los Tickets
+            {% else %}
+                Mis Tickets
+            {% endif %}
         </h1>
 
-        <p class="text-muted">
-            Historial de solicitudes registradas
+        <p class="text-muted mb-0">
+            {% if es_tecnico %}
+                Solicitudes de soporte que tienes asignadas actualmente
+            {% elif es_admin %}
+                Supervisión global de todas las solicitudes de soporte
+            {% else %}
+                Historial de tus solicitudes de soporte registradas
+            {% endif %}
         </p>
     </div>
 
-    <a href="{% url 'nuevo_ticket' %}" class="btn btn-primary">
-        + Nuevo Ticket
+    {% if not es_tecnico %}
+    <a href="{% url 'nuevo_ticket' %}" class="btn btn-primary" style="background-color: #6366f1; border-color: #6366f1;">
+        <i class="bi bi-plus-lg me-1"></i> Nuevo Ticket
     </a>
+    {% endif %}
 
 </div>
 
-<div>
+<!-- BARRA DE BÚSQUEDA Y FILTRO -->
+<div class="card shadow-sm border-0 mb-4 p-3" style="border-radius: 12px;">
     <form method="GET" class="row g-2 align-items-end">
 
         <div class="col-md-6">
-            <input type="text" name="q" value="{{ busqueda }}" class="form-control" placeholder="Buscar tickets...">
+            <label class="form-label small text-muted fw-semibold">Buscar:</label>
+            <div class="input-group">
+                <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-muted"></i></span>
+                <input type="text" name="q" value="{{ busqueda }}" class="form-control border-start-0" placeholder="Buscar por asunto o descripción...">
+            </div>
         </div>
 
-        <div class="col-md-3">
-            <label for="estado">Estado:</label>
-
+        <div class="col-md-4">
+            <label for="estado" class="form-label small text-muted fw-semibold">Filtrar por Estado:</label>
             <select name="estado" id="estado" class="form-select">
-
-                <option value="" {% if estado == "" %} selected {% endif %}>
+                <option value="" {% if estado == "" %}selected{% endif %}>
                     Todos los estados
                 </option>
-
-                <option value="Abierto" {% if estado == "Abierto" %} selected {% endif %}>
+                <option value="Abierto" {% if estado == "Abierto" %}selected{% endif %}>
                     Abierto
                 </option>
-
-                <option value="En proceso" {% if estado == "En proceso" %} selected {% endif %}>
+                <option value="En proceso" {% if estado == "En proceso" %}selected{% endif %}>
                     En proceso
                 </option>
-
-                <option value="Cerrado" {% if estado == "Cerrado" %} selected {% endif %}>
+                <option value="Cerrado" {% if estado == "Cerrado" %}selected{% endif %}>
                     Cerrado
                 </option>
-
             </select>
         </div>
 
-        <div class="col-md-3">
-            <button type="submit" class="btn btn-primary w-100">
-                Buscar
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100" style="background-color: #6366f1; border-color: #6366f1;">
+                Filtrar
             </button>
         </div>
 
     </form>
 
-    {% if busqueda %}
-
-    <div class="mb-3">
-        <span class="text-muted">
-            Resultados para:
-            <strong>{{ busqueda }}</strong>
+    {% if busqueda or estado %}
+    <div class="mt-3 pt-2 border-top d-flex align-items-center gap-2">
+        <span class="text-muted small">
+            Filtros activos:
+            {% if busqueda %}<strong>"{{ busqueda }}"</strong>{% endif %}
+            {% if estado %}<span class="badge bg-secondary ms-1">{{ estado }}</span>{% endif %}
         </span>
-
-        <a href="{% url 'lista_tickets' %}" class="btn btn-sm btn-outline-secondary ms-2">
-            Limpiar
+        <a href="{% url 'lista_tickets' %}" class="btn btn-sm btn-link text-decoration-none text-danger p-0 ms-2">
+            <i class="bi bi-x-circle me-1"></i>Limpiar filtros
         </a>
     </div>
-
     {% endif %}
 </div>
 
-<br>
-
-<div class="card shadow-sm">
+<!-- TABLA DE TICKETS -->
+<div class="card shadow-sm border-0" style="border-radius: 14px; overflow: hidden;">
 
     <div class="table-responsive">
 
-        <table class="table table-hover mb-0">
+        <table class="table table-hover align-middle mb-0">
 
-            <thead class="table-dark">
+            <thead class="table-light text-uppercase text-secondary" style="font-size: 0.78rem; letter-spacing: 0.05em;">
                 <tr>
-                    <th>Asunto</th>
+                    <th class="ps-4">Asunto</th>
                     <th>Categoría</th>
                     <th>Estado</th>
                     <th>Fecha</th>
                     <th>Usuario</th>
-                    <th>Acción</th>
+                    {% if es_admin %}
+                    <th>Técnico Asignado</th>
+                    {% endif %}
+                    <th class="text-end pe-4">Acción</th>
                 </tr>
             </thead>
 
@@ -104,77 +117,72 @@ Tickets - TIX AI
 
                 <tr>
 
-                    <td>
-                        <strong>
-                            {{ ticket.titulo }}
-                        </strong>
+                    <td class="ps-4">
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="badge bg-secondary-subtle text-secondary px-2 py-1 rounded-pill" style="font-size: 0.72rem;">
+                                #{{ ticket.id_ticket }}
+                            </span>
+                            <strong class="text-dark">
+                                {{ ticket.titulo }}
+                            </strong>
+                        </div>
                     </td>
 
                     <td>
-
                         {% if ticket.id_categoria %}
-
-                        <span class="badge bg-success">
-                            {{ ticket.id_categoria.nombre }}
-                        </span>
-
+                            <span class="badge bg-success-subtle text-success px-2 py-1 rounded-pill">
+                                {{ ticket.id_categoria.nombre }}
+                            </span>
                         {% elif ticket.clasificaciones_ia.last %}
-
-                        <span class="badge bg-primary">
-                            {{ ticket.clasificaciones_ia.last.id_categoria.nombre }}
-                        </span>
-
+                            <span class="badge bg-primary-subtle text-primary px-2 py-1 rounded-pill">
+                                {{ ticket.clasificaciones_ia.last.id_categoria.nombre }}
+                            </span>
                         {% else %}
-
-                        <span class="badge bg-secondary">
-                            Sin clasificar
-                        </span>
-
+                            <span class="badge bg-secondary px-2 py-1 rounded-pill">
+                                Sin clasificar
+                            </span>
                         {% endif %}
-
                     </td>
 
                     <td>
-
                         {% if ticket.id_estado.nombre == "Abierto" %}
-
-                        <span class="badge bg-danger">
-                            Abierto
-                        </span>
-
+                            <span class="badge bg-danger px-2 py-1">Abierto</span>
                         {% elif ticket.id_estado.nombre == "En proceso" %}
-
-                        <span class="badge bg-warning text-dark">
-                            En proceso
-                        </span>
-
+                            <span class="badge bg-warning text-dark px-2 py-1">En proceso</span>
                         {% elif ticket.id_estado.nombre == "Cerrado" %}
-
-                        <span class="badge bg-success">
-                            Cerrado
-                        </span>
-
+                            <span class="badge bg-success px-2 py-1">Cerrado</span>
                         {% else %}
-
-                        <span class="badge bg-secondary">
-                            Sin estado
-                        </span>
-
+                            <span class="badge bg-secondary px-2 py-1">{{ ticket.id_estado.nombre|default:"Sin estado" }}</span>
                         {% endif %}
+                    </td>
 
+                    <td class="text-muted small">
+                        {{ ticket.fecha_creacion|date:"d/m/Y H:i" }}
                     </td>
 
                     <td>
-                        {{ ticket.fecha_creacion|date:"d/m/Y" }}
+                        <span class="text-secondary small fw-semibold">
+                            {{ ticket.usuario.first_name|default:ticket.usuario.username }} {{ ticket.usuario.last_name }}
+                        </span>
                     </td>
 
+                    {% if es_admin %}
                     <td>
-                        {{ ticket.usuario }}
+                        {% if ticket.id_tecnico %}
+                            <span class="badge bg-info-subtle text-info-emphasis px-2 py-1">
+                                <i class="bi bi-person-fill me-1"></i>{{ ticket.id_tecnico.first_name }} {{ ticket.id_tecnico.last_name }}
+                            </span>
+                        {% else %}
+                            <span class="badge bg-light text-muted border px-2 py-1">
+                                Sin asignar
+                            </span>
+                        {% endif %}
                     </td>
+                    {% endif %}
 
-                    <td>
-                        <a href="{% url 'detalle_ticket' ticket.id_ticket %}" class="btn btn-sm btn-outline-primary">
-                            Ver
+                    <td class="text-end pe-4">
+                        <a href="{% url 'detalle_ticket' ticket.id_ticket %}" class="btn btn-sm btn-outline-primary px-3 rounded-2">
+                            Ver Detalle
                         </a>
                     </td>
 
@@ -183,8 +191,17 @@ Tickets - TIX AI
                 {% empty %}
 
                 <tr>
-                    <td colspan="5" class="text-center text-muted py-4">
-                        No existen tickets registrados.
+                    <td colspan="{% if es_admin %}7{% else %}6{% endif %}" class="text-center text-muted py-5">
+                        <i class="bi bi-inbox fs-1 d-block text-secondary opacity-50 mb-2"></i>
+                        {% if es_tecnico %}
+                            <strong class="d-block text-dark">No tienes tickets asignados actualmente</strong>
+                            <span class="small">Cuando te asignen solicitudes de soporte, aparecerán listadas aquí.</span>
+                        {% elif busqueda or estado %}
+                            <strong class="d-block text-dark">No se encontraron tickets con esos filtros</strong>
+                            <span class="small">Intenta ajustar tu término de búsqueda o limpiar los filtros.</span>
+                        {% else %}
+                            <strong class="d-block text-dark">No existen tickets registrados</strong>
+                        {% endif %}
                     </td>
                 </tr>
 

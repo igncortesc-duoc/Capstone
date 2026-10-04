@@ -239,15 +239,21 @@ def lista_tickets(request):
     busqueda = request.GET.get('q', '').strip()
     estado = request.GET.get('estado', '').strip()
 
-    es_tecnico_o_admin = (
-        request.user.groups.filter(name="Tecnico").exists()
-        or request.user.is_staff
+    es_admin = (
+        request.user.is_staff
         or request.user.is_superuser
+        or request.user.groups.filter(name__icontains="admin").exists()
     )
+    es_tecnico = request.user.groups.filter(name__in=["Tecnico", "Técnico", "tecnico"]).exists()
 
-    if es_tecnico_o_admin:
+    if es_admin:
+        # Administrador: visualiza todos los tickets del sistema
         tickets = Ticket.objects.all()
+    elif es_tecnico:
+        # Técnico: ÚNICAMENTE visualiza los tickets que tiene asignados
+        tickets = Ticket.objects.filter(id_tecnico=request.user)
     else:
+        # Cliente / Usuario común: visualiza únicamente sus tickets creados
         tickets = Ticket.objects.filter(usuario=request.user)
 
     if busqueda:
@@ -267,7 +273,9 @@ def lista_tickets(request):
             'tickets': tickets,
             'busqueda': busqueda,
             'estado': estado,
-            'es_tecnico_o_admin': es_tecnico_o_admin,
+            'es_admin': es_admin,
+            'es_tecnico': es_tecnico,
+            'es_tecnico_o_admin': es_admin or es_tecnico,
         }
     )
 
@@ -362,7 +370,31 @@ def detalle_ticket(request, ticket_id):
 
     ticket = get_object_or_404(Ticket, id_ticket=ticket_id)
 
-    return render(request, 'tickets/detalle_ticket.html', {'ticket': ticket})
+    if request.method == 'POST' and 'solucion' in request.POST:
+        if not es_tecnico_o_admin(request.user):
+            messages.error(request, 'No tienes permisos para responder a este ticket.')
+            return redirect('detalle_ticket', ticket_id=ticket.id_ticket)
+
+        solucion = request.POST.get('solucion', '').strip()
+        if solucion:
+            ticket.solucion = solucion
+            ticket.save(update_fields=['solucion'])
+            messages.success(request, 'Respuesta guardada correctamente.')
+        else:
+            messages.error(request, 'La respuesta no puede estar vacía.')
+
+        return redirect('detalle_ticket', ticket_id=ticket.id_ticket)
+
+    tecnicos_disponibles = User.objects.filter(groups__name='Tecnico')
+
+    return render(
+        request,
+        'tickets/detalle_ticket.html',
+        {
+            'ticket': ticket,
+            'tecnicos_disponibles': tecnicos_disponibles,
+        }
+    )
 
 
 @login_required
@@ -456,8 +488,6 @@ def detalle_usuario(request, usuario_id):
 
     usuario = get_object_or_404(User, pk=usuario_id)
 
-    tickets_usuario = usuario.tickets.all().order_by('-fecha_creacion')[:10]
-
     todas_categorias = Categoria.objects.all().order_by('nombre')
     categorias_usuario_ids = list(
         usuario.especialidades.values_list('categoria_id', flat=True)
@@ -465,6 +495,18 @@ def detalle_usuario(request, usuario_id):
 
     grupo_actual = usuario.groups.first()
     rol_actual = grupo_actual.name if grupo_actual else ''
+    es_tecnico = usuario.groups.filter(name__in=['Tecnico', 'Técnico', 'tecnico']).exists()
+
+    if es_tecnico:
+        # Para técnicos: buscar los tickets que ha respondido (con solución registrada)
+        tickets_respondidos = usuario.tickets_asignados.filter(
+            solucion__isnull=False
+        ).exclude(solucion__exact='').order_by('-fecha_cierre', '-fecha_creacion')
+        tickets_usuario = tickets_respondidos
+    else:
+        # Para clientes/usuarios: tickets creados por ellos
+        tickets_usuario = usuario.tickets.all().order_by('-fecha_creacion')[:10]
+        tickets_respondidos = None
 
     return render(
         request,
@@ -472,9 +514,11 @@ def detalle_usuario(request, usuario_id):
         {
             'usuario': usuario,
             'tickets_usuario': tickets_usuario,
+            'tickets_respondidos': tickets_respondidos,
             'todas_categorias': todas_categorias,
             'categorias_usuario_ids': categorias_usuario_ids,
             'rol_actual': rol_actual,
+            'es_usuario_tecnico': es_tecnico,
         }
     )
 
@@ -533,10 +577,33 @@ def configuracion(request):
         settings_usuario.interfaz = request.POST.get('interfaz')
         settings_usuario.save()
 
+        rol_param = request.GET.get('rol', '')
+        if rol_param:
+            return redirect(f'/configuracion/?rol={rol_param}')
         return redirect('configuracion')
+
+    # Soporte para previsualizar roles con pestañas o parámetro ?rol=admin / ?rol=tecnico / ?rol=cliente
+    rol_preview = request.GET.get('rol', '').lower()
+    contexto = {
+        'settings': settings_usuario,
+        'rol_preview': rol_preview,
+    }
+
+    if rol_preview == 'admin':
+        contexto['es_admin'] = True
+        contexto['es_tecnico'] = False
+        contexto['rol_nombre'] = 'ADMINISTRADOR'
+    elif rol_preview in ('tecnico', 'tech'):
+        contexto['es_admin'] = False
+        contexto['es_tecnico'] = True
+        contexto['rol_nombre'] = 'TECNICO'
+    elif rol_preview in ('cliente', 'usuario'):
+        contexto['es_admin'] = False
+        contexto['es_tecnico'] = False
+        contexto['rol_nombre'] = 'CLIENTE'
 
     return render(
         request,
         'tickets/settings.html',
-        {'settings': settings_usuario}
+        contexto
     )

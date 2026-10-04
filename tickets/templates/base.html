@@ -62,22 +62,17 @@
 
         <nav class="tix-nav">
 
+            {% if es_admin %}
+
             <a class="tix-nav-item {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}" href="{% url 'dashboard' %}">
                 <i class="bi bi-grid"></i>
                 Dashboard
             </a>
 
-            <a class="tix-nav-item {% if request.resolver_match.url_name == 'nuevo_ticket' %}active{% endif %}" href="{% url 'nuevo_ticket' %}">
-                <i class="bi bi-plus-circle"></i>
-                Nuevo Ticket
-            </a>
-
             <a class="tix-nav-item {% if request.resolver_match.url_name == 'lista_tickets' %}active{% endif %}" href="{% url 'lista_tickets' %}">
                 <i class="bi bi-ticket-perforated"></i>
-                {% if es_tecnico_o_admin %}Tickets{% else %}Mis Tickets{% endif %}
+                Tickets
             </a>
-
-            {% if es_tecnico_o_admin %}
 
             <a class="tix-nav-item {% if request.resolver_match.url_name == 'lista_usuarios' %}active{% endif %}" href="{% url 'lista_usuarios' %}">
                 <i class="bi bi-people"></i>
@@ -87,6 +82,35 @@
             <a class="tix-nav-item {% if request.resolver_match.url_name == 'reportes' %}active{% endif %}" href="{% url 'reportes' %}">
                 <i class="bi bi-bar-chart"></i>
                 Reportes
+            </a>
+
+            {% elif es_tecnico %}
+
+            <a class="tix-nav-item {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}" href="{% url 'dashboard' %}">
+                <i class="bi bi-list-task"></i>
+                Dashboard
+            </a>
+
+            <a class="tix-nav-item {% if request.resolver_match.url_name == 'lista_tickets' %}active{% endif %}" href="{% url 'lista_tickets' %}">
+                <i class="bi bi-ticket-perforated"></i>
+                Tickets
+            </a>
+
+            <a class="tix-nav-item {% if request.resolver_match.url_name == 'reportes' %}active{% endif %}" href="{% url 'reportes' %}">
+                <i class="bi bi-bar-chart"></i>
+                Reportes
+            </a>
+
+            {% else %}
+
+            <a class="tix-nav-item {% if request.resolver_match.url_name == 'nuevo_ticket' %}active{% endif %}" href="{% url 'nuevo_ticket' %}">
+                <i class="bi bi-plus-lg"></i>
+                Nuevo Ticket
+            </a>
+
+            <a class="tix-nav-item {% if request.resolver_match.url_name == 'lista_tickets' %}active{% endif %}" href="{% url 'lista_tickets' %}">
+                <i class="bi bi-clock-history"></i>
+                Historial de Tickets
             </a>
 
             {% endif %}
@@ -100,19 +124,28 @@
 
         <div class="tix-sidebar-footer">
 
-            <div class="tix-user-chip">
-                <span class="tix-avatar">
-                    {{ user.first_name|default:user.username|first|upper }}
-                </span>
-                {{ user.first_name|default:user.username }}
-            </div>
+            <div class="d-flex align-items-center justify-content-between p-2 rounded-3 mb-2" style="background: rgba(255, 255, 255, 0.07);">
+                <div class="d-flex align-items-center gap-2 overflow-hidden">
+                    <span class="tix-avatar flex-shrink-0" style="background: {% if es_admin %}#6366f1{% elif es_tecnico %}#0284c7{% else %}#eab308{% endif %}; color: #fff;">
+                        {{ user.first_name|default:user.username|first|upper }}
+                    </span>
+                    <div class="overflow-hidden">
+                        <div class="text-truncate fw-bold text-white" style="font-size: 0.8rem; line-height: 1.2;">
+                            {{ user.first_name|default:user.username|upper }}
+                        </div>
+                        <div class="text-muted text-uppercase" style="font-size: 0.65rem; font-weight: 700; letter-spacing: 0.05em;">
+                            {{ rol_nombre }}
+                        </div>
+                    </div>
+                </div>
 
-            <form method="POST" action="{% url 'logout' %}">
-                {% csrf_token %}
-                <button type="submit" class="tix-btn-sidebar tix-btn-outline">
-                    Cerrar sesión
-                </button>
-            </form>
+                <form method="POST" action="{% url 'logout' %}" class="m-0">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-link text-secondary p-1" title="Cerrar sesión" style="line-height: 1;">
+                        <i class="bi bi-box-arrow-right" style="font-size: 1.15rem; color: #94a3b8;"></i>
+                    </button>
+                </form>
+            </div>
 
         </div>
 

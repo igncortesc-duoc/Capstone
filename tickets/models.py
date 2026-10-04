@@ -39,14 +39,78 @@ class Estado(models.Model):
         return self.nombre
 
 
+
 class Settings(models.Model):
-    id_perfil = models.CharField(max_length=10, primary_key=True)
-    tema = models.CharField(max_length=20)
-    idioma = models.CharField(max_length=40)
-    interfaz = models.CharField(max_length=100)
+
+    id_perfil = models.CharField(
+        max_length=10,
+        primary_key=True
+    )
+
+    # =========================================
+
     usuario = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
         related_name="settings"
+    )
+
+
+    dark_mode = models.BooleanField(
+        default=False
+    )
+
+    idioma = models.CharField(
+        max_length=40,
+        default="Español"
+    )
+
+    interfaz = models.CharField(
+        max_length=100,
+        default="Cómoda"
+    )
+
+
+    notif_push = models.BooleanField(
+        default=True
+    )
+
+    alertas_criticas = models.BooleanField(
+        default=True
+    )
+
+    alertas_estado = models.BooleanField(
+        default=True
+    )
+
+    resumen_diario = models.BooleanField(
+        default=False
+    )
+
+    resumen_semanal = models.BooleanField(
+        default=False
+    )
+
+
+    dos_factores = models.BooleanField(
+        default=False
+    )
+
+    dos_factores_obligatorio = models.BooleanField(
+        default=False
+    )
+
+
+    asignacion_automatica = models.BooleanField(
+        default=True
+    )
+
+    sugerencias_respuesta = models.BooleanField(
+        default=False
+    )
+
+    umbral_ia = models.PositiveIntegerField(
+        default=85
     )
 
     class Meta:
@@ -54,6 +118,7 @@ class Settings(models.Model):
 
     def __str__(self):
         return f"Settings de {self.usuario}"
+
 
 
 class Ticket(models.Model):

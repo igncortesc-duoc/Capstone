@@ -111,7 +111,7 @@
 
                 </select>
 
-                <div id="bloqueCategorias" {% if rol_actual == 'Tecnico' %}{% endif %}>
+                <div id="bloqueCategorias" style="{% if rol_actual != 'Tecnico' %}display: none;{% endif %}">
 
                     <label class="form-label small">Categorías que atiende</label>
 
@@ -151,10 +151,19 @@
 
         <div class="du-card">
 
-            <h6>
-                <i class="bi bi-ticket-perforated"></i>
-                Tickets recientes
-            </h6>
+            {% if es_usuario_tecnico or rol_actual == "Tecnico" %}
+
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h6 class="mb-0">
+                    <i class="bi bi-chat-left-check text-success me-1"></i>
+                    Tickets respondidos por el técnico
+                </h6>
+                {% if tickets_usuario %}
+                <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1 rounded-pill">
+                    {{ tickets_usuario|length }} respondido{{ tickets_usuario|length|pluralize }}
+                </span>
+                {% endif %}
+            </div>
 
             {% if tickets_usuario %}
 
@@ -166,8 +175,9 @@
                         <tr class="text-muted" style="font-size: 0.8rem;">
                             <th>Asunto</th>
                             <th>Estado</th>
+                            <th>Solución brindada</th>
                             <th>Fecha</th>
-                            <th></th>
+                            <th class="text-end">Acción</th>
                         </tr>
                     </thead>
 
@@ -176,7 +186,10 @@
                         {% for ticket in tickets_usuario %}
 
                         <tr>
-                            <td>{{ ticket.titulo }}</td>
+                            <td>
+                                <strong>{{ ticket.titulo }}</strong>
+                                <small class="text-muted d-block" style="font-size: 0.72rem;">#{{ ticket.id_ticket }}</small>
+                            </td>
                             <td>
 
                                 {% if ticket.id_estado.nombre == "Abierto" %}
@@ -190,7 +203,14 @@
                                 {% endif %}
 
                             </td>
-                            <td>{{ ticket.fecha_creacion|date:"d/m/Y" }}</td>
+                            <td>
+                                <span class="small text-secondary" title="{{ ticket.solucion }}">
+                                    {{ ticket.solucion|truncatechars:50 }}
+                                </span>
+                            </td>
+                            <td class="small text-muted">
+                                {{ ticket.fecha_cierre|default:ticket.fecha_creacion|date:"d/m/Y" }}
+                            </td>
                             <td class="text-end">
                                 <a href="{% url 'detalle_ticket' ticket.id_ticket %}" class="btn btn-sm btn-outline-primary">
                                     Ver
@@ -208,9 +228,88 @@
 
             {% else %}
 
-            <p class="text-muted mb-0">
+            <p class="text-muted mb-0 py-3 text-center">
+                <i class="bi bi-inbox fs-2 d-block text-secondary opacity-50 mb-1"></i>
+                Este técnico aún no tiene tickets respondidos.
+            </p>
+
+            {% endif %}
+
+            {% else %}
+
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h6 class="mb-0">
+                    <i class="bi bi-ticket-perforated text-primary me-1"></i>
+                    Tickets solicitados por el usuario
+                </h6>
+                {% if tickets_usuario %}
+                <span class="badge bg-secondary-subtle text-secondary px-2 py-1 rounded-pill">
+                    {{ tickets_usuario|length }} ticket{{ tickets_usuario|length|pluralize }}
+                </span>
+                {% endif %}
+            </div>
+
+            {% if tickets_usuario %}
+
+            <div class="table-responsive">
+
+                <table class="table table-sm align-middle mb-0">
+
+                    <thead>
+                        <tr class="text-muted" style="font-size: 0.8rem;">
+                            <th>Asunto</th>
+                            <th>Estado</th>
+                            <th>Fecha</th>
+                            <th class="text-end">Acción</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for ticket in tickets_usuario %}
+
+                        <tr>
+                            <td>
+                                <strong>{{ ticket.titulo }}</strong>
+                                <small class="text-muted d-block" style="font-size: 0.72rem;">#{{ ticket.id_ticket }}</small>
+                            </td>
+                            <td>
+
+                                {% if ticket.id_estado.nombre == "Abierto" %}
+                                <span class="badge bg-danger">Abierto</span>
+                                {% elif ticket.id_estado.nombre == "En proceso" %}
+                                <span class="badge bg-warning text-dark">En proceso</span>
+                                {% elif ticket.id_estado.nombre == "Cerrado" %}
+                                <span class="badge bg-success">Cerrado</span>
+                                {% else %}
+                                <span class="badge bg-secondary">Sin estado</span>
+                                {% endif %}
+
+                            </td>
+                            <td class="small text-muted">{{ ticket.fecha_creacion|date:"d/m/Y" }}</td>
+                            <td class="text-end">
+                                <a href="{% url 'detalle_ticket' ticket.id_ticket %}" class="btn btn-sm btn-outline-primary">
+                                    Ver
+                                </a>
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            {% else %}
+
+            <p class="text-muted mb-0 py-3 text-center">
+                <i class="bi bi-inbox fs-2 d-block text-secondary opacity-50 mb-1"></i>
                 Este usuario no tiene tickets registrados.
             </p>
+
+            {% endif %}
 
             {% endif %}
 
@@ -225,13 +324,15 @@
 {% block extra_js %}
 
 <script>
-
 function mostrarCategorias() {
-    const rol = document.getElementById('selectRol').value;
+    const select = document.getElementById('selectRol');
     const bloque = document.getElementById('bloqueCategorias');
-    bloque.style.display = (rol === 'Tecnico') ? 'block' : 'none';
+    if (select && bloque) {
+        bloque.style.display = (select.value === 'Tecnico') ? 'block' : 'none';
+    }
 }
 
+document.addEventListener('DOMContentLoaded', mostrarCategorias);
 </script>
 
 {% endblock %}
