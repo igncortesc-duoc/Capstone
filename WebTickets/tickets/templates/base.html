@@ -28,6 +28,8 @@
         href="{% static 'css/base.css' %}"
     >
 
+    <link rel="icon" type="image/png" href="{% static 'imgs/TIXAI.png' %}">
+
     {% block extra_css %}
     {% endblock %}
 </head>
@@ -37,7 +39,7 @@
 <div class="tix-mobile-topbar">
 
     <a class="tix-logo" href="{% url 'index' %}">
-        <img src="{% static 'AAAA_LOGO_TIXAI.png' %}" alt="Logo" width="28" style="border-radius:6px;">
+        <img src="{% static 'imgs/AAAA_LOGO_TIXAI.png' %}" alt="Logo" width="28" style="border-radius:6px;">
         TIX AI
     </a>
 
