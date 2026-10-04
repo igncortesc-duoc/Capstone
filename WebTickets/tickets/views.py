@@ -6,7 +6,7 @@ from django.utils import timezone
 from django.contrib import messages
 
 from .models import Ticket, Categoria, Prioridad, Estado, ClasificacionIA, Settings, EspecialidadTecnico
-from .ml_service import predecir_categoria
+from .ml_service import predecir_categoria, predecir_prioridad
 from .forms import RegistroForm
 
 from django.core.exceptions import PermissionDenied
@@ -190,7 +190,8 @@ def nuevo_ticket(request):
         descripcion = request.POST.get('descripcion')
 
         # Predicción de IA: categoría, confianza y prioridad
-        categoria, confianza, prioridad = predecir_categoria(titulo, descripcion)
+        categoria, confianza_categoria = predecir_categoria(titulo, descripcion)
+        prioridad, confianza_prioridad = predecir_prioridad(titulo, descripcion)
 
         # Estado inicial por defecto: Abierto
         estado_abierto = Estado.objects.get(nombre="Abierto")
@@ -220,7 +221,8 @@ def nuevo_ticket(request):
                     ClasificacionIA, 'id_clasificacion_ia', 'CIA'
                 ),
                 resultado=categoria,
-                nivel_confianza=confianza,
+                nivel_confianza_categoria = confianza_categoria,
+                nivel_confianza_prioridad = confianza_prioridad,
                 fecha_clasificacion=timezone.now(),
                 modelo_utilizado="modelo_ia_v1",
                 id_ticket=ticket,

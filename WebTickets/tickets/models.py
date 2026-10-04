@@ -161,7 +161,8 @@ class Ticket(models.Model):
 class ClasificacionIA(models.Model):
     id_clasificacion_ia = models.CharField(max_length=10, primary_key=True)
     resultado = models.CharField(max_length=100)
-    nivel_confianza = models.DecimalField(max_digits=5, decimal_places=2)
+    nivel_confianza_categoria = models.DecimalField(max_digits=5, decimal_places=2)
+    nivel_confianza_prioridad = models.DecimalField(max_digits=5, decimal_places=2)
     fecha_clasificacion = models.DateTimeField(blank=True, null=True)
     modelo_utilizado = models.CharField(max_length=100)
     id_ticket = models.ForeignKey(
@@ -181,7 +182,7 @@ class ClasificacionIA(models.Model):
         db_table = "clasificacion_ia"
 
     def __str__(self):
-        return f"{self.resultado} ({self.nivel_confianza}%)"
+        return f"{self.resultado} (cat: {self.nivel_confianza_categoria}%, prio: {self.nivel_confianza_prioridad}%)"
 
 class EspecialidadTecnico(models.Model):
     tecnico = models.ForeignKey(

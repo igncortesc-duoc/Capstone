@@ -63,26 +63,30 @@ Detalle del Ticket - TIX AI
 
                 <div class="row g-3">
                     <div class="col-sm-4">
-                        <small class="text-muted d-block fw-bold text-uppercase" style="font-size: 0.72rem;">Estado:</small>
+                        <small class="text-muted d-block fw-bold text-uppercase"
+                            style="font-size: 0.72rem;">Estado:</small>
                         {% if ticket.id_estado.nombre == "Abierto" %}
-                            <span class="badge bg-danger px-2 py-1">Abierto</span>
+                        <span class="badge bg-danger px-2 py-1">Abierto</span>
                         {% elif ticket.id_estado.nombre == "En proceso" %}
-                            <span class="badge bg-warning text-dark px-2 py-1">En proceso</span>
+                        <span class="badge bg-warning text-dark px-2 py-1">En proceso</span>
                         {% elif ticket.id_estado.nombre == "Cerrado" %}
-                            <span class="badge bg-success px-2 py-1">Cerrado</span>
+                        <span class="badge bg-success px-2 py-1">Cerrado</span>
                         {% else %}
-                            <span class="badge bg-secondary px-2 py-1">{{ ticket.id_estado.nombre|default:"Sin estado" }}</span>
+                        <span class="badge bg-secondary px-2 py-1">{{ ticket.id_estado.nombre|default:"Sin estado"
+                            }}</span>
                         {% endif %}
                     </div>
 
                     <div class="col-sm-4">
-                        <small class="text-muted d-block fw-bold text-uppercase" style="font-size: 0.72rem;">Fecha de creación:</small>
+                        <small class="text-muted d-block fw-bold text-uppercase" style="font-size: 0.72rem;">Fecha de
+                            creación:</small>
                         <strong class="text-dark">{{ ticket.fecha_creacion|date:"d/m/Y H:i" }}</strong>
                     </div>
 
                     <div class="col-sm-4">
-                        <small class="text-muted d-block fw-bold text-uppercase" style="font-size: 0.72rem;">Fecha de cierre:</small>
-                        <strong class="text-dark">{{ ticket.fecha_cierre|date:"d/m/Y H:i"|default:"Sin cerrar" }}</strong>
+                        <small class="text-muted d-block fw-bold text-uppercase" style="font-size: 0.72rem;">Fecha de
+                            cierre:</small>
+                        <strong class="text-dark">{{ ticket.fecha_cierre|date:"d/m/Y H:i"|default:"Sin cerrar"}}</strong>
                     </div>
                 </div>
 
@@ -91,7 +95,8 @@ Detalle del Ticket - TIX AI
 
         <!-- SOLUCIÓN / RESPUESTA EXISTENTE (Visible para todos) -->
         {% if ticket.solucion %}
-        <div class="card shadow-sm border-0 mb-4" style="border-radius: 14px; border-left: 5px solid #22c55e !important;">
+        <div class="card shadow-sm border-0 mb-4"
+            style="border-radius: 14px; border-left: 5px solid #22c55e !important;">
             <div class="card-body p-4">
                 <div class="d-flex align-items-center gap-2 mb-3 text-success">
                     <i class="bi bi-check-circle-fill fs-5"></i>
@@ -113,7 +118,7 @@ Detalle del Ticket - TIX AI
                 <div class="d-flex align-items-center gap-2 mb-3">
                     <i class="bi bi-chat-left-dots-fill fs-5" style="color: #6366f1;"></i>
                     <h5 class="fw-bold mb-0">
-                        {% if ticket.solucion %}Modificar Solución / Respuesta{% else %}Responder a este Ticket{% endif %}
+                        {% if ticket.solucion %} Modificar Solución / Respuesta {% else %} Responder a este Ticket {% endif %}
                     </h5>
                 </div>
 
@@ -127,18 +132,14 @@ Detalle del Ticket - TIX AI
                         <label for="id_solucion" class="form-label fw-semibold text-secondary small">
                             Respuesta técnica:
                         </label>
-                        <textarea
-                            name="solucion"
-                            id="id_solucion"
-                            class="form-control"
-                            rows="5"
+                        <textarea name="solucion" id="id_solucion" class="form-control" rows="5"
                             placeholder="Escribe detalladamente la respuesta o los pasos de la solución..."
-                            required
-                        >{{ ticket.solucion|default:'' }}</textarea>
+                            required>{{ ticket.solucion|default:'' }}</textarea>
                     </div>
 
                     <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn btn-primary px-4 py-2" style="background-color: #6366f1; border-color: #6366f1; border-radius: 8px;">
+                        <button type="submit" class="btn btn-primary px-4 py-2"
+                            style="background-color: #6366f1; border-color: #6366f1; border-radius: 8px;">
                             <i class="bi bi-send-fill me-1"></i>
                             {% if ticket.solucion %}Actualizar Respuesta{% else %}Guardar y Enviar Respuesta{% endif %}
                         </button>
@@ -147,16 +148,18 @@ Detalle del Ticket - TIX AI
             </div>
         </div>
         {% else %}
-            <!-- AVISO PARA CLIENTES CUANDO AÚN NO HAY RESPUESTA -->
-            {% if not ticket.solucion %}
-            <div class="alert alert-info border-0 shadow-sm d-flex align-items-center gap-3 p-3 rounded-3" style="background-color: #e0f2fe; color: #0369a1;">
-                <i class="bi bi-clock-history fs-3 flex-shrink-0"></i>
-                <div>
-                    <strong class="d-block">Ticket en proceso de atención</strong>
-                    <span class="small">El equipo técnico está revisando tu caso. La solución aparecerá aquí en cuanto sea respondida.</span>
-                </div>
+        <!-- AVISO PARA CLIENTES CUANDO AÚN NO HAY RESPUESTA -->
+        {% if not ticket.solucion %}
+        <div class="alert alert-info border-0 shadow-sm d-flex align-items-center gap-3 p-3 rounded-3"
+            style="background-color: #e0f2fe; color: #0369a1;">
+            <i class="bi bi-clock-history fs-3 flex-shrink-0"></i>
+            <div>
+                <strong class="d-block">Ticket en proceso de atención</strong>
+                <span class="small">El equipo técnico está revisando tu caso. La solución aparecerá aquí en cuanto sea
+                    respondida.</span>
             </div>
-            {% endif %}
+        </div>
+        {% endif %}
         {% endif %}
 
     </div>
@@ -173,26 +176,50 @@ Detalle del Ticket - TIX AI
                 </h5>
 
                 {% with ultima_clasificacion=ticket.clasificaciones_ia.last %}
-                <div class="mb-3">
-                    <p class="text-muted small mb-1">Categoría predicha</p>
-                    <h5 class="fw-bold text-dark">
-                        {% if ultima_clasificacion %}
+                <div class="row g-2 mb-3">
+                    <div class="col-6">
+                        <p class="text-muted small mb-1">Categoría predicha</p>
+                        <h5 class="fw-bold text-dark">
+                            {% if ultima_clasificacion %}
                             {{ ultima_clasificacion.id_categoria.nombre }}
-                        {% else %}
+                            {% else %}
                             <span class="text-muted">Sin clasificación</span>
-                        {% endif %}
-                    </h5>
+                            {% endif %}
+                        </h5>
+                    </div>
+                    <div class="col-6">
+                        <p class="text-muted small mb-1">Prioridad predicha</p>
+                        <h5 class="fw-bold text-dark">
+                            {% if ultima_clasificacion %}
+                            {{ ultima_clasificacion.id_prioridad.nombre }}
+                            {% else %}
+                            <span class="text-muted">Sin clasificación</span>
+                            {% endif %}
+                        </h5>
+                    </div>
                 </div>
 
-                <div class="mb-3">
-                    <p class="text-muted small mb-1">Nivel de confianza</p>
-                    <h5 class="fw-bold text-primary" style="color: #6366f1 !important;">
-                        {% if ultima_clasificacion %}
-                            {{ ultima_clasificacion.nivel_confianza|floatformat:2 }}%
-                        {% else %}
+                <div class="row g-2 mb-3">
+                    <div class="col-6">
+                        <p class="text-muted small mb-1">Confianza categoría</p>
+                        <h5 class="fw-bold" style="color: #6366f1;">
+                            {% if ultima_clasificacion %}
+                            {{ ultima_clasificacion.nivel_confianza_categoria|floatformat:2 }}%
+                            {% else %}
                             --
-                        {% endif %}
-                    </h5>
+                            {% endif %}
+                        </h5>
+                    </div>
+                    <div class="col-6">
+                        <p class="text-muted small mb-1">Confianza prioridad</p>
+                        <h5 class="fw-bold" style="color: #6366f1;">
+                            {% if ultima_clasificacion %}
+                            {{ ultima_clasificacion.nivel_confianza_prioridad|floatformat:2 }}%
+                            {% else %}
+                            --
+                            {% endif %}
+                        </h5>
+                    </div>
                 </div>
                 {% endwith %}
 
@@ -202,12 +229,12 @@ Detalle del Ticket - TIX AI
                     <p class="text-muted small mb-1">Categoría final</p>
                     <h5 class="fw-bold text-dark">
                         {% if ticket.id_categoria %}
-                            {{ ticket.id_categoria.nombre }}
+                        {{ ticket.id_categoria.nombre }}
                         {% elif ticket.clasificaciones_ia.last %}
-                            {{ ticket.clasificaciones_ia.last.id_categoria.nombre }}
-                            <small class="text-muted d-block" style="font-size: 0.72rem;">(predicha, sin confirmar)</small>
+                        {{ ticket.clasificaciones_ia.last.id_categoria.nombre }}
+                        <small class="text-muted d-block" style="font-size: 0.72rem;">(predicha, sin confirmar)</small>
                         {% else %}
-                            <span class="text-muted">Sin clasificar</span>
+                        <span class="text-muted">Sin clasificar</span>
                         {% endif %}
                     </h5>
                 </div>
@@ -216,12 +243,12 @@ Detalle del Ticket - TIX AI
                     <p class="text-muted small mb-1">Prioridad</p>
                     <h5 class="fw-bold text-dark">
                         {% if ticket.id_prioridad %}
-                            {{ ticket.id_prioridad.nombre }}
+                        {{ ticket.id_prioridad.nombre }}
                         {% elif ticket.clasificaciones_ia.last %}
-                            {{ ticket.clasificaciones_ia.last.id_prioridad.nombre }}
-                            <small class="text-muted d-block" style="font-size: 0.72rem;">(predicha, sin confirmar)</small>
+                        {{ ticket.clasificaciones_ia.last.id_prioridad.nombre }}
+                        <small class="text-muted d-block" style="font-size: 0.72rem;">(predicha, sin confirmar)</small>
                         {% else %}
-                            <span class="text-muted">Sin clasificar</span>
+                        <span class="text-muted">Sin clasificar</span>
                         {% endif %}
                     </h5>
                 </div>
@@ -231,61 +258,68 @@ Detalle del Ticket - TIX AI
                 <div class="mb-3">
                     <p class="text-muted small mb-1">Técnico asignado</p>
                     {% if ticket.id_tecnico %}
-                        <div class="d-flex align-items-center gap-2 mb-1">
-                            <span class="d-inline-flex align-items-center justify-content-center rounded-circle text-white fw-bold" style="width: 32px; height: 32px; font-size: 0.85rem; background-color: #0284c7;">
-                                {{ ticket.id_tecnico.first_name|first|upper }}
-                            </span>
-                            <div>
-                                <strong class="d-block text-dark">{{ ticket.id_tecnico.first_name }} {{ ticket.id_tecnico.last_name }}</strong>
-                                {% if ticket.fecha_asignacion %}
-                                    <small class="text-muted d-block" style="font-size: 0.72rem;">
-                                        Asignado el {{ ticket.fecha_asignacion|date:"d/m/Y H:i" }}
-                                    </small>
-                                {% endif %}
-                            </div>
+                    <div class="d-flex align-items-center gap-2 mb-1">
+                        <span
+                            class="d-inline-flex align-items-center justify-content-center rounded-circle text-white fw-bold"
+                            style="width: 32px; height: 32px; font-size: 0.85rem; background-color: #0284c7;">
+                            {{ ticket.id_tecnico.first_name|first|upper }}
+                        </span>
+                        <div>
+                            <strong class="d-block text-dark">{{ ticket.id_tecnico.first_name }} {{ ticket.id_tecnico.last_name }}</strong>
+                            {% if ticket.fecha_asignacion %}
+                            <small class="text-muted d-block" style="font-size: 0.72rem;">
+                                Asignado el {{ ticket.fecha_asignacion|date:"d/m/Y H:i" }}
+                            </small>
+                            {% endif %}
                         </div>
+                    </div>
                     {% else %}
-                        <h6 class="text-muted mb-2">Sin asignar</h6>
+                    <h6 class="text-muted mb-2">Sin asignar</h6>
                     {% endif %}
                 </div>
 
                 <!-- ACCIONES DE GESTIÓN (SOLO TÉCNICOS Y ADMINISTRADORES) -->
                 {% if es_tecnico_o_admin %}
-                    <form method="POST" action="{% url 'asignar_tecnico' ticket.id_ticket %}" class="mb-3">
-                        {% csrf_token %}
-                        <div class="input-group input-group-sm">
-                            <select name="tecnico" class="form-select">
-                                <option value="">Reasignar...</option>
-                                {% for tecnico in tecnicos_disponibles %}
-                                    <option value="{{ tecnico.id }}" {% if ticket.id_tecnico_id == tecnico.id %}selected{% endif %}>
-                                        {{ tecnico.first_name }} {{ tecnico.last_name }}
-                                    </option>
-                                {% endfor %}
-                            </select>
-                            <button type="submit" class="btn btn-outline-primary">
-                                Asignar
-                            </button>
-                        </div>
-                    </form>
-
-                    <hr class="my-3">
-
-                    <h6 class="fw-bold mb-2">Estado del ticket</h6>
-                    <form method="POST" action="{% url 'cambiar_estado' ticket.id_ticket %}">
-                        {% csrf_token %}
-                        <select name="estado" class="form-select form-select-sm mb-2">
-                            <option value="Abierto" {% if ticket.id_estado.nombre == 'Abierto' %}selected{% endif %}>Abierto</option>
-                            <option value="En proceso" {% if ticket.id_estado.nombre == 'En proceso' %}selected{% endif %}>En proceso</option>
-                            <option value="Cerrado" {% if ticket.id_estado.nombre == 'Cerrado' %}selected{% endif %}>Cerrado</option>
+                <form method="POST" action="{% url 'asignar_tecnico' ticket.id_ticket %}" class="mb-3">
+                    {% csrf_token %}
+                    <div class="input-group input-group-sm">
+                        <select name="tecnico" class="form-select">
+                            <option value="">Reasignar...</option>
+                            {% for tecnico in tecnicos_disponibles %}
+                            <option value="{{ tecnico.id }}" {% if ticket.id_tecnico_id == tecnico.id %} selected {% endif %}>
+                                {{ tecnico.first_name }} {{ tecnico.last_name }}
+                            </option>
+                            {% endfor %}
                         </select>
-                        <button type="submit" class="btn btn-sm btn-primary w-100" style="background-color: #6366f1; border-color: #6366f1;">
-                            Actualizar estado
+                        <button type="submit" class="btn btn-outline-primary">
+                            Asignar
                         </button>
-                    </form>
+                    </div>
+                </form>
 
-                    <a href="{% url 'corregir_ticket' ticket.id_ticket %}" class="btn btn-sm btn-outline-primary w-100 mt-2">
-                        Corregir clasificación
-                    </a>
+                <hr class="my-3">
+
+                <h6 class="fw-bold mb-2">Estado del ticket</h6>
+                <form method="POST" action="{% url 'cambiar_estado' ticket.id_ticket %}">
+                    {% csrf_token %}
+                    <select name="estado" class="form-select form-select-sm mb-2">
+                        <option value="Abierto" {% if ticket.id_estado.nombre == 'Abierto' %} selected {% endif %}>Abierto
+                        </option>
+                        <option value="En proceso" {% if ticket.id_estado.nombre == 'En proceso' %} selected {% endif %}>En
+                            proceso</option>
+                        <option value="Cerrado" {% if ticket.id_estado.nombre == 'Cerrado' %} selected {% endif %}>Cerrado
+                        </option>
+                    </select>
+                    <button type="submit" class="btn btn-sm btn-primary w-100"
+                        style="background-color: #6366f1; border-color: #6366f1;">
+                        Actualizar estado
+                    </button>
+                </form>
+
+                <a href="{% url 'corregir_ticket' ticket.id_ticket %}"
+                    class="btn btn-sm btn-outline-primary w-100 mt-2">
+                    Corregir clasificación
+                </a>
                 {% endif %}
 
             </div>
