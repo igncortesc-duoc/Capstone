@@ -390,13 +390,37 @@ def detalle_ticket(request, ticket_id):
     tecnicos_disponibles = User.objects.filter(groups__name='Tecnico')
 
     return render(
-        request,
-        'tickets/detalle_ticket.html',
-        {
-            'ticket': ticket,
-            'tecnicos_disponibles': tecnicos_disponibles,
-        }
-    )
+    request,
+    'tickets/detalle_ticket.html',
+    {
+        'ticket': ticket,
+        'tecnicos_disponibles': tecnicos_disponibles,
+        'es_tecnico_o_admin': es_tecnico_o_admin(request.user),
+        'categorias': Categoria.objects.all(),
+        'prioridades': Prioridad.objects.all(),
+    }
+)
+
+@login_required
+def actualizar_clasificacion(request, ticket_id):
+    ticket = get_object_or_404(Ticket, id_ticket=ticket_id)
+
+    if request.method != 'POST':
+        return redirect('detalle_ticket', ticket_id=ticket.id_ticket)
+
+    if not es_tecnico_o_admin(request.user):
+        messages.error(request, 'No tienes permisos para modificar la clasificación.')
+        return redirect('detalle_ticket', ticket_id=ticket.id_ticket)
+
+    categoria_id = request.POST.get('categoria')
+    prioridad_id = request.POST.get('prioridad')
+
+    ticket.id_categoria = get_object_or_404(Categoria, pk=categoria_id) if categoria_id else None
+    ticket.id_prioridad = get_object_or_404(Prioridad, pk=prioridad_id) if prioridad_id else None
+    ticket.save(update_fields=['id_categoria', 'id_prioridad'])
+
+    messages.success(request, 'Clasificación actualizada correctamente.')
+    return redirect('detalle_ticket', ticket_id=ticket.id_ticket)
 
 
 @login_required
@@ -566,15 +590,14 @@ def configuracion(request):
         usuario=request.user,
         defaults={
             'id_perfil': generar_siguiente_id(Settings, 'id_perfil', 'SET'),
-            'tema': 'Claro',
+            'tema': False,
             'idioma': 'Español',
             'interfaz': 'Cómoda',
         }
     )
 
     if request.method == 'POST':
-
-        settings_usuario.tema = request.POST.get('tema')
+        settings_usuario.tema = request.POST.get('tema', '').lower() == 'oscuro'
         settings_usuario.idioma = request.POST.get('idioma')
         settings_usuario.interfaz = request.POST.get('interfaz')
         settings_usuario.save()

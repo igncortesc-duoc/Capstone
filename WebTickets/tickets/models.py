@@ -56,7 +56,7 @@ class Settings(models.Model):
     )
 
 
-    dark_mode = models.BooleanField(
+    tema = models.BooleanField(
         default=False
     )
 
