@@ -1,126 +1,23 @@
 {% extends 'base.html' %}
 
+{% load webpush_notifications %}
+
+
 {% block title %}
 Configuración - TIX AI
 {% endblock %}
 
 {% block content %}
 
-<style>
-    .cfg-card {
-        border: 1px solid #e5e7eb;
-        border-radius: 14px;
-        background: #fff;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.03);
-    }
-
-    .cfg-title {
-        font-weight: 700;
-        font-size: 1.05rem;
-        display: flex;
-        align-items: center;
-        gap: .6rem;
-        color: #1e293b;
-    }
-
-    .cfg-title i {
-        color: #6366f1;
-        font-size: 1.2rem;
-    }
-
-    .cfg-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: .85rem 0;
-        border-top: 1px solid #f1f5f9;
-    }
-
-    .cfg-row:first-of-type {
-        border-top: 0;
-    }
-
-    .cfg-label {
-        font-weight: 600;
-        font-size: .92rem;
-        margin: 0;
-        color: #1e293b;
-    }
-
-    .cfg-desc {
-        font-size: .8rem;
-        color: #64748b;
-        margin: 0;
-    }
-
-    .cfg-meta {
-        font-size: .72rem;
-        text-transform: uppercase;
-        font-weight: 700;
-        color: #94a3b8;
-        letter-spacing: 0.05em;
-        margin: 0 0 2px 0;
-    }
-
-    .cfg-value {
-        font-weight: 700;
-        font-size: .95rem;
-        margin: 0;
-        color: #1e293b;
-    }
-
-    .form-check-input:checked {
-        background-color: #6366f1;
-        border-color: #6366f1;
-    }
-
-    .form-switch .form-check-input {
-        width: 2.75em;
-        height: 1.45em;
-        cursor: pointer;
-    }
-
-    .form-range::-webkit-slider-thumb {
-        background: #6366f1;
-    }
-
-    .form-range::-moz-range-thumb {
-        background: #6366f1;
-    }
-
-    .form-range {
-        accent-color: #6366f1;
-    }
-
-    .avatar-cfg {
-        width: 76px;
-        height: 76px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: #f1f5f9;
-        border: 2px solid #e2e8f0;
-        overflow: hidden;
-        flex-shrink: 0;
-    }
-
-    .tix-role-switcher {
-        background: #ffffff;
-        border: 1px solid #e2e8f0;
-        border-radius: 12px;
-        padding: 0.75rem 1rem;
-        margin-bottom: 1.5rem;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-    }
-</style>
+<div id="webpush-hidden-container" class="d-none">
+    {% webpush_button %}
+</div>
 
 
 <div class="container-fluid py-3" style="max-width: 1100px;">
 
     <!-- ENCABEZADO -->
-    <h1 class="fw-bold mb-1"
-        style="font-size: 1.75rem; color: #0f172a;">
+    <h1 class="fw-bold mb-1" style="font-size: 1.75rem; color: #0f172a;">
         Configuración
     </h1>
 
@@ -129,7 +26,7 @@ Configuración - TIX AI
     </p>
 
 
-    <form method="POST">
+    <form method="POST" id="form-configuracion">
         {% csrf_token %}
 
 
@@ -154,19 +51,8 @@ Configuración - TIX AI
                 </p>
 
                 <div class="form-check form-switch m-0">
-
-                    <input type="hidden"
-                           name="tema"
-                           value="Claro">
-
-                    <input class="form-check-input"
-                           type="checkbox"
-                           role="switch"
-                           name="tema"
-                           value="Oscuro"
-                           id="modo_oscuro"
-                           {% if settings.tema == "Oscuro" %}checked{% endif %}>
-
+                    <input class="form-check-input" type="checkbox" role="switch" name="tema" id="modo_oscuro" 
+                    {% if settings.tema %} checked {% endif %}>
                 </div>
 
             </div>
@@ -178,27 +64,17 @@ Configuración - TIX AI
                     Tema de Color
                 </p>
 
-                <select name="tema_color"
-                        class="form-select form-select-sm w-auto">
+                <select name="tema_color" class="form-select form-select-sm w-auto">
 
-                    <option value="Púrpura"
-                            {% if settings.tema_color == "Púrpura" %}
-                            selected
-                            {% endif %}>
+                    <option value="Púrpura" {% if settings.tema_color == "Púrpura" %} selected {% endif %}>
                         Púrpura
                     </option>
 
-                    <option value="Azul"
-                            {% if settings.tema_color == "Azul" %}
-                            selected
-                            {% endif %}>
+                    <option value="Azul" {% if settings.tema_color == "Azul" %} selected {% endif %}>
                         Azul
                     </option>
 
-                    <option value="Verde"
-                            {% if settings.tema_color == "Verde" %}
-                            selected
-                            {% endif %}>
+                    <option value="Verde" {% if settings.tema_color == "Verde" %} selected {% endif %}>
                         Verde
                     </option>
 
@@ -215,17 +91,9 @@ Configuración - TIX AI
 
                 <div class="form-check form-switch m-0">
 
-                    <input type="hidden"
-                           name="interfaz"
-                           value="Cómoda">
+                    <input type="hidden" name="interfaz" value="Cómoda">
 
-                    <input class="form-check-input"
-                           type="checkbox"
-                           role="switch"
-                           name="interfaz"
-                           value="Compacta"
-                           id="modo_compacto"
-                           {% if settings.interfaz == "Compacta" %}checked{% endif %}>
+                    <input class="form-check-input" type="checkbox" role="switch" name="interfaz" value="Compacta" id="modo_compacto" {% if settings.interfaz == "Compacta" %} checked {% endif %}>
 
                 </div>
 
@@ -234,9 +102,7 @@ Configuración - TIX AI
         </div>
 
 
-        <input type="hidden"
-               name="idioma"
-               value="{{ settings.idioma|default:'Español' }}">
+        <input type="hidden" name="idioma" value="{{ settings.idioma|default:'Español' }}">
 
 
         <!-- Notificaciones -->
@@ -264,11 +130,7 @@ Configuración - TIX AI
 
                 <div class="form-check form-switch m-0">
 
-                    <input class="form-check-input"
-                           type="checkbox"
-                           role="switch"
-                           name="notif_push"
-                           {% if settings.notif_push %}checked{% endif %}>
+                    <input class="form-check-input" type="checkbox" role="switch" name="notif_push" {% if settings.notif_push %} checked {% endif %}>
 
                 </div>
 
@@ -291,11 +153,8 @@ Configuración - TIX AI
 
                 <div class="form-check form-switch m-0">
 
-                    <input class="form-check-input"
-                           type="checkbox"
-                           role="switch"
-                           name="alertas_criticas"
-                           {% if settings.alertas_criticas %}checked{% endif %}>
+                    <input class="form-check-input" type="checkbox" role="switch" name="alertas_criticas" 
+                    {% if settings.alertas_criticas %} checked {% endif %}>
 
                 </div>
 
@@ -308,10 +167,10 @@ Configuración - TIX AI
                     Resumen Diario
                 </p>
 
-                <div class="form-check form-switch m-0 d-flex align-items-center gap-2">
+                
+                <div class="form-check form-switch m-0 d-flex align-items-center gap-2 flex-nowrap">
 
-                    <span class="small fw-semibold text-muted"
-                          id="resumen_estado">
+                    <span class="small fw-semibold text-muted text-nowrap" id="resumen_estado">
                         {% if settings.resumen_diario %}
                             Activado
                         {% else %}
@@ -319,12 +178,7 @@ Configuración - TIX AI
                         {% endif %}
                     </span>
 
-                    <input class="form-check-input"
-                           type="checkbox"
-                           role="switch"
-                           name="resumen_diario"
-                           id="resumen_diario"
-                           {% if settings.resumen_diario %}checked{% endif %}>
+                    <input class="form-check-input m-0 flex-shrink-0" type="checkbox" role="switch" name="resumen_diario" id="resumen_diario" {% if settings.resumen_diario %} checked {% endif %}>
 
                 </div>
 
@@ -358,11 +212,8 @@ Configuración - TIX AI
 
                 <div class="form-check form-switch m-0">
 
-                    <input class="form-check-input"
-                           type="checkbox"
-                           role="switch"
-                           name="dos_factores_obligatorio"
-                           {% if settings.dos_factores_obligatorio %}checked{% endif %}>
+                    <input class="form-check-input" type="checkbox" role="switch" name="dos_factores_obligatorio" 
+                    {% if settings.dos_factores_obligatorio %} checked {% endif %}>
 
                 </div>
 
@@ -396,11 +247,8 @@ Configuración - TIX AI
 
                 <div class="form-check form-switch m-0">
 
-                    <input class="form-check-input"
-                           type="checkbox"
-                           role="switch"
-                           name="asignacion_automatica"
-                           {% if settings.asignacion_automatica %}checked{% endif %}>
+                    <input class="form-check-input" type="checkbox" role="switch" name="asignacion_automatica" 
+                    {% if settings.asignacion_automatica %} checked {% endif %}>
 
                 </div>
 
@@ -423,11 +271,8 @@ Configuración - TIX AI
 
                 <div class="form-check form-switch m-0">
 
-                    <input class="form-check-input"
-                           type="checkbox"
-                           role="switch"
-                           name="sugerencias_respuesta"
-                           {% if settings.sugerencias_respuesta %}checked{% endif %}>
+                    <input class="form-check-input" type="checkbox" role="switch" name="sugerencias_respuesta" 
+                    {% if settings.sugerencias_respuesta %} checked {% endif %}>
 
                 </div>
 
@@ -442,22 +287,15 @@ Configuración - TIX AI
                         Umbral de Confianza IA
                     </p>
 
-                    <span class="fw-bold"
-                          style="color: #6366f1;"
-                          id="umbral_valor">
+                    <span class="fw-bold text-tix-primary" id="umbral_valor">
                         {{ settings.umbral_ia|default:"85" }}%
                     </span>
 
                 </div>
 
-                <input type="range"
-                       class="form-range mt-2"
-                       min="0"
-                       max="100"
-                       name="umbral_ia"
-                       id="umbral_ia"
-                       value="{{ settings.umbral_ia|default:'85' }}"
-                       oninput="document.getElementById('umbral_valor').textContent = this.value + '%'">
+                <input type="range" class="form-range mt-2" min="0" max="100" name="umbral_ia" id="umbral_ia"
+                    value="{{ settings.umbral_ia|default:'85' }}"
+                    oninput="document.getElementById('umbral_valor').textContent = this.value + '%'">
 
             </div>
 
@@ -472,8 +310,7 @@ Configuración - TIX AI
 
 
         <!-- PERFIL DE USUARIO -->
-        <div class="cfg-card p-4 mb-4"
-             style="border: 1.5px dashed #cbd5e1;">
+        <div class="cfg-card p-4 mb-4" style="border: 1.5px dashed #cbd5e1;">
 
             <div class="cfg-title mb-3">
 
@@ -490,8 +327,7 @@ Configuración - TIX AI
                 <!-- Avatar -->
                 <div class="col-auto">
 
-                    <div class="avatar-cfg"
-                         style="
+                    <div class="avatar-cfg" style="
                          background:
                          {% if es_tecnico %}
                          #e0f2fe;
@@ -509,15 +345,11 @@ Configuración - TIX AI
 
                         {% if es_tecnico %}
 
-                            <i class="bi bi-person-gear text-primary"
-                               style="font-size: 2.4rem;">
-                            </i>
+                        <i class="bi bi-person-gear text-primary" style="font-size: 2.4rem;"></i>
 
                         {% else %}
 
-                            <i class="bi bi-person-check text-warning"
-                               style="font-size: 2.4rem;">
-                            </i>
+                        <i class="bi bi-person-check text-warning" style="font-size: 2.4rem;"></i>
 
                         {% endif %}
 
@@ -543,12 +375,12 @@ Configuración - TIX AI
 
                                 {% if request.user.first_name or request.user.last_name %}
 
-                                    {{ request.user.first_name|upper }}
-                                    {{ request.user.last_name|upper }}
+                                {{ request.user.first_name|upper }}
+                                {{ request.user.last_name|upper }}
 
                                 {% else %}
 
-                                    {{ request.user.username|upper }}
+                                {{ request.user.username|upper }}
 
                                 {% endif %}
 
@@ -568,11 +400,11 @@ Configuración - TIX AI
 
                                 {% if request.user.email %}
 
-                                    {{ request.user.email }}
+                                {{ request.user.email }}
 
                                 {% else %}
 
-                                    No registrado
+                                No registrado
 
                                 {% endif %}
 
@@ -616,9 +448,9 @@ Configuración - TIX AI
 
                             <p class="cfg-value">
 
-                                {% if request.user.telefono %}
+                                {% if request.user.settings.first.telefono %}
 
-                                    {{ request.user.telefono }}
+                                    {{ request.user.settings.first.telefono }}
 
                                 {% else %}
 
@@ -630,24 +462,16 @@ Configuración - TIX AI
 
                         </div>
 
-
                     </div>
 
                 </div>
 
-
                 <!-- Botón -->
                 <div class="col-auto">
 
-                    <button type="button"
-                            class="btn btn-outline-secondary btn-sm px-3 rounded-2">
-
-                        Editar Perfil
-
-                    </button>
+                    <a href="{% url 'editar_perfil' %}" class="btn btn-outline-secondary btn-sm px-3 rounded-2">Editar Perfil</a>
 
                 </div>
-
 
             </div>
 
@@ -656,7 +480,6 @@ Configuración - TIX AI
 
         <!-- APARIENCIA Y NOTIFICACIONES -->
         <div class="row g-4 mb-4">
-
 
             <!-- Apariencia -->
             <div class="col-lg-6">
@@ -671,37 +494,17 @@ Configuración - TIX AI
 
                     </div>
 
-
                     <!-- Modo oscuro -->
                     <div class="cfg-row">
 
                         <div>
-
-                            <p class="cfg-label">
-                                Modo Oscuro
-                            </p>
-
-                            <p class="cfg-desc">
-                                Cambia a una interfaz de colores oscuros
-                            </p>
-
+                            <p class="cfg-label">Modo Oscuro</p>
+                            <p class="cfg-desc">Cambia a una interfaz de colores oscuros</p>
                         </div>
 
-
                         <div class="form-check form-switch m-0">
-
-                            <input type="hidden"
-                                   name="tema"
-                                   value="Claro">
-
-                            <input class="form-check-input"
-                                   type="checkbox"
-                                   role="switch"
-                                   name="tema"
-                                   value="Oscuro"
-                                   id="user_modo_oscuro"
-                                   {% if settings.tema == "Oscuro" %}checked{% endif %}>
-
+                            <!-- Solo un input, con name="tema", sin atributo value -->
+                            <input class="form-check-input" type="checkbox" role="switch" name="tema" id="user_modo_oscuro" {% if settings.tema %} checked {% endif %}>
                         </div>
 
                     </div>
@@ -711,42 +514,14 @@ Configuración - TIX AI
                     <div class="cfg-row">
 
                         <div>
-
-                            <p class="cfg-label">
-                                Tamaño de Interfaz
-                            </p>
-
-                            <p class="cfg-desc">
-                                Ajusta el tamaño del texto y controles
-                            </p>
-
+                            <p class="cfg-label">Tamaño de Interfaz</p>
+                            <p class="cfg-desc">Ajusta el tamaño del texto y controles</p>
                         </div>
 
-
-                        <select name="interfaz"
-                                class="form-select form-select-sm w-auto">
-
-                            <option value="Normal"
-                                    {% if settings.interfaz == "Normal" or not settings.interfaz %}
-                                    selected
-                                    {% endif %}>
-                                Normal
-                            </option>
-
-                            <option value="Cómoda"
-                                    {% if settings.interfaz == "Cómoda" %}
-                                    selected
-                                    {% endif %}>
-                                Cómoda
-                            </option>
-
-                            <option value="Compacta"
-                                    {% if settings.interfaz == "Compacta" %}
-                                    selected
-                                    {% endif %}>
-                                Compacta
-                            </option>
-
+                        <select name="interfaz" class="form-select form-select-sm w-auto">
+                            <option value="Normal" {% if settings.interfaz == "Normal" or not settings.interfaz %} selected {% endif %}>Normal</option>
+                            <option value="Cómoda" {% if settings.interfaz == "Cómoda" %} selected {% endif %}>Cómoda</option>
+                            <option value="Compacta" {% if settings.interfaz == "Compacta" %} selected {% endif %}>Compacta</option>
                         </select>
 
                     </div>
@@ -756,39 +531,16 @@ Configuración - TIX AI
                     <div class="cfg-row">
 
                         <div>
-
-                            <p class="cfg-label">
-                                Idioma
-                            </p>
-
-                            <p class="cfg-desc">
-                                Selecciona el idioma del portal
-                            </p>
-
+                            <p class="cfg-label">Idioma</p>
+                            <p class="cfg-desc">Selecciona el idioma del portal</p>
                         </div>
 
-
-                        <select name="idioma"
-                                class="form-select form-select-sm w-auto">
-
-                            <option value="Español"
-                                    {% if settings.idioma == "Español" or not settings.idioma %}
-                                    selected
-                                    {% endif %}>
-                                Español
-                            </option>
-
-                            <option value="English"
-                                    {% if settings.idioma == "English" %}
-                                    selected
-                                    {% endif %}>
-                                English
-                            </option>
-
+                        <select name="idioma" class="form-select form-select-sm w-auto">
+                            <option value="Español" {% if settings.idioma == "Español" or not settings.idioma %} selected {% endif %}>Español</option>
+                            <option value="English" {% if settings.idioma == "English" %} selected {% endif %}>English</option>
                         </select>
 
                     </div>
-
 
                 </div>
 
@@ -801,38 +553,20 @@ Configuración - TIX AI
                 <div class="cfg-card p-4 h-100">
 
                     <div class="cfg-title mb-2">
-
                         <i class="bi bi-bell"></i>
-
                         Notificaciones
-
                     </div>
-
 
                     <!-- Push -->
                     <div class="cfg-row">
 
                         <div>
-
-                            <p class="cfg-label">
-                                Notificaciones Push
-                            </p>
-
-                            <p class="cfg-desc">
-                                Recibe alertas instantáneas en tu navegador
-                            </p>
-
+                            <p class="cfg-label">Notificaciones Push</p>
+                            <p class="cfg-desc">Recibe alertas instantáneas en tu navegador</p>
                         </div>
 
-
                         <div class="form-check form-switch m-0">
-
-                            <input class="form-check-input"
-                                   type="checkbox"
-                                   role="switch"
-                                   name="notif_push"
-                                   {% if settings.notif_push %}checked{% endif %}>
-
+                            <input class="form-check-input" type="checkbox" role="switch" name="notif_push" {% if settings.notif_push %} checked {% endif %}>
                         </div>
 
                     </div>
@@ -842,26 +576,12 @@ Configuración - TIX AI
                     <div class="cfg-row">
 
                         <div>
-
-                            <p class="cfg-label">
-                                Alertas de Estado de Ticket
-                            </p>
-
-                            <p class="cfg-desc">
-                                Notificaciones cuando cambie un estado
-                            </p>
-
+                            <p class="cfg-label">Alertas de Estado de Ticket</p>
+                            <p class="cfg-desc">Notificaciones cuando cambie un estado</p>
                         </div>
 
-
                         <div class="form-check form-switch m-0">
-
-                            <input class="form-check-input"
-                                   type="checkbox"
-                                   role="switch"
-                                   name="alertas_estado"
-                                   {% if settings.alertas_estado %}checked{% endif %}>
-
+                            <input class="form-check-input" type="checkbox" role="switch" name="alertas_estado" {% if settings.alertas_estado %} checked {% endif %}>
                         </div>
 
                     </div>
@@ -871,30 +591,15 @@ Configuración - TIX AI
                     <div class="cfg-row">
 
                         <div>
-
-                            <p class="cfg-label">
-                                Resumen Semanal
-                            </p>
-
-                            <p class="cfg-desc">
-                                Informe periódico con métricas de soporte
-                            </p>
-
+                            <p class="cfg-label">Resumen Semanal</p>
+                            <p class="cfg-desc">Informe periódico con métricas de soporte</p>
                         </div>
 
-
                         <div class="form-check form-switch m-0">
-
-                            <input class="form-check-input"
-                                   type="checkbox"
-                                   role="switch"
-                                   name="resumen_semanal"
-                                   {% if settings.resumen_semanal %}checked{% endif %}>
-
+                            <input class="form-check-input" type="checkbox" role="switch" name="resumen_semanal" {% if settings.resumen_semanal %} checked {% endif %}>
                         </div>
 
                     </div>
-
 
                 </div>
 
@@ -907,134 +612,279 @@ Configuración - TIX AI
         <div class="cfg-card p-4 mb-4">
 
             <div class="cfg-title mb-2">
-
                 <i class="bi bi-shield-check"></i>
-
                 Seguridad
-
             </div>
-
 
             <!-- Contraseña -->
             <div class="cfg-row">
 
                 <div>
-
-                    <p class="cfg-label">
-                        Contraseña de Acceso
-                    </p>
-
-                    <p class="cfg-desc">
-                        Mantén tu cuenta protegida cambiando tu contraseña regularmente
-                    </p>
-
+                    <p class="cfg-label">Contraseña de Acceso</p>
+                    <p class="cfg-desc">Mantén tu cuenta protegida cambiando tu contraseña regularmente</p>
                 </div>
 
-
-                <button type="button"
-                        class="btn btn-outline-secondary btn-sm px-3 rounded-2">
-
+                <!-- En settings.html -->
+                <a href="{% url 'solicitar_codigo_password' %}" class="btn btn-outline-secondary btn-sm px-3 rounded-2">
                     Cambiar Contraseña
-
-                </button>
+                </a>
 
             </div>
-
 
             <!-- 2FA -->
             <div class="cfg-row">
 
                 <div>
-
-                    <p class="cfg-label">
-                        Autenticación de Dos Factores (2FA)
-                    </p>
-
-                    <p class="cfg-desc">
-                        Agrega un nivel extra de seguridad utilizando tu teléfono celular
-                    </p>
-
+                    <p class="cfg-label">Autenticación de Dos Factores (2FA)</p>
+                    <p class="cfg-desc">Agrega un nivel extra de seguridad utilizando tu teléfono celular</p>
                 </div>
 
-
                 <div class="form-check form-switch m-0">
-
-                    <input class="form-check-input"
-                           type="checkbox"
-                           role="switch"
-                           name="dos_factores"
-                           {% if settings.dos_factores %}checked{% endif %}>
-
+                    <input class="form-check-input" type="checkbox" role="switch" name="dos_factores" {% if settings.dos_factores %} checked {% endif %}>
                 </div>
 
             </div>
 
-        </div>
-
-
+        </div> 
+        
         {% endif %}
-
-
-        <!-- BOTONES -->
-        <div class="d-flex justify-content-end gap-2 mb-4">
-
-            <a href="{% url 'dashboard' %}"
-               class="btn btn-outline-secondary px-4">
-
-                Cancelar
-
-            </a>
-
-
-            <button type="submit"
-                    class="btn btn-primary px-4"
-                    style="
-                    background-color: #6366f1;
-                    border-color: #6366f1;
-                    ">
-
-                Guardar cambios
-
-            </button>
-
-        </div>
-
 
     </form>
 
 </div>
 
 
+<!-- ============================================ -->
+<!-- NOTIFICACIÓN FLOTANTE DE GUARDADO EXITOSO -->
+<!-- ============================================ -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1055;">
+    <div id="toast-autoguardado" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body fw-medium">
+                <i class="bi bi-check-circle-fill me-2"></i> Cambio guardado automáticamente.
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================ -->
+<!-- SCRIPT MAESTRO DE AUTOGUARDADO Y EFECTOS -->
+<!-- ============================================ -->
 <script>
 
-    // ============================================
-    // RESUMEN DIARIO
-    // ============================================
 
-    const resumen =
-        document.getElementById('resumen_diario');
+async function cancelarSuscripcionPush() {
+    const registro = await navigator.serviceWorker
+        .getRegistration('/webpush/');
 
-    if (resumen) {
-
-        resumen.addEventListener('change', function () {
-
-            const estadoSpan =
-                document.getElementById('resumen_estado');
-
-            if (estadoSpan) {
-
-                estadoSpan.textContent =
-                    this.checked
-                    ? 'Activado'
-                    : 'Desactivado';
-
-            }
-
-        });
-
+    if (!registro) {
+        return true;
     }
 
-</script>
+    const suscripcion = await registro.pushManager.getSubscription();
 
+    if (!suscripcion) {
+        return true;
+    }
+
+    const boton = document.getElementById(
+        'webpush-subscribe-button'
+    );
+
+    if (!boton) {
+        throw new Error('No se encontró el botón original de WebPush.');
+    }
+
+    // Utilizar el proceso de cancelación del propio paquete.
+    if (boton.textContent.includes('Unsubscribe')) {
+        boton.click();
+    } else {
+        throw new Error(
+            'El botón WebPush no está sincronizado con la suscripción.'
+        );
+    }
+
+    // Esperar a que el navegador confirme la cancelación.
+    for (let i = 0; i < 30; i++) {
+        await new Promise(resolve => setTimeout(resolve, 500));
+
+        const actual = await registro.pushManager.getSubscription();
+
+        if (!actual) {
+            return true;
+        }
+    }
+
+    throw new Error('No se pudo cancelar la suscripción Push.');
+}
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    
+    const form = document.getElementById('form-configuracion'); 
+    const toastElement = document.getElementById('toast-autoguardado');
+    
+    if (!form) return;
+
+
+
+    
+form.addEventListener('change', async function(event) {
+    const objetivo = event.target;
+    const nombreOpcion = objetivo.name;
+
+    if (nombreOpcion === 'notif_push') {
+        try {
+            if (objetivo.checked) {
+                if (!('serviceWorker' in navigator) ||
+                    !('PushManager' in window)) {
+                    throw new Error('El navegador no admite Push.');
+                }
+
+                // Si el usuario bloqueó el permiso en Chrome,
+                // debe habilitarlo manualmente.
+                if (Notification.permission === 'denied') {
+                    objetivo.checked = false;
+                    alert(
+                        'Chrome tiene bloqueadas las notificaciones. ' +
+                        'Entra en la configuración del sitio y permítelas.'
+                    );
+                    return;
+                }
+
+            // Solicitar permiso cuando todavía no se ha decidido.
+                if (Notification.permission === 'default') {
+                    const permiso = await Notification.requestPermission();
+
+                    if (permiso !== 'granted') {
+                        objetivo.checked = false;
+                        alert('No se concedió el permiso de notificaciones.');
+                        return;
+                    }
+                }
+
+                const registro = await navigator.serviceWorker
+                    .getRegistration('/webpush/');
+
+                if (!registro) {
+                    throw new Error('No se encontró el Service Worker.');
+                }
+
+                let suscripcion =
+                    await registro.pushManager.getSubscription();
+
+                if (!suscripcion) {
+                    const boton = document.getElementById(
+                        'webpush-subscribe-button'
+                    );
+
+                    if (!boton) {
+                        throw new Error('No se encontró el botón WebPush.');
+                    }
+
+                    boton.click();
+
+                    // Esperar a que el botón original cree la suscripción.
+                    for (let i = 0; i < 30; i++) {
+                        await new Promise(resolve =>
+                            setTimeout(resolve, 500)
+                        );
+
+                        suscripcion =
+                            await registro.pushManager.getSubscription();
+
+                        if (suscripcion) break;
+                    }
+                }
+
+                if (!suscripcion) {
+                    throw new Error(
+                        'No se creó la suscripción. Revisa la consola.'
+                    );
+                }
+
+            } else {
+                await cancelarSuscripcionPush();
+            }
+
+        } catch (error) {
+            console.error('Error gestionando Push:', error);
+            objetivo.checked = !objetivo.checked;
+            alert(error.message || 'No se pudieron cambiar las notificaciones.');
+            return;
+        }
+    }
+
+    const formData = new FormData(form);
+    const csrfToken = form.querySelector(
+        '[name=csrfmiddlewaretoken]'
+    ).value;
+
+    try {
+        const response = await fetch(window.location.href, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRFToken': csrfToken
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (data.status !== 'ok') {
+            throw new Error('Django no confirmó el autoguardado.');
+        }
+
+        if (nombreOpcion === 'tema' ||
+            nombreOpcion === 'modo_oscuro') {
+            document.body.classList.toggle(
+                'dark-mode',
+                objetivo.checked
+            );
+        }
+
+        if (nombreOpcion === 'tema_color') {
+            document.body.className = document.body.className
+                .replace(/\btheme-\S+/g, '')
+                .trim();
+
+            document.body.classList.add(
+                'theme-' + objetivo.value.toLowerCase()
+            );
+        }
+
+        if (nombreOpcion === 'resumen_diario') {
+            const estado = document.getElementById('resumen_estado');
+
+            if (estado) {
+                estado.textContent = objetivo.checked
+                    ? 'Activado'
+                    : 'Desactivado';
+            }
+        }
+
+        const toast = bootstrap.Toast.getOrCreateInstance(
+            toastElement,
+            { delay: 2500 }
+        );
+
+        toast.show();
+
+    } catch (error) {
+        console.error('Error en el autoguardado:', error);
+        alert('No se pudieron guardar los cambios.');
+    }
+    });
+
+});
+
+
+</script>
 
 {% endblock %}

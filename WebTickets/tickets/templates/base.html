@@ -1,52 +1,183 @@
 {% load static %}
+{% load webpush_notifications %}
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>{% block title %}TIX AI{% endblock %}</title>
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1"
-    >
-
-    <title>
-        {% block title %}TIX AI{% endblock %}
-    </title>
-
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-    >
-
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
-    >
-
-    <link
-        rel="stylesheet"
-        href="{% static 'css/base.css' %}"
-    >
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    
+    <link rel="stylesheet" href="{% static 'css/global.css' %}">
     <link rel="icon" type="image/png" href="{% static 'imgs/TIXAI.png' %}">
 
-    {% block extra_css %}
-    {% endblock %}
+    {% webpush_header %}
+
+    <!-- ========================================== -->
+    <!-- TEMA DE COLOR Y MODO OSCURO DINÁMICOS      -->
+    <!-- ========================================== -->
+    <style>
+        /* Color Púrpura por Defecto */
+        :root {
+            --tix-purple: #6366f1;
+            --tix-purple-hover: #5254d1;
+            --tix-purple-light: rgba(255, 255, 255, 0.2);
+            --tix-sidebar-bg: #3730a3; /* Púrpura oscuro para la barra */
+        }
+
+        /* Si el admin elige Azul */
+        {% if user_settings.tema_color == 'Azul' %}
+        :root {
+            --tix-purple: #3b82f6 !important;
+            --tix-purple-hover: #2563eb !important;
+            --tix-sidebar-bg: #1e3a8a !important; /* Azul oscuro para la barra */
+        }
+        /* Si el admin elige Verde */
+        {% elif user_settings.tema_color == 'Verde' %}
+        :root {
+            --tix-purple: #10b981 !important;
+            --tix-purple-hover: #059669 !important;
+            --tix-sidebar-bg: #064e3b !important; /* Verde oscuro para la barra */
+        }
+        {% endif %}
+
+        /* ==========================================
+           1. FONDO DE LA BARRA (MÁS OSCURO)
+           ========================================== */
+        .tix-sidebar, 
+        .tix-mobile-topbar {
+            background-color: var(--tix-sidebar-bg) !important;
+        }
+
+        /* ==========================================
+           2. FORZAR COLORES EN BOTONES E ICONOS
+           ========================================== */
+        .btn-primary, button[type="submit"], .tix-btn-primary {
+            background-color: var(--tix-purple) !important;
+            border-color: var(--tix-purple) !important;
+            color: #ffffff !important;
+        }
+        .btn-primary:hover, button[type="submit"]:hover, .tix-btn-primary:hover {
+            background-color: var(--tix-purple-hover) !important;
+            border-color: var(--tix-purple-hover) !important;
+        }
+
+        /* Ajuste para el ítem activo en la barra */
+        .tix-nav-item.active {
+            color: #ffffff !important;
+            background-color: var(--tix-purple-light) !important;
+            border-left: 3px solid #ffffff !important;
+        }
+        .tix-nav-item.active i {
+            color: #ffffff !important;
+        }
+
+        *[style*="color: #6366f1"] {
+            color: var(--tix-purple) !important;
+        }
+        #umbral_valor, .cfg-title i {
+            color: var(--tix-purple) !important;
+        }
+
+        /* ==========================================
+           3. MODO OSCURO NORMAL (Fondos sin alterar)
+           ========================================== */
+        body {
+            background-color: #f8fafc;
+        }
+        body.dark-mode {
+            background-color: #0f172a !important; 
+            color: #f8fafc !important;
+        }
+        body.dark-mode .tix-main,
+        body.dark-mode .tix-layout {
+            background-color: #0f172a !important;
+        }
+        body.dark-mode .card, 
+        body.dark-mode .cfg-card {
+            background-color: #1e293b !important;
+            border-color: #334155 !important;
+            color: #f8fafc !important;
+        }
+        body.dark-mode h1, body.dark-mode h2, body.dark-mode h3, 
+        body.dark-mode h4, body.dark-mode h5, body.dark-mode h6,
+        body.dark-mode .text-dark, 
+        body.dark-mode .cfg-title, 
+        body.dark-mode .cfg-label, 
+        body.dark-mode .cfg-value {
+            color: #ffffff !important;
+        }
+        body.dark-mode .text-muted, 
+        body.dark-mode .cfg-desc {
+            color: #cbd5e1 !important;
+        }
+
+        /* ==========================================
+           4. MODO COMPACTO
+           ========================================== */
+        /* Reducir tamaño de la barra lateral */
+        body.compact-mode .tix-nav-item {
+            padding: 6px 12px !important;
+            font-size: 0.85rem !important;
+            margin-bottom: 2px !important;
+        }
+        body.compact-mode .tix-logo {
+            padding: 15px !important;
+            font-size: 1.1rem !important;
+        }
+        
+        /* Reducir márgenes de las tarjetas y contenedores principales */
+        body.compact-mode .tix-main {
+            padding: 15px !important;
+        }
+        body.compact-mode .card, 
+        body.compact-mode .cfg-card {
+            margin-bottom: 15px !important;
+        }
+        body.compact-mode .card-body {
+            padding: 15px !important;
+        }
+
+        /* Apretar las tablas para mostrar más registros */
+        body.compact-mode .table th, 
+        body.compact-mode .table td {
+            padding: 8px 10px !important;
+            font-size: 0.85rem !important;
+            vertical-align: middle !important;
+        }
+
+        /* Reducir botones y formularios */
+        body.compact-mode .btn {
+            padding: 4px 10px !important;
+            font-size: 0.85rem !important;
+        }
+        body.compact-mode .form-control,
+        body.compact-mode .form-select {
+            padding: 4px 10px !important;
+            font-size: 0.85rem !important;
+        }
+    </style>
+
+    
+
+    {% block extra_css %}{% endblock %}
 </head>
 
-<body>
+<!-- INYECTAMOS MODO OSCURO A TODO EL BODY -->
+<body class="{% if user_settings.tema %}dark-mode{% endif %} {% if user_settings.interfaz == 'Compacta' %}compact-mode{% endif %}">
 
 <div class="tix-mobile-topbar">
-
     <a class="tix-logo" href="{% url 'index' %}">
         <img src="{% static 'imgs/AAAA_LOGO_TIXAI.png' %}" alt="Logo" width="28" style="border-radius:6px;">
         TIX AI
     </a>
-
     <button class="tix-mobile-toggle" type="button" onclick="document.getElementById('tixSidebar').classList.add('open'); document.getElementById('tixBackdrop').classList.add('show');">
         <i class="bi bi-list"></i>
     </button>
-
 </div>
 
 <div class="tix-sidebar-backdrop" id="tixBackdrop" onclick="document.getElementById('tixSidebar').classList.remove('open'); this.classList.remove('show');"></div>
@@ -56,79 +187,35 @@
     <aside class="tix-sidebar" id="tixSidebar">
 
         <a class="tix-logo" href="{% url 'index' %}">
-            <span class="tix-logo-icon">T</span>
+            <span class="tix-logo-icon" style="background: var(--tix-purple) !important;">T</span>
             TIX AI
         </a>
 
         {% if user.is_authenticated %}
-
         <nav class="tix-nav">
-
             {% if es_admin %}
-
-            <a class="tix-nav-item {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}" href="{% url 'dashboard' %}">
-                <i class="bi bi-grid"></i>
-                Dashboard
-            </a>
-
-            <a class="tix-nav-item {% if request.resolver_match.url_name == 'lista_tickets' %}active{% endif %}" href="{% url 'lista_tickets' %}">
-                <i class="bi bi-ticket-perforated"></i>
-                Tickets
-            </a>
-
-            <a class="tix-nav-item {% if request.resolver_match.url_name == 'lista_usuarios' %}active{% endif %}" href="{% url 'lista_usuarios' %}">
-                <i class="bi bi-people"></i>
-                Usuarios
-            </a>
-
-            <a class="tix-nav-item {% if request.resolver_match.url_name == 'reportes' %}active{% endif %}" href="{% url 'reportes' %}">
-                <i class="bi bi-bar-chart"></i>
-                Reportes
-            </a>
-
+            <a class="tix-nav-item {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}" href="{% url 'dashboard' %}"><i class="bi bi-grid"></i> Dashboard</a>
+            <a class="tix-nav-item {% if request.resolver_match.url_name == 'lista_tickets' %}active{% endif %}" href="{% url 'lista_tickets' %}"><i class="bi bi-ticket-perforated"></i> Tickets</a>
+            <a class="tix-nav-item {% if request.resolver_match.url_name == 'lista_usuarios' %}active{% endif %}" href="{% url 'lista_usuarios' %}"><i class="bi bi-people"></i> Usuarios</a>
+            <a class="tix-nav-item {% if request.resolver_match.url_name == 'reportes' %}active{% endif %}" href="{% url 'reportes' %}"><i class="bi bi-bar-chart"></i> Reportes</a>
+            
             {% elif es_tecnico %}
-
-            <a class="tix-nav-item {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}" href="{% url 'dashboard' %}">
-                <i class="bi bi-list-task"></i>
-                Dashboard
-            </a>
-
-            <a class="tix-nav-item {% if request.resolver_match.url_name == 'lista_tickets' %}active{% endif %}" href="{% url 'lista_tickets' %}">
-                <i class="bi bi-ticket-perforated"></i>
-                Tickets
-            </a>
-
-            <a class="tix-nav-item {% if request.resolver_match.url_name == 'reportes' %}active{% endif %}" href="{% url 'reportes' %}">
-                <i class="bi bi-bar-chart"></i>
-                Reportes
-            </a>
-
+            <a class="tix-nav-item {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}" href="{% url 'dashboard' %}"><i class="bi bi-list-task"></i> Dashboard</a>
+            <a class="tix-nav-item {% if request.resolver_match.url_name == 'lista_tickets' %}active{% endif %}" href="{% url 'lista_tickets' %}"><i class="bi bi-ticket-perforated"></i> Tickets</a>
+            <a class="tix-nav-item {% if request.resolver_match.url_name == 'reportes' %}active{% endif %}" href="{% url 'reportes' %}"><i class="bi bi-bar-chart"></i> Reportes</a>
+            
             {% else %}
-
-            <a class="tix-nav-item {% if request.resolver_match.url_name == 'nuevo_ticket' %}active{% endif %}" href="{% url 'nuevo_ticket' %}">
-                <i class="bi bi-plus-lg"></i>
-                Nuevo Ticket
-            </a>
-
-            <a class="tix-nav-item {% if request.resolver_match.url_name == 'lista_tickets' %}active{% endif %}" href="{% url 'lista_tickets' %}">
-                <i class="bi bi-clock-history"></i>
-                Historial de Tickets
-            </a>
-
+            <a class="tix-nav-item {% if request.resolver_match.url_name == 'nuevo_ticket' %}active{% endif %}" href="{% url 'nuevo_ticket' %}"><i class="bi bi-plus-lg"></i> Nuevo Ticket</a>
+            <a class="tix-nav-item {% if request.resolver_match.url_name == 'lista_tickets' %}active{% endif %}" href="{% url 'lista_tickets' %}"><i class="bi bi-clock-history"></i> Historial de Tickets</a>
             {% endif %}
-
-            <a class="tix-nav-item {% if request.resolver_match.url_name == 'configuracion' %}active{% endif %}" href="{% url 'configuracion' %}">
-                <i class="bi bi-gear"></i>
-                Configuración
-            </a>
-
+            
+            <a class="tix-nav-item {% if request.resolver_match.url_name == 'configuracion' %}active{% endif %}" href="{% url 'configuracion' %}"><i class="bi bi-gear"></i> Configuración</a>
         </nav>
 
         <div class="tix-sidebar-footer">
-
             <div class="d-flex align-items-center justify-content-between p-2 rounded-3 mb-2" style="background: rgba(255, 255, 255, 0.07);">
                 <div class="d-flex align-items-center gap-2 overflow-hidden">
-                    <span class="tix-avatar flex-shrink-0" style="background: {% if es_admin %}#6366f1{% elif es_tecnico %}#0284c7{% else %}#eab308{% endif %}; color: #fff;">
+                    <span class="tix-avatar flex-shrink-0" style="background: {% if es_admin %}var(--tix-purple){% elif es_tecnico %}#0284c7{% else %}#eab308{% endif %} !important; color: #fff;">
                         {{ user.first_name|default:user.username|first|upper }}
                     </span>
                     <div class="overflow-hidden">
@@ -143,57 +230,36 @@
 
                 <form method="POST" action="{% url 'logout' %}" class="m-0">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-link text-secondary p-1" title="Cerrar sesión" style="line-height: 1;">
-                        <i class="bi bi-box-arrow-right" style="font-size: 1.15rem; color: #94a3b8;"></i>
+                    <button type="submit" class="btn btn-link text-secondary p-1" title="Cerrar sesión" style="line-height: 1; background: transparent !important; border: none !important;">
+                        <i class="bi bi-box-arrow-right" style="font-size: 1.15rem; color: #94a3b8 !important;"></i>
                     </button>
                 </form>
             </div>
-
         </div>
 
         {% else %}
-
         <nav class="tix-nav">
-
-            <a class="tix-nav-item {% if request.resolver_match.url_name == 'index' %}active{% endif %}" href="{% url 'index' %}">
-                <i class="bi bi-house"></i>
-                Bienvenida
-            </a>
-
+            <a class="tix-nav-item {% if request.resolver_match.url_name == 'index' %}active{% endif %}" href="{% url 'index' %}"><i class="bi bi-house"></i> Bienvenida</a>
         </nav>
-
         <div class="tix-sidebar-footer">
-
-            <a href="{% url 'register' %}" class="tix-btn-sidebar tix-btn-primary">
-                Registrarse
-            </a>
-
-            <a href="{% url 'login' %}" class="tix-btn-sidebar tix-btn-outline">
-                Iniciar Sesión
-            </a>
-
+            <a href="{% url 'register' %}" class="tix-btn-sidebar tix-btn-primary">Registrarse</a>
+            <a href="{% url 'login' %}" class="tix-btn-sidebar tix-btn-outline">Iniciar Sesión</a>
         </div>
-
         {% endif %}
-
     </aside>
 
     <main class="tix-main">
-
-        {% block content %}
-        {% endblock %}
-
+        {% block content %}{% endblock %}
     </main>
 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-></script>
+{% block extra_js %}{% endblock %}
 
-{% block extra_js %}
-{% endblock %}
+<!-- Este botón pedirá permiso al usuario para enviarle notificaciones -->
+
 
 </body>
 </html>

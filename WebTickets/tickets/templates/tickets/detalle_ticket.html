@@ -116,7 +116,7 @@ Detalle del Ticket - TIX AI
         <div class="card shadow-sm border-0 mb-4" style="border-radius: 14px;">
             <div class="card-body p-4">
                 <div class="d-flex align-items-center gap-2 mb-3">
-                    <i class="bi bi-chat-left-dots-fill fs-5" style="color: #6366f1;"></i>
+                    <i class="bi bi-chat-left-dots-fill fs-5 text-tix-primary"></i>
                     <h5 class="fw-bold mb-0">
                         {% if ticket.solucion %} Modificar Solución / Respuesta {% else %} Responder a este Ticket {% endif %}
                     </h5>
@@ -140,7 +140,7 @@ Detalle del Ticket - TIX AI
                     <div class="d-flex justify-content-end">
                         <button type="submit" class="btn btn-primary px-4 py-2"
                             style="background-color: #6366f1; border-color: #6366f1; border-radius: 8px;">
-                            <i class="bi bi-send-fill me-1"></i>
+                            <i class="bi bi-send-fill me-1 text-tix-primary"></i>
                             {% if ticket.solucion %}Actualizar Respuesta{% else %}Guardar y Enviar Respuesta{% endif %}
                         </button>
                     </div>
@@ -171,7 +171,7 @@ Detalle del Ticket - TIX AI
             <div class="card-body p-4">
 
                 <h5 class="fw-bold mb-3 d-flex align-items-center gap-2">
-                    <i class="bi bi-cpu-fill" style="color: #6366f1;"></i>
+                    <i class="bi bi-cpu-fill text-tix-primary"></i>
                     Resultado IA
                 </h5>
 
@@ -227,7 +227,7 @@ Detalle del Ticket - TIX AI
 
                 <div class="mb-3">
     {% if es_tecnico_o_admin %}
-    <form method="POST" action="{% url 'actualizar_clasificacion' ticket.id_ticket %}">
+    <form method="POST">
         {% csrf_token %}
 
         <p class="text-muted small mb-1">Categoría final</p>
@@ -245,10 +245,6 @@ Detalle del Ticket - TIX AI
             <option value="{{ p.pk }}" {% if ticket.id_prioridad_id == p.pk %}selected{% endif %}>{{ p.nombre }}</option>
             {% endfor %}
         </select>
-
-        <button type="submit" class="btn btn-sm btn-primary w-100" style="background-color: #6366f1; border-color: #6366f1;">
-            Guardar clasificación
-        </button>
     </form>
     {% else %}
     <p class="text-muted small mb-1">Categoría final</p>
@@ -304,7 +300,7 @@ Detalle del Ticket - TIX AI
 
                 <!-- ACCIONES DE GESTIÓN (SOLO TÉCNICOS Y ADMINISTRADORES) -->
                 {% if es_tecnico_o_admin %}
-                <form method="POST" action="{% url 'asignar_tecnico' ticket.id_ticket %}" class="mb-3">
+                <form method="POST" action="{% url 'actualizar_ticket' ticket.id_ticket %}" class="mb-3">
                     {% csrf_token %}
                     <div class="input-group input-group-sm">
                         <select name="tecnico" class="form-select">
@@ -315,42 +311,34 @@ Detalle del Ticket - TIX AI
                             </option>
                             {% endfor %}
                         </select>
-                        <button type="submit" class="btn btn-outline-primary">
-                            Asignar
-                        </button>
                     </div>
+
+                    <hr>
+
+                    <button type="submit" class="btn btn-sm btn-primary w-100" style="background-color: #6366f1; border-color: #6366f1;">
+                    Guardar cambios
+                    </button>
+                
                 </form>
 
                 <hr class="my-3">
 
-                <h6 class="fw-bold mb-2">Estado del ticket</h6>
-                <form method="POST" action="{% url 'cambiar_estado' ticket.id_ticket %}">
-                    {% csrf_token %}
-                    <select name="estado" class="form-select form-select-sm mb-2">
-                        <option value="Abierto" {% if ticket.id_estado.nombre == 'Abierto' %} selected {% endif %}>Abierto
-                        </option>
-                        <option value="En proceso" {% if ticket.id_estado.nombre == 'En proceso' %} selected {% endif %}>En
-                            proceso</option>
-                        <option value="Cerrado" {% if ticket.id_estado.nombre == 'Cerrado' %} selected {% endif %}>Cerrado
-                        </option>
-                    </select>
-                    <button type="submit" class="btn btn-sm btn-primary w-100"
-                        style="background-color: #6366f1; border-color: #6366f1;">
-                        Actualizar estado
-                    </button>
-                </form>
+                
 
-                <a href="{% url 'corregir_ticket' ticket.id_ticket %}"
-                    class="btn btn-sm btn-outline-primary w-100 mt-2">
-                    Corregir clasificación
-                </a>
+
                 {% endif %}
 
             </div>
+            
         </div>
+
+        
 
     </div>
 
+    
+
 </div>
+
 
 {% endblock %}

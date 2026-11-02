@@ -59,6 +59,12 @@ class Settings(models.Model):
     tema = models.BooleanField(
         default=False
     )
+    
+    # NUEVO CAMPO: Tema de color global
+    tema_color = models.CharField(
+        max_length=20,
+        default="Púrpura"
+    )
 
     idioma = models.CharField(
         max_length=40,
@@ -113,6 +119,8 @@ class Settings(models.Model):
         default=85
     )
 
+    telefono = models.CharField(max_length=20, null=True, blank=True)
+    
     class Meta:
         db_table = "settings"
 

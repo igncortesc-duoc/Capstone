@@ -8,9 +8,8 @@ urlpatterns = [
     path('tickets/', views.lista_tickets, name='lista_tickets'),
     path('nuevo/', views.nuevo_ticket, name='nuevo_ticket'),
     path('ticket/<str:ticket_id>/', views.detalle_ticket, name='detalle_ticket'),
-    path('ticket/<str:ticket_id>/corregir/', views.corregir_ticket, name='corregir_ticket'),
-    path('ticket/<str:ticket_id>/estado/', views.cambiar_estado, name='cambiar_estado'),
-    path('login/', auth_views.LoginView.as_view(template_name='tickets/login.html'), name='login'),
+    path('login/', views.CustomLoginView.as_view(), name='login'),
+    path('login/verificar-2fa/', views.verificar_2fa, name='verificar_2fa'),
     path('logout/', auth_views.LogoutView.as_view(template_name='tickets/logout.html'), name='logout'),
     path('registro/', views.registro, name='register'),
     path('configuracion/', views.configuracion, name='configuracion'),
@@ -18,6 +17,16 @@ urlpatterns = [
     path('usuarios/<str:usuario_id>/', views.detalle_usuario, name='detalle_usuario'),
     path('usuarios/<int:usuario_id>/gestionar/', views.gestionar_usuario, name='gestionar_usuario'),
     path('reportes/', views.reportes, name='reportes'),
-    path('ticket/<str:ticket_id>/asignar/', views.asignar_tecnico, name='asignar_tecnico'),
-    path('ticket/<str:ticket_id>/clasificacion/', views.actualizar_clasificacion, name='actualizar_clasificacion'),
+    path('tickets/<str:ticket_id>/actualizar/', views.actualizar_ticket, name='actualizar_ticket'),
+    path('perfil/editar/', views.editar_perfil, name='editar_perfil'),
+    # urls.py
+    path('perfil/solicitar-codigo/', views.solicitar_codigo_password, name='solicitar_codigo_password'),
+    path('perfil/cambiar-contrasena/', views.cambiar_password, name='cambiar_contrasena'),
+
+    path('login/verificar-2fa/', views.verificar_2fa, name='verificar_2fa'),
+
+    path('perfil/vincular-telefono/', views.vincular_telefono, name='vincular_telefono'),
+    path('perfil/verificar-telefono/', views.verificar_telefono, name='verificar_telefono'),
+    
+    path('login/seleccionar-metodo/', views.seleccionar_metodo_2fa, name='seleccionar_metodo_2fa'),
 ]

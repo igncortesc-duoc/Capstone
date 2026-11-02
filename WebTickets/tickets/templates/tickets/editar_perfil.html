@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}Editar Perfil - TIX AI{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1 class="h3 fw-bold mb-1">Editar Perfil</h1>
+                <p class="text-muted mb-0">Actualiza tu información personal</p>
+            </div>
+        </div>
+
+        <div class="card shadow-sm border-0" style="border-radius: 14px;">
+            <div class="card-body p-4">
+                
+                <form method="POST">
+                    {% csrf_token %}
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-semibold">Nombre</label>
+                            <input type="text" name="nombre" class="form-control" value="{{ usuario.first_name }}">
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-semibold">Apellido</label>
+                            <input type="text" name="apellido" class="form-control" value="{{ usuario.last_name }}">
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">Correo Electrónico</label>
+                        <input type="email" name="correo" class="form-control" value="{{ usuario.email }}" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">Telefono</label>
+                        <!-- Se agrega .first para poder acceder al dato real -->
+                        <input type="tel" name="telefono" class="form-control" value="{{ usuario.settings.first.telefono }}" placeholder="+56912345678" required>
+                    </div>
+
+                    <div class="d-flex justify-content-end gap-2">
+                        <a href="{% url 'configuracion' %}" class="btn btn-outline-secondary px-4">
+                            Cancelar
+                        </a>
+                        <button type="submit" class="btn btn-primary px-4" style="background-color: #6366f1; border-color: #6366f1;">
+                            Guardar Cambios
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

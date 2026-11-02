@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-lg-5 text-center">
+        <h2 class="fw-bold">Vincular Teléfono</h2>
+        <p class="text-muted">Para activar el 2FA necesitas registrar un número celular.</p>
+        <form method="POST" class="card p-4 shadow-sm border-0" style="border-radius: 14px;">
+            {% csrf_token %}
+            <input type="text" name="telefono" class="form-control form-control-lg mb-3 text-center" placeholder="+56 9 1234 5678" required>
+            <button type="submit" class="btn btn-primary btn-lg" style="background-color: var(--tix-purple, #6366f1); border-color: var(--tix-purple, #6366f1);">
+                Enviar SMS
+            </button>
+            <a href="{% url 'configuracion' %}" class="btn btn-light mt-2">Cancelar</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

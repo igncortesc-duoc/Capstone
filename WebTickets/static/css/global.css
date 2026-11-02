@@ -1,0 +1,493 @@
+/* =========================================
+   1. VARIABLES Y BASE
+   ========================================= */
+:root {
+    --tix-bg: #f3f4f6;
+    --tix-sidebar: #12131c;
+    --tix-purple: #6366f1;
+    --tix-purple-hover: #5254d1;
+    --tix-card-dark: #1c1e29;
+    --tix-card-dark-2: #23252f;
+}
+
+/* --- TEMAS DE COLOR (Modificables por el Admin) --- */
+body.theme-púrpura {
+    --tix-purple: #6366f1;
+    --tix-purple-hover: #5254d1;
+}
+
+body.theme-azul {
+    --tix-purple: #3b82f6;
+    --tix-purple-hover: #2563eb;
+}
+
+body.theme-verde {
+    --tix-purple: #10b981;
+    --tix-purple-hover: #059669;
+}
+
+/* --- MODO OSCURO (Activado por el usuario) --- */
+body.dark-mode {
+    --tix-bg: #0f172a;
+    /* Fondo general oscuro */
+    color: #f8fafc;
+    /* Texto claro */
+}
+
+/* Forzar que las tarjetas se vuelvan oscuras en modo oscuro */
+body.dark-mode .card,
+body.dark-mode .cfg-card,
+body.dark-mode .du-card {
+    background-color: #1e293b;
+    border-color: #334155;
+    color: #f8fafc;
+}
+
+/* Forzar que el texto oscuro se vuelva claro en modo oscuro */
+body.dark-mode .text-dark,
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h5,
+body.dark-mode h6,
+body.dark-mode .cfg-title,
+body.dark-mode .cfg-label,
+body.dark-mode .cfg-value {
+    color: #f8fafc !important;
+}
+
+body.dark-mode .text-muted,
+body.dark-mode .cfg-desc {
+    color: #94a3b8 !important;
+}
+
+/* Forzar tablas oscuras de Bootstrap en modo oscuro */
+body.dark-mode .table,
+body.dark-mode .table-responsive {
+    color: #f8fafc;
+    border-color: #334155;
+    background-color: transparent;
+}
+
+body.dark-mode .table-light th,
+body.dark-mode .table-dark th,
+body.dark-mode .table thead th {
+    background-color: #0f172a !important;
+    color: #94a3b8 !important;
+    border-bottom: 1px solid #334155;
+}
+
+body.dark-mode .table tbody td {
+    background-color: #1e293b !important;
+    border-bottom: 1px solid #334155;
+    color: #e2e8f0;
+}
+
+body.dark-mode .table-hover tbody tr:hover td {
+    background-color: #334155 !important;
+}
+
+/* Ajustes a los campos de búsqueda / formularios en modo oscuro */
+body.dark-mode .form-control,
+body.dark-mode .form-select,
+body.dark-mode .input-group-text {
+    background-color: #0f172a;
+    border-color: #334155;
+    color: #f8fafc;
+}
+
+body {
+    background-color: var(--tix-bg);
+    font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+    margin: 0;
+}
+
+/* Estilos pagina Settings  */
+
+.cfg-card {
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.cfg-title {
+    font-weight: 700;
+    font-size: 1.05rem;
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    color: #1e293b;
+}
+
+.cfg-title i {
+    color: #6366f1;
+    font-size: 1.2rem;
+}
+
+.cfg-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .85rem 0;
+    border-top: 1px solid #f1f5f9;
+}
+
+.cfg-row:first-of-type {
+    border-top: 0;
+}
+
+.cfg-label {
+    font-weight: 600;
+    font-size: .92rem;
+    margin: 0;
+    color: #1e293b;
+}
+
+.cfg-desc {
+    font-size: .8rem;
+    color: #64748b;
+    margin: 0;
+}
+
+.cfg-meta {
+    font-size: .72rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #94a3b8;
+    letter-spacing: 0.05em;
+    margin: 0 0 2px 0;
+}
+
+.cfg-value {
+    font-weight: 700;
+    font-size: .95rem;
+    margin: 0;
+    color: #1e293b;
+}
+
+.form-check-input:checked {
+    background-color: #6366f1;
+    border-color: #6366f1;
+}
+
+.form-switch .form-check-input {
+    width: 2.75em;
+    height: 1.45em;
+    cursor: pointer;
+}
+
+.form-range::-webkit-slider-thumb {
+    background: #6366f1;
+}
+
+.form-range::-moz-range-thumb {
+    background: #6366f1;
+}
+
+.form-range {
+    accent-color: #6366f1;
+}
+
+.avatar-cfg {
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f1f5f9;
+    border: 2px solid #e2e8f0;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.tix-role-switcher {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+/* 5. Avatares por roles (para el sidebar y detalles) */
+.avatar-admin {
+    background-color: var(--tix-purple);
+    color: #fff;
+}
+
+.avatar-tecnico {
+    background-color: #0284c7;
+    color: #fff;
+}
+
+.avatar-usuario {
+    background-color: #eab308;
+    color: #fff;
+}
+
+/* =========================================
+   2. LAYOUT PRINCIPAL (Sidebar y Contenido)
+   ========================================= */
+.tix-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.tix-sidebar {
+    width: 220px;
+    background-color: var(--tix-sidebar);
+    color: #fff;
+    padding: 20px 16px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.tix-main {
+    flex: 1;
+    padding: 32px 40px;
+    min-width: 0;
+}
+
+/* =========================================
+   3. COMPONENTES GLOBALES (Botones, Nav, Logos)
+   ========================================= */
+.tix-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 24px;
+    text-decoration: none;
+    color: #fff;
+}
+
+.tix-logo-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: var(--tix-purple);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.tix-nav {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.tix-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    color: #cbd5e1;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: background-color 0.15s ease;
+}
+
+.tix-nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #fff;
+}
+
+.tix-nav-item.active {
+    background-color: rgba(99, 102, 241, 0.18);
+    color: #fff;
+    font-weight: 600;
+}
+
+.tix-btn-sidebar {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+
+.tix-btn-primary {
+    background-color: var(--tix-purple);
+    color: #fff;
+}
+
+.tix-btn-primary:hover {
+    background-color: var(--tix-purple-hover);
+    color: #fff;
+}
+
+.tix-btn-outline {
+    background-color: transparent;
+    color: #e5e7eb;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.tix-btn-outline:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #fff;
+}
+
+.tix-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 6px;
+}
+
+.tix-status-activo,
+.du-status-activo {
+    background-color: #22c55e;
+}
+
+.tix-status-inactivo,
+.du-status-inactivo {
+    background-color: #9ca3af;
+}
+
+.tix-status-bloqueado,
+.du-status-bloqueado {
+    background-color: #ef4444;
+}
+
+/* =========================================
+   4. TARJETAS Y VISTAS ESPECÍFICAS
+   ========================================= */
+.tix-card-dark {
+    background: linear-gradient(180deg, var(--tix-card-dark) 0%, var(--tix-card-dark-2) 100%);
+    color: #e5e7eb;
+    border-radius: 14px;
+    padding: 22px 26px;
+    margin-bottom: 20px;
+}
+
+/* Sección de Detalles de Usuario */
+.du-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: linear-gradient(135deg, var(--tix-card-dark) 0%, var(--tix-card-dark-2) 100%);
+    border-radius: 16px;
+    padding: 28px 32px;
+    color: #fff;
+    margin-bottom: 24px;
+}
+
+.du-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--tix-purple);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.du-header-info h2 {
+    margin-bottom: 4px;
+    font-weight: 700;
+}
+
+.du-header-info p {
+    margin-bottom: 0;
+    color: #cbd5e1;
+    font-size: 0.9rem;
+}
+
+.du-badge-rol {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: rgba(99, 102, 241, 0.25);
+    color: #c7d2fe;
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin-top: 8px;
+}
+
+.du-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 22px 26px;
+    margin-bottom: 20px;
+}
+
+.du-info-row,
+.tix-role-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #f1f2f4;
+    font-size: 0.9rem;
+}
+
+.du-info-row:last-child,
+.tix-role-row:last-child {
+    border-bottom: none;
+}
+
+/* =========================================
+   5. RESPONSIVE / MÓVILES
+   ========================================= */
+.tix-mobile-topbar {
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--tix-sidebar);
+    color: #fff;
+    padding: 14px 16px;
+}
+
+.tix-mobile-toggle {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .tix-mobile-topbar {
+        display: flex;
+    }
+
+    .tix-main {
+        padding: 20px;
+    }
+
+    .tix-sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 1050;
+        transform: translateX(-100%);
+        transition: transform 0.2s ease;
+    }
+
+    .tix-sidebar.open {
+        transform: translateX(0);
+    }
+}
