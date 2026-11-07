@@ -18,11 +18,27 @@ Iniciar sesión - TIX AI
                 <p class="text-muted mb-4">
                     Ingresa tus credenciales para continuar.
                 </p>
-
-                {% if form.errors %}
-                <div class="alert alert-danger">
-                    Correo o contraseña incorrectos.
+                {% if lockout_message %}
+                <div class="alert alert-danger" role="alert">
+                    <strong>Acceso bloqueado temporalmente</strong>
+                    <p class="mb-0 mt-2">
+                        {{ lockout_message }}
+                    </p>
                 </div>
+                {% endif %}
+                {% if form.errors %}
+                <div class="alert alert-danger" role="alert">
+                    <strong>Inicio de sesión fallido.</strong>
+                    Correo o contraseña incorrectos. Verifica tus credenciales e inténtalo nuevamente.
+                </div>
+                {% endif %}
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
                 {% endif %}
 
                 <form method="POST">

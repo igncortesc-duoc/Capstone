@@ -491,3 +491,20 @@ body {
         transform: translateX(0);
     }
 }
+
+
+/* =========================================
+   Alerta inactividad
+   ========================================= */
+
+body {
+    color: white;
+}
+
+p {
+    color: white;
+}
+
+.modal * {
+    color: white;
+}

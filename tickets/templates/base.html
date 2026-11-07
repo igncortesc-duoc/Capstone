@@ -254,11 +254,221 @@
 
 </div>
 
+
+<!-- Inactividad -->
+{% if user.is_authenticated %}
+<div class="modal fade" id="inactividadModal" tabindex="-1"
+     data-bs-backdrop="static" data-bs-keyboard="false"
+     aria-labelledby="tituloInactividad" aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="background-color: #ffffff !important; color: #212529 !important;">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="tituloInactividad"
+                    style="color: #212529 !important;">
+                    Sesión por expirar
+                </h5>
+            </div>
+
+            <div class="modal-body text-center">
+                <p>Hemos detectado que llevas varios minutos sin actividad.</p>
+                <p>Tu sesión se cerrará automáticamente en:</p>
+
+                <h2 id="contadorInactividad"
+                    style="color: #dc3545 !important; font-weight: bold;">
+                    02:00
+                </h2>
+
+                <p>¿Deseas continuar utilizando TIXAI?</p>
+            </div>
+
+            <div class="modal-footer justify-content-center">
+
+                <button type="button" id="btnContinuar"
+                        class="btn btn-primary">
+                    Continuar sesión
+                </button>
+
+                <form method="POST" action="{% url 'logout' %}"
+                      id="logoutInactividadForm">
+                    {% csrf_token %}
+
+                    <button type="submit" class="btn btn-outline-danger">
+                        Cerrar sesión
+                    </button>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endif %}
+
+
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+{% if user.is_authenticated %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    // Tiempo de espera
+    const TIEMPO_AVISO = 13 * 60 * 1000;
+    const TIEMPO_CIERRE = 2 * 60 * 1000;
+
+    // Temporizadores
+    let temporizadorAviso;
+    let temporizadorCierre;
+    let intervalo;
+
+    let tiempoRestante = TIEMPO_CIERRE;
+    let avisoVisible = false;
+
+    // Elementos del modal
+    const modalElemento = document.getElementById('inactividadModal');
+
+    if (!modalElemento) return;
+
+    const modal = new bootstrap.Modal(modalElemento);
+
+    const contador = document.getElementById('contadorInactividad');
+    const botonContinuar = document.getElementById('btnContinuar');
+    const formularioLogout = document.getElementById('logoutInactividadForm');
+
+    // URLs de Django
+    const URL_RENOVAR = "{% url 'dashboard' %}";
+    const URL_LOGIN = "{% url 'login' %}";
+
+    // Reiniciar temporizador de aviso
+    function reiniciarTemporizadores() {
+
+        // No ocultar el modal si ya está visible
+        if (avisoVisible) return;
+
+        clearTimeout(temporizadorAviso);
+
+        temporizadorAviso = setTimeout(function () {
+            mostrarAviso();
+        }, TIEMPO_AVISO);
+    }
+
+    // Mostrar aviso de inactividad
+    function mostrarAviso() {
+
+        avisoVisible = true;
+        tiempoRestante = TIEMPO_CIERRE;
+
+        modal.show();
+
+        actualizarContador();
+
+        // Actualizar contador cada segundo
+        intervalo = setInterval(function () {
+
+            tiempoRestante -= 1000;
+
+            actualizarContador();
+
+            if (tiempoRestante <= 0) {
+                clearInterval(intervalo);
+            }
+
+        }, 1000);
+
+        // Cerrar sesión al terminar los dos minutos
+        temporizadorCierre = setTimeout(function () {
+
+            formularioLogout.submit();
+
+        }, TIEMPO_CIERRE);
+    }
+
+    // Actualizar contador visual
+    function actualizarContador() {
+
+        const minutos = Math.floor(tiempoRestante / 60000);
+
+        const segundos = Math.floor(
+            (tiempoRestante % 60000) / 1000
+        );
+
+        contador.textContent =
+            String(minutos).padStart(2, '0') + ':' +
+            String(segundos).padStart(2, '0');
+    }
+
+    // Continuar utilizando la sesión
+    botonContinuar.addEventListener('click', async function () {
+
+        botonContinuar.disabled = true;
+        botonContinuar.textContent = 'Comprobando sesión...';
+
+        try {
+
+            const respuesta = await fetch(URL_RENOVAR, {
+                method: 'GET',
+                credentials: 'same-origin',
+                cache: 'no-store'
+            });
+
+            // Comprobar si la sesión sigue activa
+            if (!respuesta.ok || respuesta.redirected) {
+
+                window.location.href = URL_LOGIN;
+                return;
+            }
+
+            // Cancelar cierre automático
+            clearTimeout(temporizadorCierre);
+            clearInterval(intervalo);
+
+            // Ocultar modal y reiniciar temporizador
+            avisoVisible = false;
+            modal.hide();
+
+            botonContinuar.disabled = false;
+            botonContinuar.textContent = 'Continuar sesión';
+
+            reiniciarTemporizadores();
+
+        } catch (error) {
+
+            window.location.href = URL_LOGIN;
+
+        }
+
+    });
+
+    // Detectar actividad del usuario
+    const eventosActividad = [
+        'mousemove',
+        'mousedown',
+        'keydown',
+        'scroll',
+        'touchstart',
+        'click'
+    ];
+
+    eventosActividad.forEach(function (evento) {
+
+        document.addEventListener(evento, reiniciarTemporizadores);
+
+    });
+
+    // Iniciar temporizador
+    reiniciarTemporizadores();
+
+});
+</script>
+{% endif %}
 
 {% block extra_js %}{% endblock %}
 
 <!-- Este botón pedirá permiso al usuario para enviarle notificaciones -->
+
 
 
 </body>

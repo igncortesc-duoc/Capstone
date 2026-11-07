@@ -23,7 +23,7 @@ Nuevo Ticket - TIX AI
                 </p>
 
 
-                <form method="POST">
+                <form method="POST" id="form-ticket">
 
                     {% csrf_token %}
 
@@ -68,6 +68,7 @@ Nuevo Ticket - TIX AI
 
                         <button
                             type="submit"
+                            id="btn-enviar"
                             class="btn btn-primary"
                         >
                             Analizar y crear ticket
@@ -92,5 +93,16 @@ Nuevo Ticket - TIX AI
     </div>
 
 </div>
+<script>
+    document.getElementById('form-ticket').addEventListener('submit', function() {
+        const boton = document.getElementById('btn-enviar');
 
+        if (boton.disabled) {
+            return;
+        }
+
+        boton.disabled = true;
+        boton.textContent = 'Enviando ticket...';
+    });
+</script>
 {% endblock %}
