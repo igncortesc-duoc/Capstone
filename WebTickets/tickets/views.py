@@ -1144,8 +1144,8 @@ def seleccionar_metodo_2fa(request):
                 send_mail(
                     'Tu código de acceso 2FA - TIX AI',
                     f'Hola {user.username},\n\nTu código de verificación de 2 Factores es: {codigo_2fa}',
-                    settings.EMAIL_HOST_USER,
-                    [user.email],
+                    from_email=None,
+                    recipient_list=[user.email],
                     fail_silently=False,
                 )
                 messages.success(request, 'Código enviado a tu correo electrónico.')
