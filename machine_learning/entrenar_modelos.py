@@ -109,12 +109,25 @@ def entrenar_objetivo(X, y, nombre_objetivo):
 
 
     # ========================================================
-    # TF-IDF
+    # TF-IDF CON STOPWORDS EN ESPAÑOL Y N-GRAMAS
     # ========================================================
+
+    spanish_stopwords = [
+        'de', 'la', 'que', 'el', 'en', 'y', 'a', 'los', 'del', 'se', 'las', 'por', 'un', 'para',
+        'con', 'no', 'una', 'su', 'al', 'lo', 'como', 'más', 'pero', 'sus', 'le', 'ya', 'o',
+        'este', 'sí', 'porque', 'esta', 'son', 'entre', 'está', 'cuando', 'muy', 'sin', 'sobre',
+        'también', 'me', 'hasta', 'hay', 'donde', 'quien', 'desde', 'todo', 'nos', 'durante',
+        'todos', 'uno', 'les', 'ni', 'contra', 'otros', 'ese', 'eso', 'ante', 'ellos', 'e',
+        'esto', 'mí', 'antes', 'algunos', 'qué', 'unos', 'yo', 'otro', 'otras', 'otra', 'él',
+        'tanto', 'esa', 'estos', 'mucho', 'quienes', 'nada', 'muchos', 'cual', 'poco', 'ella',
+        'estar', 'estas', 'algunas', 'algo', 'nosotros', 'mi', 'mis', 'tus', 'tu', 'te', 'ti'
+    ]
 
     vectorizador = TfidfVectorizer(
         lowercase=True,
-        stop_words=None
+        stop_words=spanish_stopwords,
+        ngram_range=(1, 2),
+        sublinear_tf=True
     )
 
     X_train_tfidf = vectorizador.fit_transform(

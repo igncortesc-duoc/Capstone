@@ -184,9 +184,17 @@
                     {% endif %}
 
                     <td class="text-end pe-4">
-                        <a href="{% url 'detalle_ticket' ticket.id_ticket %}" class="btn btn-sm btn-outline-primary px-3 rounded-2">
-                            Ver Detalle
-                        </a>
+                        <div class="d-inline-flex gap-2">
+                            <a href="{% url 'detalle_ticket' ticket.id_ticket %}" class="btn btn-sm btn-outline-primary px-3 rounded-2">
+                                Ver Detalle
+                            </a>
+                            <form method="POST" action="{% url 'eliminar_ticket' ticket.id_ticket %}" class="d-inline" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este ticket permanentemente?');">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-sm btn-outline-danger px-2 rounded-2" title="Eliminar Ticket">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
+                        </div>
                     </td>
 
                 </tr>

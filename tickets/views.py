@@ -1191,3 +1191,26 @@ def seleccionar_metodo_2fa(request):
                 messages.error(request, 'Problema al enviar el correo.')
 
     return render(request, 'tickets/seleccionar_metodo_2fa.html', {'tiene_telefono': bool(numero_registrado)})
+
+@login_required
+def eliminar_ticket(request, ticket_id):
+    ticket = get_object_or_404(Ticket, id_ticket=ticket_id)
+    es_admin = (
+        request.user.is_staff
+        or request.user.is_superuser
+        or request.user.groups.filter(name__icontains="admin").exists()
+    )
+    es_autor = (ticket.usuario == request.user)
+    es_tecnico = request.user.groups.filter(name__in=["Tecnico", "Técnico", "tecnico"]).exists()
+
+    if not (es_admin or es_autor or es_tecnico):
+        raise PermissionDenied
+
+    if request.method == 'POST':
+        ticket_num = ticket.id_ticket
+        ticket.delete()
+        messages.success(request, f'El ticket #{ticket_num} se eliminó correctamente.')
+        return redirect('lista_tickets')
+
+    return redirect('detalle_ticket', ticket_id=ticket.id_ticket)
+
