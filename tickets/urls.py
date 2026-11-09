@@ -19,14 +19,9 @@ urlpatterns = [
     path('reportes/', views.reportes, name='reportes'),
     path('tickets/<str:ticket_id>/actualizar/', views.actualizar_ticket, name='actualizar_ticket'),
     path('perfil/editar/', views.editar_perfil, name='editar_perfil'),
-    # urls.py
     path('perfil/solicitar-codigo/', views.solicitar_codigo_password, name='solicitar_codigo_password'),
     path('perfil/cambiar-contrasena/', views.cambiar_password, name='cambiar_contrasena'),
-
-    path('login/verificar-2fa/', views.verificar_2fa, name='verificar_2fa'),
-
     path('perfil/vincular-telefono/', views.vincular_telefono, name='vincular_telefono'),
     path('perfil/verificar-telefono/', views.verificar_telefono, name='verificar_telefono'),
-    
     path('login/seleccionar-metodo/', views.seleccionar_metodo_2fa, name='seleccionar_metodo_2fa'),
 ]

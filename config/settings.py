@@ -27,10 +27,10 @@ load_dotenv(BASE_DIR / '.env')
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ###ACAA CAMBIAR DESPUESSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['*']
 
 STATIC_URL = 'static/'
 
@@ -166,6 +166,9 @@ LOGIN_REDIRECT_URL = 'dashboard'
 LOGOUT_REDIRECT_URL = 'login'
 
 # Configuración para enviar correos mediante Gmail (Django 6+)
+GMAIL_USER = os.getenv('EMAIL_HOST_USER', 'proyectos.informaticos.2026@gmail.com')
+GMAIL_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'bogh iabq wtiz pymv')
+
 MAILERS = {
     "default": {
         "BACKEND": "django.core.mail.backends.smtp.EmailBackend",
@@ -173,8 +176,8 @@ MAILERS = {
             "host": "smtp.gmail.com",
             "port": 587,
             "use_tls": True,
-            "username": "proyectos.informaticos.2026@gmail.com", # Tu correo
-            "password": "bogh iabq wtiz pymv",        # Tu clave de aplicación
+            "username": GMAIL_USER, # Tu correo
+            "password": GMAIL_PASSWORD,        # Tu clave de aplicación
         }
     }
 }
@@ -187,11 +190,11 @@ SESSION_SAVE_EVERY_REQUEST = True
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 
 
-#Limite de inicios de sesion
+# Limite de inicios de sesion
 AXES_FAILURE_LIMIT = 5
 AXES_COOLOFF_TIME = timedelta(minutes=15)
 AXES_LOCKOUT_CALLABLE = 'tickets.views.tixai_lockout'
 AXES_RESET_ON_SUCCESS = True
 AXES_RESET_COOL_OFF_ON_FAILURE = False
 
-DEFAULT_FROM_EMAIL = 'proyectos.informaticos.2026@gmail.com' # Usa el mismo correo de tu cuenta
+DEFAULT_FROM_EMAIL = GMAIL_USER # Usa el mismo correo de tu cuenta

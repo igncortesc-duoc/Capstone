@@ -49,7 +49,7 @@ Iniciar sesión - TIX AI
                         <label class="form-label" for="id_username">
                             Correo
                         </label>
-                        <input type="text" name="username" id="id_username" class="form-control" required autofocus>
+                        <input type="text" name="username" id="id_username" class="form-control" value="{{ form.username.value|default:'' }}" required autofocus>
                     </div>
 
                     <div class="mb-4">
