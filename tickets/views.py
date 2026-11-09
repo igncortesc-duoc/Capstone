@@ -1,4 +1,5 @@
 import random
+import re
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash, authenticate, login
 
@@ -56,21 +57,21 @@ def generar_siguiente_id(modelo, campo_id, prefijo, ancho=4):
     Genera el siguiente ID correlativo tipo 'TCK0001' para modelos cuya
     PK es un CharField (no autoincremental).
     """
-    ultimo = (
+    ids = list(
         modelo.objects.filter(**{f"{campo_id}__startswith": prefijo})
-        .order_by(f"-{campo_id}")
-        .first()
+        .values_list(campo_id, flat=True)
     )
+    patron = re.compile(rf"^{re.escape(prefijo)}(\d+)$")
+    numeros = []
+    for val in ids:
+        m = patron.match(str(val))
+        if m:
+            try:
+                numeros.append(int(m.group(1)))
+            except ValueError:
+                pass
 
-    if ultimo:
-        numero_actual = getattr(ultimo, campo_id).replace(prefijo, "")
-        try:
-            siguiente = int(numero_actual) + 1
-        except ValueError:
-            siguiente = 1
-    else:
-        siguiente = 1
-
+    siguiente = max(numeros) + 1 if numeros else 1
     return f"{prefijo}{str(siguiente).zfill(ancho)}"
 
 # ---------------------------------------------------------------------------
@@ -100,6 +101,13 @@ def registro(request):
 
             grupo_usuario, _ = Group.objects.get_or_create(name="Usuario")
             user.groups.add(grupo_usuario)
+
+            telefono = (data.get('telefono') or '').strip() or None
+            Settings.objects.create(
+                id_perfil=generar_siguiente_id(Settings, 'id_perfil', 'SET'),
+                usuario=user,
+                telefono=telefono,
+            )
 
             auth_login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect('dashboard')
@@ -187,7 +195,7 @@ def responder_ticket(request, id_ticket):
                 messages.info(request, 'Respuesta guardada. (No se envió correo porque tú eres el creador de este ticket).')
             # ------------------------
 
-            return redirect('detalle_ticket', id_ticket=ticket.id_ticket)
+            return redirect('detalle_ticket', ticket_id=ticket.id_ticket)
 
     return render(
         request,
@@ -306,24 +314,24 @@ def nuevo_ticket(request):
             notificaciones_activadas = ajustes_usuario.alertas_estado
         
         if notificaciones_activadas:
-                   
             if correos_destino:
-
-                send_mail(
-                    subject=asunto,
-                    message=mensaje,
-                    from_email=None,
-                    recipient_list=correos_tecnicos,
-                    fail_silently=False, # Evita que la app se caiga si falla el envío
-                )
-
-                messages.success(request, 'Ticket creado correctamente. Se ha notificado a los técnicos por correo.')
+                try:
+                    send_mail(
+                        subject=asunto,
+                        message=mensaje,
+                        from_email=None,
+                        recipient_list=correos_destino,
+                        fail_silently=False,
+                    )
+                    messages.success(request, 'Ticket creado correctamente. Se ha notificado a los técnicos por correo.')
+                except Exception as e:
+                    messages.warning(request, f'Ticket creado. No se pudo enviar correo a los técnicos: {e}')
             else:
-                # Mensaje por si no hay técnicos registrados con correo
-                messages.warning(request, 'Ticket creado, pero no se encontraron correos de técnicos para notificar.')
-            # ------------------------
+                messages.info(request, 'Ticket creado exitosamente.')
+        else:
+            messages.success(request, 'Ticket creado exitosamente.')
 
-            return redirect('detalle_ticket', ticket_id=ticket.id_ticket)
+        return redirect('detalle_ticket', ticket_id=ticket.id_ticket)
 
     return render(request, 'tickets/nuevo_ticket.html')
 
@@ -580,29 +588,24 @@ def detalle_ticket(request, ticket_id):
             
             # --- LÓGICA DE CORREO ---
             if request.user.id != ticket.usuario.id:
-
-                # 1. Verificar si el usuario tiene las notificaciones activadas
-                # (Asumiendo que tu modelo de configuración está enlazado como .settings)
-                notificaciones_activadas = False
-                
-                if hasattr(ticket.usuario, 'settings'):
-                    # Si usa el campo alertas_estado de tu base de datos
-                    notificaciones_activadas = ticket.usuario.settings.alertas_estado
+                ajustes_usuario = ticket.usuario.settings.first()
+                notificaciones_activadas = getattr(ajustes_usuario, 'alertas_estado', True) if ajustes_usuario else True
 
                 if notificaciones_activadas:
-
                     if ticket.usuario.email:
                         asunto = f'TIX AI: Nueva respuesta en tu ticket #{ticket.id_ticket}'
                         mensaje = f"Hola {ticket.usuario.username},\n\nTienes una nueva respuesta en tu ticket '{ticket.titulo}'.\n\nRespuesta:\n{ticket.solucion}\n\nIngresa al portal para ver más detalles."
-                    
-                        send_mail(
-                            subject=asunto,
-                            message=mensaje,
-                            from_email=None,
-                            recipient_list=[ticket.usuario.email],
-                            fail_silently=False,
-                        )
-                        messages.success(request, 'Respuesta guardada y notificada por correo al cliente.')
+                        try:
+                            send_mail(
+                                subject=asunto,
+                                message=mensaje,
+                                from_email=None,
+                                recipient_list=[ticket.usuario.email],
+                                fail_silently=False,
+                            )
+                            messages.success(request, 'Respuesta guardada y notificada por correo al cliente.')
+                        except Exception as e:
+                            messages.warning(request, f'Respuesta guardada. No se pudo enviar el correo de notificación: {e}')
                     else:
                         messages.warning(request, 'Respuesta guardada. ADVERTENCIA: El usuario no tiene correo registrado.')
             else:
@@ -911,32 +914,32 @@ def editar_perfil(request):
 
         else:
             # Validar si el teléfono está en uso antes de hacer nada más
-            telefono_en_uso = Settings.objects.filter(telefono=telefono).exclude(usuario=usuario).exists()
+            telefono_limpio = telefono.strip() if telefono else ""
+            telefono_en_uso = (
+                bool(telefono_limpio)
+                and Settings.objects.filter(telefono=telefono_limpio).exclude(usuario=usuario).exists()
+            )
 
             if telefono_en_uso:
                 messages.error(request, 'Este número de teléfono ya está registrado en otra cuenta.')
-                # Detenemos la ejecución aquí para que NO guarde el dato duplicado
                 return render(request, 'tickets/editar_perfil.html', {'usuario': usuario})
 
-            # Si pasa la validación, guardamos el usuario
             usuario.first_name = nombre
             usuario.last_name = apellido
             usuario.email = correo
             usuario.username = correo
             usuario.save()
 
-            # Buscamos su configuración actual usando .first()
             ajustes_usuario = usuario.settings.first()
 
             if ajustes_usuario:
-                ajustes_usuario.telefono = telefono
+                ajustes_usuario.telefono = telefono_limpio or None
                 ajustes_usuario.save()
             else:
-                # Si no existe, lo creamos generando correctamente su id_perfil
                 Settings.objects.create(
                     id_perfil=generar_siguiente_id(Settings, 'id_perfil', 'SET'),
                     usuario=usuario,
-                    telefono=telefono
+                    telefono=telefono_limpio or None
                 )
 
             messages.success(request, 'Tu perfil se actualizó correctamente.')
@@ -1065,15 +1068,16 @@ def verificar_2fa(request):
 
         if codigo_ingresado == codigo_real:
             user_id = request.session.get('pre_2fa_user_id')
-            user = User.objects.get(id=user_id)
+            user = User.objects.filter(id=user_id).first()
+            if not user:
+                request.session.pop('codigo_2fa', None)
+                request.session.pop('pre_2fa_user_id', None)
+                return redirect('login')
 
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
 
-            # Limpiamos la basura de la sesión por seguridad
-            if 'codigo_2fa' in request.session:
-                del request.session['codigo_2fa']
-            if 'pre_2fa_user_id' in request.session:
-                del request.session['pre_2fa_user_id']
+            request.session.pop('codigo_2fa', None)
+            request.session.pop('pre_2fa_user_id', None)
 
             messages.success(request, 'Autenticación exitosa.')
             return redirect('dashboard')
@@ -1114,15 +1118,16 @@ def verificar_telefono(request):
         codigo_real = request.session.get('codigo_sms')
         
         if codigo_ingresado == codigo_real:
-            # El código es correcto: Guardamos el teléfono y activamos el 2FA automáticamente
-            ajustes = request.user.settings.first()
+            ajustes, _ = Settings.objects.get_or_create(
+                usuario=request.user,
+                defaults={'id_perfil': generar_siguiente_id(Settings, 'id_perfil', 'SET')}
+            )
             ajustes.telefono = request.session.get('telefono_temp')
             ajustes.dos_factores = True
             ajustes.save()
             
-            # Limpieza de sesión
-            del request.session['codigo_sms']
-            del request.session['telefono_temp']
+            request.session.pop('codigo_sms', None)
+            request.session.pop('telefono_temp', None)
             
             messages.success(request, 'Teléfono verificado. 2FA activado correctamente.')
             return redirect('configuracion')
@@ -1138,8 +1143,10 @@ def seleccionar_metodo_2fa(request):
         return redirect('login')
 
     user_id = request.session.get('pre_2fa_user_id')
-    from django.contrib.auth.models import User
-    user = User.objects.get(id=user_id)
+    user = User.objects.filter(id=user_id).first()
+    if not user:
+        request.session.pop('pre_2fa_user_id', None)
+        return redirect('login')
     ajustes_usuario = user.settings.first()
     numero_registrado = getattr(ajustes_usuario, 'telefono', None)
 

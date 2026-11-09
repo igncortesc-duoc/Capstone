@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from .models import Settings
 
 
 class RegistroForm(forms.Form):
@@ -14,10 +15,16 @@ class RegistroForm(forms.Form):
     )
 
     def clean_correo(self):
-        correo = self.cleaned_data['correo']
-        if User.objects.filter(username=correo).exists():
+        correo = self.cleaned_data['correo'].strip()
+        if User.objects.filter(username=correo).exists() or User.objects.filter(email=correo).exists():
             raise forms.ValidationError("Ya existe una cuenta con este correo.")
         return correo
+
+    def clean_telefono(self):
+        telefono = (self.cleaned_data.get('telefono') or '').strip()
+        if telefono and Settings.objects.filter(telefono=telefono).exists():
+            raise forms.ValidationError("Este número de teléfono ya está registrado en otra cuenta.")
+        return telefono
 
     def clean(self):
         cleaned = super().clean()
