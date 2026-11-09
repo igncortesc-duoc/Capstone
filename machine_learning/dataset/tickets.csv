@@ -1,0 +1,121 @@
+asunto,descripcion,categoria,prioridad
+Olvide mi contraseña,No puedo ingresar a mi cuenta porque olvide mi contraseña,Accesos,Media
+No puedo iniciar sesión,El sistema indica que mi usuario o contraseña es incorrecto,Accesos,Media
+Cuenta bloqueada,Mi cuenta fue bloqueada después de varios intentos fallidos,Accesos,Alta
+Necesito restablecer mi clave,Quiero cambiar la contraseña de mi cuenta institucional,Accesos,Media
+No tengo acceso al sistema,Mi usuario no tiene permisos para ingresar a la plataforma,Accesos,Alta
+Problema con mi usuario,No puedo acceder a mi cuenta corporativa con mis credenciales,Accesos,Alta
+Contraseña vencida,El sistema me solicita cambiar mi contraseña porque venció el plazo,Accesos,Media
+No puedo entrar al correo,Mi cuenta de correo no permite iniciar sesión con mi contraseña,Accesos,Alta
+Usuario bloqueado,Mi usuario aparece bloqueado en el sistema de tickets,Accesos,Alta
+Necesito permisos,Necesito acceso a una carpeta compartida y permisos de lectura,Accesos,Media
+Cambio de clave,Deseo actualizar mi contraseña por una nueva,Accesos,Baja
+Problema con contraseña,Tengo problemas con la contraseña no me deja ingresar,Accesos,Media
+Restablecimiento de credenciales,Olvidé los datos de inicio de sesión de mi cuenta,Accesos,Media
+Error de autenticación,No puedo autenticarme en el portal con mi usuario y clave,Accesos,Alta
+Problema al entrar,Ingreso mi clave pero me dice que no es correcta,Accesos,Media
+Desbloqueo de cuenta,Por favor desbloquear mi usuario para poder continuar trabajando,Accesos,Alta
+Permisos denegados,No tengo autorización para ingresar al módulo que necesito,Accesos,Media
+Solicitud de acceso,Necesito que me habiliten usuario en el nuevo sistema,Accesos,Media
+Clave caducada,Me aparece mensaje de contraseña expirada al iniciar,Accesos,Media
+No recuerdo mi clave,No me acuerdo de la contraseña del sistema,Accesos,Media
+Cambiar clave de acceso,Requiero modificar mi clave actual por seguridad,Accesos,Baja
+Acceso restringido,El sistema me dice que no tengo privilegios suficientes,Accesos,Media
+Credenciales inválidas,El sistema rechaza mis datos de acceso constantemente,Accesos,Alta
+Recuperar cuenta,Necesito recuperar el acceso a mi perfil de usuario,Accesos,Media
+Problema con inicio de sesión,La página no me deja ingresar con mi clave,Accesos,Alta
+Tengo problemas con la contraseña ya que se la sabe un amigo,Tengo problemas con la contraseña ya que se la sabe un amigo y temo que ingrese,Seguridad,Critica
+Alguien sabe mi clave,Un compañero o tercero conoce mi contraseña y necesito cambiarla urgente,Seguridad,Critica
+Contraseña comprometida,Creo que alguien descubrió mi clave de acceso institucional,Seguridad,Critica
+Correo sospechoso,Recibí un correo electrónico con un enlace sospechoso pidiendo datos,Seguridad,Alta
+Posible phishing,Recibí un mensaje que solicita mis datos personales y credenciales,Seguridad,Critica
+Archivo sospechoso,Descargué un archivo adjunto que parece contener un virus,Seguridad,Critica
+Actividad extraña,Detecté actividad sospechosa y movimientos raros en mi cuenta,Seguridad,Critica
+Cuenta comprometida,Creo que alguien ingresó a mi cuenta sin autorización,Seguridad,Critica
+Mensaje fraudulento,Recibí un mensaje que parece ser una estafa o suplantación,Seguridad,Alta
+Posible virus,Mi computador muestra señales de estar infectado por malware,Seguridad,Critica
+Alerta de seguridad,El antivirus detectó una amenaza grave o troyano en mi equipo,Seguridad,Critica
+Acceso desconocido,Veo un inicio de sesión que no reconozco desde otra ubicación,Seguridad,Critica
+Enlace peligroso,Abrí un enlace que podría ser malicioso y me preocupa la seguridad,Seguridad,Critica
+Robo de credenciales,Creo que me robaron la contraseña en una página falsa,Seguridad,Critica
+Intento de hackeo,Detecté múltiples intentos de ingreso no autorizados a mi perfil,Seguridad,Critica
+Suplantación de identidad,Alguien se está haciendo pasar por un directivo pidiendo información,Seguridad,Critica
+Fuga de información,Se compartieron datos confidenciales sin autorización,Seguridad,Critica
+Amenaza de virus,Aparecen ventanas emergentes extrañas y el antivirus alerta peligro,Seguridad,Critica
+Amigo sabe mi contraseña,Un amigo o conocido sabe mi clave y temo por mi privacidad,Seguridad,Critica
+Vulnerabilidad detectada,Encontré un fallo de seguridad que expone información sensible,Seguridad,Alta
+Computador no enciende,Mi computador no prende al presionar el botón de encendido,Hardware,Alta
+Notebook lento,Mi notebook tarda demasiado tiempo en iniciar y el disco suena,Hardware,Media
+Problema con el teclado,Algunas teclas de mi teclado dejaron de funcionar físicamente,Hardware,Baja
+Mouse no funciona,El mouse dejó de responder y la luz no enciende,Hardware,Baja
+Pantalla negra,El computador enciende pero la pantalla permanece negra y no da video,Hardware,Alta
+Impresora no imprime,La impresora física recibe el documento pero no saca las hojas,Hardware,Media
+Computador se apaga,Mi computador se apaga inesperadamente por sobrecalentamiento,Hardware,Alta
+Problema con monitor,El monitor no muestra imagen o parpadea con líneas,Hardware,Alta
+Disco duro lleno,Mi computador indica que no tiene espacio físico disponible en disco,Hardware,Media
+Notebook se calienta,El equipo se calienta demasiado después de algunos minutos de uso,Hardware,Alta
+Cargador dañado,El cargador de mi notebook hace chispas o no pasa corriente,Hardware,Alta
+Batería no carga,La batería del portátil no retiene carga al desconectar el cable,Hardware,Media
+Falla de memoria RAM,El computador pita al encender y no arranca el sistema,Hardware,Alta
+Pantalla rota,Se cayó el notebook y la pantalla LCD se quebró,Hardware,Alta
+Ventilador ruidoso,El ventilador del procesador hace un zumbido fuerte y no enfría,Hardware,Media
+Impresora atascada,La impresora tiene un atasco de papel y no permite imprimir,Hardware,Media
+Puerto USB no reconoce,Conecto dispositivos a los puertos USB y no los detecta,Hardware,Baja
+Equipo no da video,El computador arranca las luces pero no envía señal al monitor,Hardware,Alta
+Disco duro con ruidos,El disco duro hace un sonido metálico tipo click,Hardware,Alta
+Fuente de poder quemada,Salió olor a quemado de la torre y no volvió a encender,Hardware,Alta
+Excel se cierra,Microsoft Excel se cierra inesperadamente mientras trabajo con planillas,Software,Media
+Word no abre,Microsoft Word no inicia correctamente y arroja código de error,Software,Media
+Error en programa,Una aplicación muestra un mensaje de error al ejecutarse en Windows,Software,Media
+Programa lento,El software contable tarda demasiado tiempo en responder consultas,Software,Baja
+Aplicación no funciona,Un programa dejó de funcionar después de una actualización de software,Software,Alta
+Error al instalar programa,No puedo instalar una aplicación en mi computador por error de instalador,Software,Media
+Sistema se congela,La aplicación queda congelada sin responder y debo forzar cierre,Software,Alta
+Problema con navegador,Google Chrome se cierra inesperadamente al abrir pestañas,Software,Media
+Actualización con error,Después de actualizar el programa comenzó a fallar con pantallazos,Software,Media
+Licencia de software,El sistema indica que la licencia del programa expiró,Software,Media
+Error en Windows,Windows muestra pantalla azul de error de software al abrir aplicaciones,Software,Alta
+No abre Acrobat Reader,No puedo abrir documentos PDF con el lector oficial,Software,Baja
+Fallo en base de datos local,El sistema reporta error de conexión con la base de datos de la app,Software,Alta
+Outlook no sincroniza,El cliente de correo Outlook no descarga los mensajes nuevos,Software,Media
+Programa corrupto,Me aparece mensaje indicando que faltan archivos dll del programa,Software,Media
+Teams no abre,La aplicación de Microsoft Teams se queda cargando en bucle,Software,Media
+Error al exportar,El sistema falla cuando intento exportar un reporte a archivo Excel,Software,Media
+Navegador no responde,Edge o Chrome quedan congelados al abrir el portal interno,Software,Media
+Falta paquete de software,Se requiere instalar complementos para ejecutar el visor,Software,Baja
+Bug en plataforma,Al presionar el botón de guardar se produce un error no controlado,Software,Media
+No tengo internet,Mi computador no puede conectarse a internet ni navegar,Red,Alta
+WiFi no funciona,No puedo conectarme a la red inalámbrica de la oficina,Red,Alta
+Internet lento,La conexión a internet está demasiado lenta y no cargan páginas,Red,Media
+No detecta WiFi,Mi notebook no encuentra ninguna red inalámbrica disponible,Red,Alta
+Sin conexión,El equipo indica que no tiene conexión de red ni acceso a internet,Red,Alta
+VPN no conecta,No puedo conectarme a la red interna mediante el cliente VPN,Red,Alta
+Problema con red,No puedo acceder a los recursos compartidos de la red interna,Red,Alta
+Cable de red,El computador no detecta el cable Ethernet conectado a la toma,Red,Media
+Internet se desconecta,La conexión a internet se corta constantemente cada cinco minutos,Red,Alta
+No puedo acceder al servidor,El servidor principal no responde a las solicitudes de red,Red,Critica
+Caída de enlace,Se cayó el enlace principal de fibra óptica de la sucursal,Red,Critica
+Sin acceso a red local,No tengo visibilidad de los demás equipos en la red LAN,Red,Alta
+Problema con DNS,El navegador muestra error DNS no pudo resolver el nombre del sitio,Red,Media
+IP no asignada,El computador indica configuración IP no válida o sin DHCP,Red,Media
+Servidor de archivos caído,No es posible conectar a la unidad Z de red compartida,Red,Alta
+Conexión intermitente,La red local se cae y vuelve de manera inestable,Red,Alta
+Falla de switch de red,Varios puestos de trabajo perdieron conexión de red simultáneamente,Red,Critica
+Velocidad de red degradada,Las descargas y transferencias en la red están casi paralizadas,Red,Media
+Problema con proxy,El navegador rechaza la conexión por error de configuración proxy,Red,Media
+Sin señal inalámbrica,El access point del piso parece estar apagado o sin señal,Red,Alta
+Solicitar cuenta,Necesito crear una cuenta nueva para utilizar el sistema,Consulta general,Baja
+Consulta sobre sistema,Quiero saber cómo funciona la plataforma y qué módulos tiene,Consulta general,Baja
+Información de soporte,Necesito información sobre los horarios y canales del servicio técnico,Consulta general,Baja
+Horario de atención,Quiero conocer el horario de atención presencial del área TI,Consulta general,Baja
+Solicitar información,Tengo una consulta sobre los servicios informáticos disponibles,Consulta general,Baja
+Cómo usar el sistema,Necesito ayuda o capacitación para aprender a utilizar la plataforma,Consulta general,Baja
+Consulta general,Tengo una duda general sobre el funcionamiento del sistema de tickets,Consulta general,Baja
+Información sobre servicio,Quiero conocer qué catálogo de servicios ofrece el área informática,Consulta general,Baja
+Solicitud de ayuda,Necesito orientación sobre un procedimiento administrativo o técnico,Consulta general,Baja
+Pregunta sobre plataforma,Tengo una pregunta relacionada con el flujo de solicitudes del sistema,Consulta general,Baja
+Manual de usuario,Dónde puedo encontrar la documentación o guía de usuario del sistema,Consulta general,Baja
+Duda sobre procedimiento,Quisiera consultar cuál es el proceso para pedir equipamiento,Consulta general,Baja
+Capacitación,Quisiera solicitar información sobre capacitaciones para nuevos ingresos,Consulta general,Baja
+Preguntas frecuentes,Tienen disponible una sección de preguntas frecuentes o FAQ,Consulta general,Baja
+Contacto con jefatura TI,Necesito contactar a la jefatura del departamento de informática,Consulta general,Baja
