@@ -1,4 +1,5 @@
 import random
+import re
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash, authenticate, login
 
@@ -23,7 +24,23 @@ from django.core.exceptions import PermissionDenied
 
 from twilio.rest import Client
 
-
+# ---------------------------------------------------------------------------
+# bloqueo de inicio de sesion
+# ---------------------------------------------------------------------------
+def tixai_lockout(request, response, credentials, *args, **kwargs):
+    return render(
+        request,
+        'tickets/login.html',
+        {
+            'lockout_message': (
+                'Has superado el límite de 5 intentos fallidos. '
+                'Por seguridad, tu acceso ha sido bloqueado durante '
+                '15 minutos. Inténtalo nuevamente después de ese período.'
+            ),
+            'next': request.POST.get('next', ''),
+        },
+        status=429
+    )
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
@@ -40,23 +57,22 @@ def generar_siguiente_id(modelo, campo_id, prefijo, ancho=4):
     Genera el siguiente ID correlativo tipo 'TCK0001' para modelos cuya
     PK es un CharField (no autoincremental).
     """
-    ultimo = (
+    ids = list(
         modelo.objects.filter(**{f"{campo_id}__startswith": prefijo})
-        .order_by(f"-{campo_id}")
-        .first()
+        .values_list(campo_id, flat=True)
     )
+    patron = re.compile(rf"^{re.escape(prefijo)}(\d+)$")
+    numeros = []
+    for val in ids:
+        m = patron.match(str(val))
+        if m:
+            try:
+                numeros.append(int(m.group(1)))
+            except ValueError:
+                pass
 
-    if ultimo:
-        numero_actual = getattr(ultimo, campo_id).replace(prefijo, "")
-        try:
-            siguiente = int(numero_actual) + 1
-        except ValueError:
-            siguiente = 1
-    else:
-        siguiente = 1
-
+    siguiente = max(numeros) + 1 if numeros else 1
     return f"{prefijo}{str(siguiente).zfill(ancho)}"
-
 
 # ---------------------------------------------------------------------------
 # Público / Auth
@@ -66,7 +82,6 @@ def index(request):
     if request.user.is_authenticated:
         return redirect('dashboard')
     return render(request, 'tickets/index.html')
-
 
 def registro(request):
 
@@ -87,7 +102,14 @@ def registro(request):
             grupo_usuario, _ = Group.objects.get_or_create(name="Usuario")
             user.groups.add(grupo_usuario)
 
-            auth_login(request, user)
+            telefono = (data.get('telefono') or '').strip() or None
+            Settings.objects.create(
+                id_perfil=generar_siguiente_id(Settings, 'id_perfil', 'SET'),
+                usuario=user,
+                telefono=telefono,
+            )
+
+            auth_login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect('dashboard')
     else:
         form = RegistroForm()
@@ -116,7 +138,6 @@ def asignar_tecnico_automatico(categoria_obj):
     )
 
     return tecnico_elegido
-
 
 # ---------------------------------------------------------------------------
 # Tickets
@@ -174,7 +195,7 @@ def responder_ticket(request, id_ticket):
                 messages.info(request, 'Respuesta guardada. (No se envió correo porque tú eres el creador de este ticket).')
             # ------------------------
 
-            return redirect('detalle_ticket', id_ticket=ticket.id_ticket)
+            return redirect('detalle_ticket', ticket_id=ticket.id_ticket)
 
     return render(
         request,
@@ -183,7 +204,6 @@ def responder_ticket(request, id_ticket):
             'ticket': ticket
         }
     )
-
 
 @login_required
 def nuevo_ticket(request):
@@ -203,7 +223,13 @@ def nuevo_ticket(request):
         # Buscar objetos de categoría y prioridad predichos
         categoria_obj = Categoria.objects.filter(nombre=categoria).first()
         prioridad_obj = Prioridad.objects.filter(nombre=prioridad).first()
-
+        print("========== DEPURACIÓN TIXAI ==========")
+        print("Categoría predicha:", repr(categoria))
+        print("Objeto categoría:", categoria_obj)
+        print("ID categoría:", categoria_obj.pk if categoria_obj else None)
+        print("Prioridad predicha:", repr(prioridad))
+        print("Objeto prioridad:", prioridad_obj)
+        print("======================================")
         tecnico_asignado = asignar_tecnico_automatico(categoria_obj)
 
         ticket = Ticket.objects.create(
@@ -216,8 +242,15 @@ def nuevo_ticket(request):
             id_prioridad=prioridad_obj,
             id_estado=estado_abierto,
             fecha_asignacion=timezone.now() if tecnico_asignado else None,
+            id_categoria=categoria_obj
         )
+        ticket.refresh_from_db()
 
+        print("========== TICKET GUARDADO ==========")
+        print("ID ticket:", ticket.id_ticket)
+        print("Categoría FK:", ticket.id_categoria_id)
+        print("Prioridad FK:", ticket.id_prioridad_id)
+        print("=====================================")
         # Registrar la clasificación de la IA (queda como historial/predicción)
         if categoria_obj and prioridad_obj:
             ClasificacionIA.objects.create(
@@ -281,27 +314,26 @@ def nuevo_ticket(request):
             notificaciones_activadas = ajustes_usuario.alertas_estado
         
         if notificaciones_activadas:
-                   
             if correos_destino:
-
-                send_mail(
-                    subject=asunto,
-                    message=mensaje,
-                    from_email=None,
-                    recipient_list=correos_tecnicos,
-                    fail_silently=False, # Evita que la app se caiga si falla el envío
-                )
-
-                messages.success(request, 'Ticket creado correctamente. Se ha notificado a los técnicos por correo.')
+                try:
+                    send_mail(
+                        subject=asunto,
+                        message=mensaje,
+                        from_email=None,
+                        recipient_list=correos_destino,
+                        fail_silently=False,
+                    )
+                    messages.success(request, 'Ticket creado correctamente. Se ha notificado a los técnicos por correo.')
+                except Exception as e:
+                    messages.warning(request, f'Ticket creado. No se pudo enviar correo a los técnicos: {e}')
             else:
-                # Mensaje por si no hay técnicos registrados con correo
-                messages.warning(request, 'Ticket creado, pero no se encontraron correos de técnicos para notificar.')
-            # ------------------------
+                messages.info(request, 'Ticket creado exitosamente.')
+        else:
+            messages.success(request, 'Ticket creado exitosamente.')
 
-            return redirect('detalle_ticket', ticket_id=ticket.id_ticket)
+        return redirect('detalle_ticket', ticket_id=ticket.id_ticket)
 
     return render(request, 'tickets/nuevo_ticket.html')
-
 
 @login_required
 def actualizar_ticket(request, ticket_id):
@@ -317,82 +349,58 @@ def actualizar_ticket(request, ticket_id):
     if request.method != 'POST':
         return redirect('detalle_ticket', ticket_id=ticket.id_ticket)
 
-    # Obtener los datos enviados desde el formulario
-    categoria_id = request.POST.get('categoria')
-    prioridad_id = request.POST.get('prioridad')
-    nuevo_estado = request.POST.get('estado')
-    tecnico_id = request.POST.get('tecnico')
-    solucion = request.POST.get('solucion')
-
-    # Actualizar categoría
-    if categoria_id:
-        ticket.id_categoria = get_object_or_404(
-            Categoria, pk=categoria_id
-        )
-    else:
-        ticket.id_categoria = None
-
-    # Actualizar prioridad
-    if prioridad_id:
-        ticket.id_prioridad = get_object_or_404(
-            Prioridad, pk=prioridad_id
-        )
-    else:
-        ticket.id_prioridad = None
-
-    # Actualizar estado
-    if nuevo_estado:
-        estados_validos = ['Abierto', 'En proceso', 'Cerrado']
-
-        if nuevo_estado not in estados_validos:
-            messages.error(request, 'El estado seleccionado no es válido.')
-            return redirect(
-                'detalle_ticket', ticket_id=ticket.id_ticket
-            )
-
-        ticket.id_estado = get_object_or_404(
-            Estado, nombre=nuevo_estado
-        )
-
-        # Registrar fecha de cierre
-        if nuevo_estado == 'Cerrado':
-            if not ticket.fecha_cierre:
-                ticket.fecha_cierre = timezone.now()
+    # Actualizar categoría solo si viene en la petición
+    if 'categoria' in request.POST:
+        categoria_id = request.POST.get('categoria')
+        if categoria_id:
+            ticket.id_categoria = get_object_or_404(Categoria, pk=categoria_id)
         else:
-            ticket.fecha_cierre = None
+            ticket.id_categoria = None
 
-    # Actualizar técnico asignado
-    if tecnico_id:
-        tecnico = get_object_or_404(
-            User,
-            pk=tecnico_id,
-            groups__name='Tecnico'
-        )
+    # Actualizar prioridad solo si viene en la petición
+    if 'prioridad' in request.POST:
+        prioridad_id = request.POST.get('prioridad')
+        if prioridad_id:
+            ticket.id_prioridad = get_object_or_404(Prioridad, pk=prioridad_id)
+        else:
+            ticket.id_prioridad = None
 
-        if ticket.id_tecnico_id != tecnico.id:
-            ticket.id_tecnico = tecnico
-            ticket.fecha_asignacion = timezone.now()
-    else:
-        ticket.id_tecnico = None
-        ticket.fecha_asignacion = None
+    # Actualizar estado solo si viene en la petición
+    if 'estado' in request.POST:
+        nuevo_estado = request.POST.get('estado')
+        estados_validos = ['Abierto', 'En proceso', 'Cerrado']
+        if nuevo_estado in estados_validos:
+            ticket.id_estado = get_object_or_404(Estado, nombre=nuevo_estado)
+            if nuevo_estado == 'Cerrado':
+                if not ticket.fecha_cierre:
+                    ticket.fecha_cierre = timezone.now()
+            else:
+                ticket.fecha_cierre = None
+        elif nuevo_estado:
+            messages.error(request, 'El estado seleccionado no es válido.')
+            return redirect('detalle_ticket', ticket_id=ticket.id_ticket)
+
+    # Actualizar técnico asignado solo si viene en la petición
+    if 'tecnico' in request.POST:
+        tecnico_id = request.POST.get('tecnico')
+        if tecnico_id:
+            tecnico = get_object_or_404(User, pk=tecnico_id, groups__name='Tecnico')
+            if ticket.id_tecnico_id != tecnico.id:
+                ticket.id_tecnico = tecnico
+                ticket.fecha_asignacion = timezone.now()
+        else:
+            ticket.id_tecnico = None
+            ticket.fecha_asignacion = None
 
     # Actualizar respuesta o solución
-    if solucion is not None:
-        ticket.solucion = solucion.strip() or None
+    if 'solucion' in request.POST:
+        solucion = request.POST.get('solucion')
+        if solucion is not None:
+            ticket.solucion = solucion.strip() or None
 
-    # Guardar todos los cambios en una sola operación
     ticket.save()
-
-    messages.success(
-        request,
-        'Los detalles del ticket se actualizaron correctamente.'
-    )
-
+    messages.success(request, 'Los detalles del ticket se actualizaron correctamente.')
     return redirect('detalle_ticket', ticket_id=ticket.id_ticket)
-
-
-
-
 
 @login_required
 def lista_tickets(request):
@@ -440,21 +448,33 @@ def lista_tickets(request):
         }
     )
 
-
 @login_required
 def dashboard(request):
+    es_admin = (
+        request.user.is_staff
+        or request.user.is_superuser
+        or request.user.groups.filter(name__icontains="admin").exists()
+    )
+    es_tecnico = request.user.groups.filter(name__in=["Tecnico", "Técnico", "tecnico"]).exists()
 
-    total_tickets = Ticket.objects.count()
+    if es_admin:
+        # Administrador: visualiza todos los tickets del sistema
+        tickets_base = Ticket.objects.all()
+    elif es_tecnico:
+        # Técnico: visualiza únicamente los tickets que tiene asignados
+        tickets_base = Ticket.objects.filter(id_tecnico=request.user)
+    else:
+        # Cliente / Usuario común: visualiza ÚNICAMENTE sus tickets creados
+        tickets_base = Ticket.objects.filter(usuario=request.user)
 
-    tickets_abiertos = Ticket.objects.filter(id_estado__nombre='Abierto').count()
-    tickets_proceso = Ticket.objects.filter(id_estado__nombre='En proceso').count()
-    tickets_cerrados = Ticket.objects.filter(id_estado__nombre='Cerrado').count()
+    total_tickets = tickets_base.count()
+    tickets_abiertos = tickets_base.filter(id_estado__nombre='Abierto').count()
+    tickets_proceso = tickets_base.filter(id_estado__nombre='En proceso').count()
+    tickets_cerrados = tickets_base.filter(id_estado__nombre='Cerrado').count()
 
     # Contar tickets por categoría final (confirmada o, si no hay, la predicha)
     categorias_dict = {}
-
-    for ticket in Ticket.objects.all():
-
+    for ticket in tickets_base:
         if ticket.id_categoria:
             categoria = ticket.id_categoria.nombre
         else:
@@ -479,12 +499,16 @@ def dashboard(request):
         'categorias_data': categorias_data,
         'estados_labels': estados_labels,
         'estados_data': estados_data,
+        'es_admin': es_admin,
+        'es_tecnico': es_tecnico,
     }
 
     return render(request, 'tickets/dashboard.html', contexto)
 
 @login_required
 def reportes(request):
+    if not es_tecnico_o_admin(request.user):
+        raise PermissionDenied
 
     total_tickets = Ticket.objects.count()
 
@@ -525,11 +549,11 @@ def reportes(request):
 
     return render(request, 'tickets/reportes.html', contexto)
 
-
 @login_required
 def detalle_ticket(request, ticket_id):
-
     ticket = get_object_or_404(Ticket, id_ticket=ticket_id)
+    if not (es_tecnico_o_admin(request.user) or ticket.usuario == request.user):
+        raise PermissionDenied
 
     if request.method == 'POST' and 'solucion' in request.POST:
         if not es_tecnico_o_admin(request.user):
@@ -564,29 +588,24 @@ def detalle_ticket(request, ticket_id):
             
             # --- LÓGICA DE CORREO ---
             if request.user.id != ticket.usuario.id:
-
-                # 1. Verificar si el usuario tiene las notificaciones activadas
-                # (Asumiendo que tu modelo de configuración está enlazado como .settings)
-                notificaciones_activadas = False
-                
-                if hasattr(ticket.usuario, 'settings'):
-                    # Si usa el campo alertas_estado de tu base de datos
-                    notificaciones_activadas = ticket.usuario.settings.alertas_estado
+                ajustes_usuario = ticket.usuario.settings.first()
+                notificaciones_activadas = getattr(ajustes_usuario, 'alertas_estado', True) if ajustes_usuario else True
 
                 if notificaciones_activadas:
-
                     if ticket.usuario.email:
                         asunto = f'TIX AI: Nueva respuesta en tu ticket #{ticket.id_ticket}'
                         mensaje = f"Hola {ticket.usuario.username},\n\nTienes una nueva respuesta en tu ticket '{ticket.titulo}'.\n\nRespuesta:\n{ticket.solucion}\n\nIngresa al portal para ver más detalles."
-                    
-                        send_mail(
-                            subject=asunto,
-                            message=mensaje,
-                            from_email=None,
-                            recipient_list=[ticket.usuario.email],
-                            fail_silently=False,
-                        )
-                        messages.success(request, 'Respuesta guardada y notificada por correo al cliente.')
+                        try:
+                            send_mail(
+                                subject=asunto,
+                                message=mensaje,
+                                from_email=None,
+                                recipient_list=[ticket.usuario.email],
+                                fail_silently=False,
+                            )
+                            messages.success(request, 'Respuesta guardada y notificada por correo al cliente.')
+                        except Exception as e:
+                            messages.warning(request, f'Respuesta guardada. No se pudo enviar el correo de notificación: {e}')
                     else:
                         messages.warning(request, 'Respuesta guardada. ADVERTENCIA: El usuario no tiene correo registrado.')
             else:
@@ -608,7 +627,6 @@ def detalle_ticket(request, ticket_id):
         'prioridades': Prioridad.objects.all(),
     })
  
-
 
 # ---------------------------------------------------------------------------
 # Usuarios (ahora sobre el modelo User de Django + Groups)
@@ -650,9 +668,10 @@ def lista_usuarios(request):
         }
     )
 
-
 @login_required
 def detalle_usuario(request, usuario_id):
+    if not es_tecnico_o_admin(request.user):
+        raise PermissionDenied
 
     usuario = get_object_or_404(User, pk=usuario_id)
 
@@ -690,7 +709,6 @@ def detalle_usuario(request, usuario_id):
         }
     )
 
-
 @login_required
 def gestionar_usuario(request, usuario_id):
 
@@ -703,27 +721,45 @@ def gestionar_usuario(request, usuario_id):
 
         nuevo_rol = request.POST.get('rol', '').strip()
 
-        if nuevo_rol in ('Tecnico', 'Usuario'):
+        # Validar los roles permitidos
+        if nuevo_rol not in ('Tecnico', 'Usuario'):
+            messages.error(request, 'El rol seleccionado no es válido.')
+            return redirect('detalle_usuario', usuario_id=usuario.id)
 
-            grupo = get_object_or_404(Group, name=nuevo_rol)
-            usuario.groups.clear()
-            usuario.groups.add(grupo)
+        # Obtener el grupo o crearlo si todavía no existe
+        grupo, creado = Group.objects.get_or_create(name=nuevo_rol)
 
-            # Limpia especialidades previas siempre; si sigue siendo Técnico,
-            # las vuelve a crear con lo que venga marcado en el formulario.
-            EspecialidadTecnico.objects.filter(tecnico=usuario).delete()
+        # Eliminar los roles anteriores
+        usuario.groups.clear()
 
-            if nuevo_rol == 'Tecnico':
-                categorias_ids = request.POST.getlist('categorias')
-                for cat_id in categorias_ids:
-                    categoria = Categoria.objects.filter(id_categoria=cat_id).first()
-                    if categoria:
-                        EspecialidadTecnico.objects.create(tecnico=usuario, categoria=categoria)
+        # Asignar el nuevo rol
+        usuario.groups.add(grupo)
 
-        return redirect('detalle_usuario', usuario_id=usuario.id)
+        # Limpiar las especialidades anteriores
+        EspecialidadTecnico.objects.filter(tecnico=usuario).delete()
+
+        # Si ahora es técnico, registrar sus especialidades
+        if nuevo_rol == 'Tecnico':
+
+            categorias_ids = request.POST.getlist('categorias')
+
+            for cat_id in categorias_ids:
+                categoria = Categoria.objects.filter(
+                    id_categoria=cat_id
+                ).first()
+
+                if categoria:
+                    EspecialidadTecnico.objects.get_or_create(
+                        tecnico=usuario,
+                        categoria=categoria
+                    )
+
+        messages.success(
+            request,
+            f'El rol de {usuario.username} se actualizó correctamente.'
+        )
 
     return redirect('detalle_usuario', usuario_id=usuario.id)
-
 
 @login_required
 def configuracion(request):
@@ -775,7 +811,6 @@ def configuracion(request):
             
         if 'interfaz' in request.POST:
             settings_usuario.interfaz = request.POST.get('interfaz')
-
 
         quiere_2fa = request.POST.get('dos_factores') == 'on'
             
@@ -879,32 +914,32 @@ def editar_perfil(request):
 
         else:
             # Validar si el teléfono está en uso antes de hacer nada más
-            telefono_en_uso = Settings.objects.filter(telefono=telefono).exclude(usuario=usuario).exists()
+            telefono_limpio = telefono.strip() if telefono else ""
+            telefono_en_uso = (
+                bool(telefono_limpio)
+                and Settings.objects.filter(telefono=telefono_limpio).exclude(usuario=usuario).exists()
+            )
 
             if telefono_en_uso:
                 messages.error(request, 'Este número de teléfono ya está registrado en otra cuenta.')
-                # Detenemos la ejecución aquí para que NO guarde el dato duplicado
                 return render(request, 'tickets/editar_perfil.html', {'usuario': usuario})
 
-            # Si pasa la validación, guardamos el usuario
             usuario.first_name = nombre
             usuario.last_name = apellido
             usuario.email = correo
             usuario.username = correo
             usuario.save()
 
-            # Buscamos su configuración actual usando .first()
             ajustes_usuario = usuario.settings.first()
 
             if ajustes_usuario:
-                ajustes_usuario.telefono = telefono
+                ajustes_usuario.telefono = telefono_limpio or None
                 ajustes_usuario.save()
             else:
-                # Si no existe, lo creamos generando correctamente su id_perfil
                 Settings.objects.create(
                     id_perfil=generar_siguiente_id(Settings, 'id_perfil', 'SET'),
                     usuario=usuario,
-                    telefono=telefono
+                    telefono=telefono_limpio or None
                 )
 
             messages.success(request, 'Tu perfil se actualizó correctamente.')
@@ -943,6 +978,7 @@ def solicitar_codigo_password(request):
     codigo = random.randint(100000, 999999)
     # 2. Lo guardamos en la sesión
     request.session['codigo_recuperacion'] = codigo
+    print(f'\n========================================\n[TIX AI] CODIGO DE SEGURIDAD PARA {usuario.email}: {codigo}\n========================================\n')
 
     # 3. Enviamos el correo
     asunto = 'Código de seguridad para cambiar tu contraseña - TIX AI'
@@ -963,44 +999,41 @@ def solicitar_codigo_password(request):
     # 4. Mostramos la pantalla para que ingrese el código
     return render(request, 'tickets/verificar_codigo.html')
 
-
 @login_required
 def cambiar_password(request):
-    # Validamos que el usuario haya pasado por el paso del código primero
+    # Validamos que el usuario haya pasado por el paso del codigo primero
     if not request.session.get('autorizado_cambio_clave'):
-        messages.warning(request, 'Debes verificar tu identidad con un código primero.')
+        messages.warning(request, 'Debes verificar tu identidad con un codigo primero.')
         return redirect('solicitar_codigo_password')
 
     if request.method == 'POST':
-        nueva_password = request.POST.get('nueva_password')
-        confirmar_password = request.POST.get('confirmar_password')
+        nueva_password = request.POST.get('nueva_password', '')
+        confirmar_password = request.POST.get('confirmar_password', '')
 
-        if nueva_password and nueva_password == confirmar_password:
-            usuario = request.user
-            
-            # --- NUEVA VALIDACIÓN ---
-            # Verificamos si la nueva contraseña es igual a la contraseña actual
-            if usuario.check_password(nueva_password):
-                messages.error(request, 'La nueva contraseña no puede ser igual a tu contraseña actual. Por favor, elige una diferente.')
-            else:
-                # Si es diferente, la encriptamos y la guardamos
-                usuario.set_password(nueva_password)
-                usuario.save()
-                
-                # Mantiene la sesión iniciada después de cambiar la contraseña
-                update_session_auth_hash(request, usuario)
-                
-                # Quitamos la autorización para que no pueda volver a esta URL directamente
-                del request.session['autorizado_cambio_clave']
-                
-                messages.success(request, '¡Contraseña actualizada con éxito!')
-                return redirect('configuracion') 
-                
-        else:
+        if not nueva_password or not confirmar_password:
+            messages.error(request, 'Por favor, completa ambos campos de contraseña.')
+        elif len(nueva_password) < 8:
+            messages.error(request, 'La nueva contraseña debe tener al menos 8 caracteres.')
+        elif nueva_password != confirmar_password:
             messages.error(request, 'Las contraseñas no coinciden. Inténtalo de nuevo.')
+        elif request.user.check_password(nueva_password):
+            messages.error(request, 'La nueva contraseña no puede ser igual a tu contraseña actual. Por favor, elige una diferente.')
+        else:
+            usuario = request.user
+            usuario.set_password(nueva_password)
+            usuario.save()
+
+            # Mantiene la sesion iniciada despues de cambiar la contraseña
+            update_session_auth_hash(request, usuario)
+
+            # Quitamos la autorizacion para que no pueda volver a esta URL directamente
+            if 'autorizado_cambio_clave' in request.session:
+                del request.session['autorizado_cambio_clave']
+
+            messages.success(request, '¡Contraseña actualizada con éxito!')
+            return redirect('configuracion')
 
     return render(request, 'tickets/cambiar_password.html')
-
 
 class CustomLoginView(LoginView):
     template_name = 'tickets/login.html' # Mantenemos tu misma plantilla
@@ -1024,7 +1057,6 @@ class CustomLoginView(LoginView):
         # Si NO tiene activado el 2FA, iniciamos sesión normalmente (comportamiento por defecto)
         return super().form_valid(form)
 
-
 def verificar_2fa(request):
     # Si alguien intenta entrar a esta URL sin pasar por el login, lo echamos
     if 'pre_2fa_user_id' not in request.session:
@@ -1033,25 +1065,26 @@ def verificar_2fa(request):
     if request.method == 'POST':
         codigo_ingresado = request.POST.get('codigo', '').strip()
         codigo_real = request.session.get('codigo_2fa')
-        
+
         if codigo_ingresado == codigo_real:
-            # ¡Código correcto! Buscamos al usuario y lo logueamos oficialmente
             user_id = request.session.get('pre_2fa_user_id')
-            user = User.objects.get(id=user_id)
-            
-            login(request, user)
-            
-            # Limpiamos la basura de la sesión por seguridad
-            del request.session['codigo_2fa']
-            del request.session['pre_2fa_user_id']
-            
+            user = User.objects.filter(id=user_id).first()
+            if not user:
+                request.session.pop('codigo_2fa', None)
+                request.session.pop('pre_2fa_user_id', None)
+                return redirect('login')
+
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+
+            request.session.pop('codigo_2fa', None)
+            request.session.pop('pre_2fa_user_id', None)
+
             messages.success(request, 'Autenticación exitosa.')
-            return redirect('configuracion') # <-- Cambia esto por la url de tu inicio o dashboard
+            return redirect('dashboard')
         else:
             messages.error(request, 'Código incorrecto. Revisa tu correo e intenta nuevamente.')
 
     return render(request, 'tickets/verificar_2fa.html')
-
 
 @login_required
 def vincular_telefono(request):
@@ -1085,15 +1118,16 @@ def verificar_telefono(request):
         codigo_real = request.session.get('codigo_sms')
         
         if codigo_ingresado == codigo_real:
-            # El código es correcto: Guardamos el teléfono y activamos el 2FA automáticamente
-            ajustes = request.user.settings.first()
+            ajustes, _ = Settings.objects.get_or_create(
+                usuario=request.user,
+                defaults={'id_perfil': generar_siguiente_id(Settings, 'id_perfil', 'SET')}
+            )
             ajustes.telefono = request.session.get('telefono_temp')
             ajustes.dos_factores = True
             ajustes.save()
             
-            # Limpieza de sesión
-            del request.session['codigo_sms']
-            del request.session['telefono_temp']
+            request.session.pop('codigo_sms', None)
+            request.session.pop('telefono_temp', None)
             
             messages.success(request, 'Teléfono verificado. 2FA activado correctamente.')
             return redirect('configuracion')
@@ -1102,7 +1136,6 @@ def verificar_telefono(request):
             
     return render(request, 'tickets/verificar_telefono.html')
 
-
 # En views.py (Asegúrate de tener importados send_mail, settings, y Twilio Client)
 def seleccionar_metodo_2fa(request):
     # Validar que venga del login
@@ -1110,18 +1143,21 @@ def seleccionar_metodo_2fa(request):
         return redirect('login')
 
     user_id = request.session.get('pre_2fa_user_id')
-    from django.contrib.auth.models import User
-    user = User.objects.get(id=user_id)
+    user = User.objects.filter(id=user_id).first()
+    if not user:
+        request.session.pop('pre_2fa_user_id', None)
+        return redirect('login')
     ajustes_usuario = user.settings.first()
     numero_registrado = getattr(ajustes_usuario, 'telefono', None)
 
     if request.method == 'POST':
         metodo = request.POST.get('metodo')
-        
+
         # Generar el código solo cuando hace clic en un botón
         import random
         codigo_2fa = str(random.randint(100000, 999999))
         request.session['codigo_2fa'] = codigo_2fa
+        print(f'\n========================================\n[TIX AI] CODIGO 2FA PARA {user.email}: {codigo_2fa}\n========================================\n')
 
         if metodo == 'sms':
             if numero_registrado:
@@ -1138,14 +1174,15 @@ def seleccionar_metodo_2fa(request):
                     messages.error(request, 'Problema al enviar SMS. Intenta con correo.')
             else:
                 messages.error(request, 'No tienes un número de teléfono registrado.')
-        
+
         elif metodo == 'email':
             try:
+                from_email = getattr(settings, 'DEFAULT_FROM_EMAIL', None)
                 send_mail(
                     'Tu código de acceso 2FA - TIX AI',
                     f'Hola {user.username},\n\nTu código de verificación de 2 Factores es: {codigo_2fa}',
-                    from_email=None,
-                    recipient_list=[user.email],
+                    from_email,
+                    [user.email],
                     fail_silently=False,
                 )
                 messages.success(request, 'Código enviado a tu correo electrónico.')
@@ -1154,3 +1191,26 @@ def seleccionar_metodo_2fa(request):
                 messages.error(request, 'Problema al enviar el correo.')
 
     return render(request, 'tickets/seleccionar_metodo_2fa.html', {'tiene_telefono': bool(numero_registrado)})
+
+@login_required
+def eliminar_ticket(request, ticket_id):
+    ticket = get_object_or_404(Ticket, id_ticket=ticket_id)
+    es_admin = (
+        request.user.is_staff
+        or request.user.is_superuser
+        or request.user.groups.filter(name__icontains="admin").exists()
+    )
+    es_autor = (ticket.usuario == request.user)
+    es_tecnico = request.user.groups.filter(name__in=["Tecnico", "Técnico", "tecnico"]).exists()
+
+    if not (es_admin or es_autor or es_tecnico):
+        raise PermissionDenied
+
+    if request.method == 'POST':
+        ticket_num = ticket.id_ticket
+        ticket.delete()
+        messages.success(request, f'El ticket #{ticket_num} se eliminó correctamente.')
+        return redirect('lista_tickets')
+
+    return redirect('detalle_ticket', ticket_id=ticket.id_ticket)
+
