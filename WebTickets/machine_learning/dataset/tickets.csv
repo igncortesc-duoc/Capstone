@@ -1,121 +1,1021 @@
 asunto,descripcion,categoria,prioridad
-Olvide mi contraseña,No puedo ingresar a mi cuenta porque olvide mi contraseña,Accesos,Media
-No puedo iniciar sesión,El sistema indica que mi usuario o contraseña es incorrecto,Accesos,Media
-Cuenta bloqueada,Mi cuenta fue bloqueada después de varios intentos fallidos,Accesos,Alta
-Necesito restablecer mi clave,Quiero cambiar la contraseña de mi cuenta institucional,Accesos,Media
-No tengo acceso al sistema,Mi usuario no tiene permisos para ingresar a la plataforma,Accesos,Alta
-Problema con mi usuario,No puedo acceder a mi cuenta corporativa con mis credenciales,Accesos,Alta
-Contraseña vencida,El sistema me solicita cambiar mi contraseña porque venció el plazo,Accesos,Media
-No puedo entrar al correo,Mi cuenta de correo no permite iniciar sesión con mi contraseña,Accesos,Alta
-Usuario bloqueado,Mi usuario aparece bloqueado en el sistema de tickets,Accesos,Alta
-Necesito permisos,Necesito acceso a una carpeta compartida y permisos de lectura,Accesos,Media
-Cambio de clave,Deseo actualizar mi contraseña por una nueva,Accesos,Baja
-Problema con contraseña,Tengo problemas con la contraseña no me deja ingresar,Accesos,Media
-Restablecimiento de credenciales,Olvidé los datos de inicio de sesión de mi cuenta,Accesos,Media
-Error de autenticación,No puedo autenticarme en el portal con mi usuario y clave,Accesos,Alta
-Problema al entrar,Ingreso mi clave pero me dice que no es correcta,Accesos,Media
-Desbloqueo de cuenta,Por favor desbloquear mi usuario para poder continuar trabajando,Accesos,Alta
-Permisos denegados,No tengo autorización para ingresar al módulo que necesito,Accesos,Media
-Solicitud de acceso,Necesito que me habiliten usuario en el nuevo sistema,Accesos,Media
-Clave caducada,Me aparece mensaje de contraseña expirada al iniciar,Accesos,Media
-No recuerdo mi clave,No me acuerdo de la contraseña del sistema,Accesos,Media
-Cambiar clave de acceso,Requiero modificar mi clave actual por seguridad,Accesos,Baja
-Acceso restringido,El sistema me dice que no tengo privilegios suficientes,Accesos,Media
-Credenciales inválidas,El sistema rechaza mis datos de acceso constantemente,Accesos,Alta
-Recuperar cuenta,Necesito recuperar el acceso a mi perfil de usuario,Accesos,Media
-Problema con inicio de sesión,La página no me deja ingresar con mi clave,Accesos,Alta
-Tengo problemas con la contraseña ya que se la sabe un amigo,Tengo problemas con la contraseña ya que se la sabe un amigo y temo que ingrese,Seguridad,Critica
-Alguien sabe mi clave,Un compañero o tercero conoce mi contraseña y necesito cambiarla urgente,Seguridad,Critica
-Contraseña comprometida,Creo que alguien descubrió mi clave de acceso institucional,Seguridad,Critica
-Correo sospechoso,Recibí un correo electrónico con un enlace sospechoso pidiendo datos,Seguridad,Alta
-Posible phishing,Recibí un mensaje que solicita mis datos personales y credenciales,Seguridad,Critica
-Archivo sospechoso,Descargué un archivo adjunto que parece contener un virus,Seguridad,Critica
-Actividad extraña,Detecté actividad sospechosa y movimientos raros en mi cuenta,Seguridad,Critica
-Cuenta comprometida,Creo que alguien ingresó a mi cuenta sin autorización,Seguridad,Critica
-Mensaje fraudulento,Recibí un mensaje que parece ser una estafa o suplantación,Seguridad,Alta
-Posible virus,Mi computador muestra señales de estar infectado por malware,Seguridad,Critica
-Alerta de seguridad,El antivirus detectó una amenaza grave o troyano en mi equipo,Seguridad,Critica
-Acceso desconocido,Veo un inicio de sesión que no reconozco desde otra ubicación,Seguridad,Critica
-Enlace peligroso,Abrí un enlace que podría ser malicioso y me preocupa la seguridad,Seguridad,Critica
-Robo de credenciales,Creo que me robaron la contraseña en una página falsa,Seguridad,Critica
-Intento de hackeo,Detecté múltiples intentos de ingreso no autorizados a mi perfil,Seguridad,Critica
-Suplantación de identidad,Alguien se está haciendo pasar por un directivo pidiendo información,Seguridad,Critica
-Fuga de información,Se compartieron datos confidenciales sin autorización,Seguridad,Critica
-Amenaza de virus,Aparecen ventanas emergentes extrañas y el antivirus alerta peligro,Seguridad,Critica
-Amigo sabe mi contraseña,Un amigo o conocido sabe mi clave y temo por mi privacidad,Seguridad,Critica
-Vulnerabilidad detectada,Encontré un fallo de seguridad que expone información sensible,Seguridad,Alta
-Computador no enciende,Mi computador no prende al presionar el botón de encendido,Hardware,Alta
-Notebook lento,Mi notebook tarda demasiado tiempo en iniciar y el disco suena,Hardware,Media
+Posible correo phishing recibido,Me robaron el computador y necesito bloquear todos mis accesos urgentemente.,Seguridad,Critica
+Desbloqueo de cuenta,He perdido el acceso al sistema. Solicito reseteo de password por favor.,Accesos,Baja
+lentitud en la red wifi,No tengo acceso a internet ni a la red local desde hace media hora.,Red,Media
+Acceso sospechoso detectado,Me llegó una alerta de inicio de sesión desde una ubicación desconocida.,Seguridad,Critica
+Lentitud en la red wifi,"No puedo mapear la unidad de red compartida Z:, dice acceso denegado.",Red,Alta
+Impresora atascada,"Varias teclas de mi laptop dejaron de funcionar, especialmente la barra espaciadora.",Hardware,Media
+Teclado no funciona,"Varias teclas de mi laptop dejaron de funcionar, especialmente la barra espaciadora.",Hardware,Alta
+Lentitud en la red wifi,Las videollamadas se cortan por la mala señal de red en mi sector.,Red,Alta
+Mouse defectuoso,La batería se agota en 10 minutos aunque esté conectada a la corriente.,Hardware,Media
+error al abrir crm,Necesito que instalen un visor de PDF especializado para mi trabajo.,Software,Media
+Instalación de programa requerida,"Al intentar abrir la aplicación Portal RRHH, me arroja el código de error 500.",Software,Alta
 Problema con el teclado,Algunas teclas de mi teclado dejaron de funcionar físicamente,Hardware,Baja
-Mouse no funciona,El mouse dejó de responder y la luz no enciende,Hardware,Baja
-Pantalla negra,El computador enciende pero la pantalla permanece negra y no da video,Hardware,Alta
-Impresora no imprime,La impresora física recibe el documento pero no saca las hojas,Hardware,Media
-Computador se apaga,Mi computador se apaga inesperadamente por sobrecalentamiento,Hardware,Alta
-Problema con monitor,El monitor no muestra imagen o parpadea con líneas,Hardware,Alta
-Disco duro lleno,Mi computador indica que no tiene espacio físico disponible en disco,Hardware,Media
-Notebook se calienta,El equipo se calienta demasiado después de algunos minutos de uso,Hardware,Alta
-Cargador dañado,El cargador de mi notebook hace chispas o no pasa corriente,Hardware,Alta
-Batería no carga,La batería del portátil no retiene carga al desconectar el cable,Hardware,Media
-Falla de memoria RAM,El computador pita al encender y no arranca el sistema,Hardware,Alta
-Pantalla rota,Se cayó el notebook y la pantalla LCD se quebró,Hardware,Alta
-Ventilador ruidoso,El ventilador del procesador hace un zumbido fuerte y no enfría,Hardware,Media
-Impresora atascada,La impresora tiene un atasco de papel y no permite imprimir,Hardware,Media
-Puerto USB no reconoce,Conecto dispositivos a los puertos USB y no los detecta,Hardware,Baja
-Equipo no da video,El computador arranca las luces pero no envía señal al monitor,Hardware,Alta
-Disco duro con ruidos,El disco duro hace un sonido metálico tipo click,Hardware,Alta
-Fuente de poder quemada,Salió olor a quemado de la torre y no volvió a encender,Hardware,Alta
-Excel se cierra,Microsoft Excel se cierra inesperadamente mientras trabajo con planillas,Software,Media
-Word no abre,Microsoft Word no inicia correctamente y arroja código de error,Software,Media
-Error en programa,Una aplicación muestra un mensaje de error al ejecutarse en Windows,Software,Media
-Programa lento,El software contable tarda demasiado tiempo en responder consultas,Software,Baja
-Aplicación no funciona,Un programa dejó de funcionar después de una actualización de software,Software,Alta
-Error al instalar programa,No puedo instalar una aplicación en mi computador por error de instalador,Software,Media
-Sistema se congela,La aplicación queda congelada sin responder y debo forzar cierre,Software,Alta
-Problema con navegador,Google Chrome se cierra inesperadamente al abrir pestañas,Software,Media
-Actualización con error,Después de actualizar el programa comenzó a fallar con pantallazos,Software,Media
-Licencia de software,El sistema indica que la licencia del programa expiró,Software,Media
-Error en Windows,Windows muestra pantalla azul de error de software al abrir aplicaciones,Software,Alta
-No abre Acrobat Reader,No puedo abrir documentos PDF con el lector oficial,Software,Baja
-Fallo en base de datos local,El sistema reporta error de conexión con la base de datos de la app,Software,Alta
-Outlook no sincroniza,El cliente de correo Outlook no descarga los mensajes nuevos,Software,Media
-Programa corrupto,Me aparece mensaje indicando que faltan archivos dll del programa,Software,Media
-Teams no abre,La aplicación de Microsoft Teams se queda cargando en bucle,Software,Media
-Error al exportar,El sistema falla cuando intento exportar un reporte a archivo Excel,Software,Media
-Navegador no responde,Edge o Chrome quedan congelados al abrir el portal interno,Software,Media
-Falta paquete de software,Se requiere instalar complementos para ejecutar el visor,Software,Baja
-Bug en plataforma,Al presionar el botón de guardar se produce un error no controlado,Software,Media
-No tengo internet,Mi computador no puede conectarse a internet ni navegar,Red,Alta
-WiFi no funciona,No puedo conectarme a la red inalámbrica de la oficina,Red,Alta
-Internet lento,La conexión a internet está demasiado lenta y no cargan páginas,Red,Media
-No detecta WiFi,Mi notebook no encuentra ninguna red inalámbrica disponible,Red,Alta
-Sin conexión,El equipo indica que no tiene conexión de red ni acceso a internet,Red,Alta
-VPN no conecta,No puedo conectarme a la red interna mediante el cliente VPN,Red,Alta
-Problema con red,No puedo acceder a los recursos compartidos de la red interna,Red,Alta
-Cable de red,El computador no detecta el cable Ethernet conectado a la toma,Red,Media
-Internet se desconecta,La conexión a internet se corta constantemente cada cinco minutos,Red,Alta
-No puedo acceder al servidor,El servidor principal no responde a las solicitudes de red,Red,Critica
-Caída de enlace,Se cayó el enlace principal de fibra óptica de la sucursal,Red,Critica
-Sin acceso a red local,No tengo visibilidad de los demás equipos en la red LAN,Red,Alta
-Problema con DNS,El navegador muestra error DNS no pudo resolver el nombre del sitio,Red,Media
-IP no asignada,El computador indica configuración IP no válida o sin DHCP,Red,Media
-Servidor de archivos caído,No es posible conectar a la unidad Z de red compartida,Red,Alta
-Conexión intermitente,La red local se cae y vuelve de manera inestable,Red,Alta
-Falla de switch de red,Varios puestos de trabajo perdieron conexión de red simultáneamente,Red,Critica
-Velocidad de red degradada,Las descargas y transferencias en la red están casi paralizadas,Red,Media
-Problema con proxy,El navegador rechaza la conexión por error de configuración proxy,Red,Media
-Sin señal inalámbrica,El access point del piso parece estar apagado o sin señal,Red,Alta
-Solicitar cuenta,Necesito crear una cuenta nueva para utilizar el sistema,Consulta general,Baja
-Consulta sobre sistema,Quiero saber cómo funciona la plataforma y qué módulos tiene,Consulta general,Baja
-Información de soporte,Necesito información sobre los horarios y canales del servicio técnico,Consulta general,Baja
-Horario de atención,Quiero conocer el horario de atención presencial del área TI,Consulta general,Baja
+Solicitud de acceso a Confluence,He perdido el acceso al sistema. Solicito reseteo de password por favor.,Accesos,Baja
+Información de beneficios,Tengo una duda sobre cómo actualizar mi dirección particular en el sistema.,Consulta general,Baja
+Posible correo phishing recibido,me llegó una alerta de inicio de sesión desde una ubicación desconocida.,Seguridad,Alta
+Actualización de datos personales,Quisiera saber cómo ingresar mis días de vacaciones en la intranet.,Consulta general,Baja
+Información de beneficios,Tengo una duda sobre cómo actualizar mi dirección particular en el sistema.,Consulta general,Media
+Lentitud en la red wifi,La conexión wifi en la sala de reuniones es muy inestable.,Red,Critica
+Solicitud de manual de Jira,Necesito información sobre los beneficios de salud del mes.,Consulta general,Media
+Desbloqueo de cuenta,Mi usuario fue bloqueado tras varios intentos fallidos. Necesito ayuda.,Accesos,Media
+actualización fallida de erp,"Al intentar abrir la aplicación Intranet, me arroja el código de error 500.",Software,Baja
+Solicitud de manual de Office 365,Necesito información sobre los beneficios de salud del mes.,Consulta general,Baja
 Solicitar información,Tengo una consulta sobre los servicios informáticos disponibles,Consulta general,Baja
-Cómo usar el sistema,Necesito ayuda o capacitación para aprender a utilizar la plataforma,Consulta general,Baja
-Consulta general,Tengo una duda general sobre el funcionamiento del sistema de tickets,Consulta general,Baja
-Información sobre servicio,Quiero conocer qué catálogo de servicios ofrece el área informática,Consulta general,Baja
-Solicitud de ayuda,Necesito orientación sobre un procedimiento administrativo o técnico,Consulta general,Baja
-Pregunta sobre plataforma,Tengo una pregunta relacionada con el flujo de solicitudes del sistema,Consulta general,Baja
+Duda sobre formato de firma,Necesito el manual de usuario para el nuevo portal de Portal RRHH.,Consulta general,Baja
+Fuga de información,Se compartieron datos confidenciales sin autorización,Seguridad,Critica
+Información de beneficios,Tengo una duda sobre cómo actualizar mi dirección particular en el sistema.,Consulta general,Media
+Duda sobre vacaciones,Tengo una duda sobre cómo actualizar mi dirección particular en el sistema.,Consulta general,Baja
+error de login en vpn,"No puedo acceder a mi cuenta, me indica que la contraseña es incorrecta al intentar entrar a ERP.",Accesos,Media
+Acceso sospechoso detectado,Recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Alta
+Solicitud de manual de Confluence,Quisiera saber cómo ingresar mis días de vacaciones en la intranet.,Consulta general,Media
+Batería de laptop no carga,El monitor externo se apaga y enciende solo intermitentemente.,Hardware,Media
+Problema de autenticación de doble factor,"No puedo acceder a mi cuenta, me indica que la contraseña es incorrecta al intentar entrar a Confluence.",Accesos,Baja
+Cable de red dañado,La conexión wifi en la sala de reuniones es muy inestable.,Red,Alta
+Error de login en VPN,"Al poner mis credenciales en SAP, la página se queda cargando y no avanza.",Accesos,Media
+Actualización fallida de Confluence,El programa se congela constantemente y tengo que forzar el cierre.,Software,Media
+credenciales revocadas en sap,Necesito permisos para ingresar al sistema Confluence por un nuevo proyecto.,Accesos,Media
+Batería de laptop no carga,El monitor externo se apaga y enciende solo intermitentemente.,Hardware,Media
+Información de beneficios,¿Me podrían indicar dónde descargar la plantilla oficial para firmas de correo?,Consulta general,Baja
+Actualización de datos personales,necesito información sobre los beneficios de salud del mes.,Consulta general,Baja
+Acceso sospechoso detectado,Recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Critica
+Duda sobre formato de firma,Tengo una duda sobre cómo actualizar mi dirección particular en el sistema.,Consulta general,Baja
+Error al abrir ERP,El programa se congela constantemente y tengo que forzar el cierre.,Software,Baja
+Error al abrir VPN,Word y Excel me piden activar la licencia y no me dejan editar documentos.,Software,Baja
+restablecer contraseña de confluence,Mi usuario fue bloqueado tras varios intentos fallidos. Necesito ayuda.,Accesos,Media
+Pantalla parpadea,La impresora del segundo piso tiene papel atascado y marca error.,Hardware,Media
+Pantalla negra,El computador enciende pero la pantalla permanece negra y no da video,Hardware,Alta
+restablecer contraseña de vpn,Necesito permisos para ingresar al sistema Confluence por un nuevo proyecto.,Accesos,Alta
+Licencia de Office expirada,"Al intentar abrir la aplicación CRM, me arroja el código de error 500.",Software,Alta
+No hay acceso al servidor compartido,"La conexión Portal RRHH se desconecta cada 5 minutos, es imposible trabajar.",Red,Critica
+Problema con proxy,El navegador rechaza la conexión por error de configuración proxy,Red,Media
+Error al abrir Confluence,Necesito que instalen un visor de PDF especializado para mi trabajo.,Software,Baja
+Cargador dañado,El cargador de mi notebook hace chispas o no pasa corriente,Hardware,Alta
+Posible correo phishing recibido,Recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Critica
+Información de beneficios,Tengo una duda sobre cómo actualizar mi dirección particular en el sistema.,Consulta general,Baja
+Clave caducada,Me aparece mensaje de contraseña expirada al iniciar,Accesos,Media
+Bloqueo por antivirus,El antivirus detectó una amenaza y bloqueó varios archivos en mi disco C.,Seguridad,Critica
+Error al abrir ERP,"Al intentar abrir la aplicación VPN, me arroja el código de error 500.",Software,Media
+Error al abrir SAP,Necesito que instalen un visor de PDF especializado para mi trabajo.,Software,Media
+Batería de laptop no carga,La batería se agota en 10 minutos aunque esté conectada a la corriente.,Hardware,Alta
+Bug en módulo de reportes,El programa se congela constantemente y tengo que forzar el cierre.,Software,Baja
+Impresora atascada,"Varias teclas de mi laptop dejaron de funcionar, especialmente la barra espaciadora.",Hardware,Alta
+Pantalla parpadea,El monitor externo se apaga y enciende solo intermitentemente.,Hardware,Alta
+Duda sobre formato de firma,Tengo una duda sobre cómo actualizar mi dirección particular en el sistema.,Consulta general,Baja
+Bloqueo por antivirus,El antivirus detectó una amenaza y bloqueó varios archivos en mi disco C.,Seguridad,Alta
+Error de login en Intranet,Necesito permisos para ingresar al sistema Intranet por un nuevo proyecto.,Accesos,Alta
+Licencia de Office expirada,Necesito que instalen un visor de PDF especializado para mi trabajo.,Software,Alta
+Impresora atascada,El equipo se reinicia solo de manera aleatoria arrojando un pantallazo azul.,Hardware,Baja
+Duda sobre formato de firma,Quisiera saber cómo ingresar mis días de vacaciones en la intranet.,Consulta general,Baja
+Impresora atascada,"Varias teclas de mi laptop dejaron de funcionar, especialmente la barra espaciadora.",Hardware,Alta
+Sin conexión a internet,No tengo acceso a internet ni a la red local desde hace media hora.,Red,Critica
+Restablecer contraseña de Jira,He perdido el acceso al sistema. Solicito reseteo de password por favor.,Accesos,Alta
+Posible correo phishing recibido,Recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Critica
+Solicitud de manual de Intranet,Necesito el manual de usuario para el nuevo portal de SAP.,Consulta general,Baja
+Duda sobre formato de firma,Necesito el manual de usuario para el nuevo portal de Portal RRHH.,Consulta general,Baja
+Teclado no funciona,La batería se agota en 10 minutos aunque esté conectada a la corriente.,Hardware,Baja
+Bug en módulo de reportes,El programa se congela constantemente y tengo que forzar el cierre.,Software,Alta
+Necesito restablecer mi clave,Quiero cambiar la contraseña de mi cuenta institucional,Accesos,Media
+Desbloqueo de cuenta,Mi usuario fue bloqueado tras varios intentos fallidos. Necesito ayuda.,Accesos,Alta
+Desbloqueo de cuenta,"Al poner mis credenciales en CRM, la página se queda cargando y no avanza.",Accesos,Alta
+Alerta de virus en equipo,El antivirus detectó una amenaza y bloqueó varios archivos en mi disco C.,Seguridad,Alta
+Información de beneficios,Necesito el manual de usuario para el nuevo portal de VPN.,Consulta general,Baja
+Cable de red,El computador no detecta el cable Ethernet conectado a la toma,Red,Media
+Caída de Office 365,"No puedo mapear la unidad de red compartida Z:, dice acceso denegado.",Red,Critica
+Pantalla parpadea,"Varias teclas de mi laptop dejaron de funcionar, especialmente la barra espaciadora.",Hardware,Alta
+Solicitud de manual de Jira,Necesito información sobre los beneficios de salud del mes.,Consulta general,Baja
+Inestabilidad en llamadas de Teams,"La conexión CRM se desconecta cada 5 minutos, es imposible trabajar.",Red,Alta
+Duda sobre formato de firma,Quisiera saber cómo ingresar mis días de vacaciones en la intranet.,Consulta general,Media
+Equipo sobrecalentado,El equipo se reinicia solo de manera aleatoria arrojando un pantallazo azul.,Hardware,Alta
+Sin conexión a internet,"No puedo mapear la unidad de red compartida Z:, dice acceso denegado.",Red,Critica
+Acceso sospechoso detectado,me robaron el computador y necesito bloquear todos mis accesos urgentemente.,Seguridad,Alta
+Equipo sobrecalentado,"Varias teclas de mi laptop dejaron de funcionar, especialmente la barra espaciadora.",Hardware,Baja
+Solicitud de acceso a Intranet,Mi usuario fue bloqueado tras varios intentos fallidos. Necesito ayuda.,Accesos,Media
+Actualización de datos personales,Necesito el manual de usuario para el nuevo portal de Confluence.,Consulta general,Media
+Teclado no funciona,La batería se agota en 10 minutos aunque esté conectada a la corriente.,Hardware,Baja
+No puedo entrar al correo,Mi cuenta de correo no permite iniciar sesión con mi contraseña,Accesos,Alta
+Archivo adjunto sospechoso,Me llegó una alerta de inicio de sesión desde una ubicación desconocida.,Seguridad,Alta
+Credenciales revocadas en Office 365,He perdido el acceso al sistema. Solicito reseteo de password por favor.,Accesos,Media
+Archivo adjunto sospechoso,Recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Alta
+Error de login en Portal RRHH,Mi usuario fue bloqueado tras varios intentos fallidos. Necesito ayuda.,Accesos,Media
+bloqueo por antivirus,El antivirus detectó una amenaza y bloqueó varios archivos en mi disco C.,Seguridad,Alta
+actualización de datos personales,¿Me podrían indicar dónde descargar la plantilla oficial para firmas de correo?,Consulta general,Media
+Inestabilidad en llamadas de Teams,No tengo acceso a internet ni a la red local desde hace media hora.,Red,Media
+Lentitud en la red wifi,La conexión wifi en la sala de reuniones es muy inestable.,Red,Alta
+Información de beneficios,¿Me podrían indicar dónde descargar la plantilla oficial para firmas de correo?,Consulta general,Baja
+Caída de VPN,"La conexión Portal RRHH se desconecta cada 5 minutos, es imposible trabajar.",Red,Critica
+Teclado no funciona,La batería se agota en 10 minutos aunque esté conectada a la corriente.,Hardware,Media
+Lentitud en la red wifi,No tengo acceso a internet ni a la red local desde hace media hora.,Red,Alta
+Solicitud de acceso a CRM,"No puedo acceder a mi cuenta, me indica que la contraseña es incorrecta al intentar entrar a Intranet.",Accesos,Media
 Manual de usuario,Dónde puedo encontrar la documentación o guía de usuario del sistema,Consulta general,Baja
-Duda sobre procedimiento,Quisiera consultar cuál es el proceso para pedir equipamiento,Consulta general,Baja
-Capacitación,Quisiera solicitar información sobre capacitaciones para nuevos ingresos,Consulta general,Baja
-Preguntas frecuentes,Tienen disponible una sección de preguntas frecuentes o FAQ,Consulta general,Baja
+Batería de laptop no carga,La batería se agota en 10 minutos aunque esté conectada a la corriente.,Hardware,Media
+bloqueo por antivirus,me llegó una alerta de inicio de sesión desde una ubicación desconocida.,Seguridad,Alta
+Bug en módulo de reportes,"Al intentar abrir la aplicación Jira, me arroja el código de error 500.",Software,Baja
+Caída de Portal RRHH,"No puedo mapear la unidad de red compartida Z:, dice acceso denegado.",Red,Critica
+Posible correo phishing recibido,El antivirus detectó una amenaza y bloqueó varios archivos en mi disco C.,Seguridad,Critica
+Información de beneficios,Necesito el manual de usuario para el nuevo portal de ERP.,Consulta general,Media
+Error de login en Portal RRHH,mi usuario fue bloqueado tras varios intentos fallidos. necesito ayuda.,Accesos,Media
+Cable de red dañado,"No puedo mapear la unidad de red compartida Z:, dice acceso denegado.",Red,Critica
+Equipo sobrecalentado,La impresora del segundo piso tiene papel atascado y marca error.,Hardware,Baja
+Bug en módulo de reportes,"Al intentar abrir la aplicación SAP, me arroja el código de error 500.",Software,Alta
+Pantalla parpadea,La impresora del segundo piso tiene papel atascado y marca error.,Hardware,Baja
+Solicitud de acceso a CRM,Mi usuario fue bloqueado tras varios intentos fallidos. Necesito ayuda.,Accesos,Baja
+Alerta de virus en equipo,El antivirus detectó una amenaza y bloqueó varios archivos en mi disco C.,Seguridad,Alta
+Inestabilidad en llamadas de Teams,No tengo acceso a internet ni a la red local desde hace media hora.,Red,Alta
+Archivo adjunto sospechoso,Me llegó una alerta de inicio de sesión desde una ubicación desconocida.,Seguridad,Alta
+Caída de Intranet,"La conexión Portal RRHH se desconecta cada 5 minutos, es imposible trabajar.",Red,Critica
+caída de confluence,"No puedo mapear la unidad de red compartida Z:, dice acceso denegado.",Red,Alta
+desbloqueo de cuenta,Mi usuario fue bloqueado tras varios intentos fallidos. Necesito ayuda.,Accesos,Baja
+Cambiar clave de acceso,Requiero modificar mi clave actual por seguridad,Accesos,Baja
+Lentitud en la red wifi,"No puedo mapear la unidad de red compartida Z:, dice acceso denegado.",Red,Alta
+Acceso desconocido,Veo un inicio de sesión que no reconozco desde otra ubicación,Seguridad,Critica
+Desbloqueo de cuenta,Necesito permisos para ingresar al sistema ERP por un nuevo proyecto.,Accesos,Media
+Solicitud de manual de ERP,Necesito el manual de usuario para el nuevo portal de VPN.,Consulta general,Baja
+Consulta de feriados,Necesito información sobre los beneficios de salud del mes.,Consulta general,Baja
+error de login en portal rrhh,"No puedo acceder a mi cuenta, me indica que la contraseña es incorrecta al intentar entrar a Confluence.",Accesos,Baja
+No tengo acceso al sistema,Mi usuario no tiene permisos para ingresar a la plataforma,Accesos,Alta
+error de login en confluence,Necesito permisos para ingresar al sistema SAP por un nuevo proyecto.,Accesos,Baja
+Batería de laptop no carga,El equipo se reinicia solo de manera aleatoria arrojando un pantallazo azul.,Hardware,Baja
+Solicitud de manual de SAP,Necesito el manual de usuario para el nuevo portal de CRM.,Consulta general,Baja
+Consulta de feriados,Necesito información sobre los beneficios de salud del mes.,Consulta general,Baja
+Duda sobre formato de firma,Tengo una duda sobre cómo actualizar mi dirección particular en el sistema.,Consulta general,Media
+Licencia de Office expirada,Se intentó actualizar VPN pero dio un error a mitad de proceso.,Software,Media
+Desbloqueo de cuenta,Mi usuario fue bloqueado tras varios intentos fallidos. Necesito ayuda.,Accesos,Media
+Alerta de seguridad,El antivirus detectó una amenaza grave o troyano en mi equipo,Seguridad,Critica
+Solicitud de manual de CRM,Tengo una duda sobre cómo actualizar mi dirección particular en el sistema.,Consulta general,Baja
+Consulta sobre sistema,Quiero saber cómo funciona la plataforma y qué módulos tiene,Consulta general,Baja
+Problema de autenticación de doble factor,He perdido el acceso al sistema. Solicito reseteo de password por favor.,Accesos,Baja
+Problema de autenticación de doble factor,He perdido el acceso al sistema. Solicito reseteo de password por favor.,Accesos,Alta
+Actualización con error,Después de actualizar el programa comenzó a fallar con pantallazos,Software,Media
+Bloqueo por antivirus,Me llegó una alerta de inicio de sesión desde una ubicación desconocida.,Seguridad,Alta
+Licencia de Office expirada,word y excel me piden activar la licencia y no me dejan editar documentos.,Software,Baja
+Lentitud en la red wifi,"No puedo mapear la unidad de red compartida Z:, dice acceso denegado.",Red,Alta
+Lentitud en la red wifi,Las videollamadas se cortan por la mala señal de red en mi sector.,Red,Media
+aplicación se cierra inesperadamente,el programa se congela constantemente y tengo que forzar el cierre.,Software,Media
+Solicitud de manual de CRM,Necesito el manual de usuario para el nuevo portal de Confluence.,Consulta general,Media
+Problema de autenticación de doble factor,Necesito permisos para ingresar al sistema Intranet por un nuevo proyecto.,Accesos,Baja
+Falta paquete de software,Se requiere instalar complementos para ejecutar el visor,Software,Baja
+Teclado no funciona,La impresora del segundo piso tiene papel atascado y marca error.,Hardware,Alta
+Información de beneficios,Tengo una duda sobre cómo actualizar mi dirección particular en el sistema.,Consulta general,Media
+Duda sobre formato de firma,necesito información sobre los beneficios de salud del mes.,Consulta general,Baja
+Cable de red dañado,la conexión wifi en la sala de reuniones es muy inestable.,Red,Critica
+Equipo sobrecalentado,La impresora del segundo piso tiene papel atascado y marca error.,Hardware,Media
+alerta de virus en equipo,No puedo abrir un archivo de trabajo porque el sistema de seguridad lo bloqueó.,Seguridad,Alta
+Lentitud en la red wifi,"la conexión intranet se desconecta cada 5 minutos, es imposible trabajar.",Red,Alta
+Batería de laptop no carga,La batería se agota en 10 minutos aunque esté conectada a la corriente.,Hardware,Baja
+Solicitud de manual de Intranet,Tengo una duda sobre cómo actualizar mi dirección particular en el sistema.,Consulta general,Baja
+Solicitud de manual de SAP,Tengo una duda sobre cómo actualizar mi dirección particular en el sistema.,Consulta general,Baja
+Disco duro haciendo ruido,La batería se agota en 10 minutos aunque esté conectada a la corriente.,Hardware,Baja
+Programa corrupto,Me aparece mensaje indicando que faltan archivos dll del programa,Software,Media
+Inestabilidad en llamadas de Teams,no tengo acceso a internet ni a la red local desde hace media hora.,Red,Critica
+Error al abrir Intranet,El programa se congela constantemente y tengo que forzar el cierre.,Software,Alta
+Internet lento,La conexión a internet está demasiado lenta y no cargan páginas,Red,Media
+Caída de Confluence,Las videollamadas se cortan por la mala señal de red en mi sector.,Red,Media
+mouse defectuoso,El equipo se reinicia solo de manera aleatoria arrojando un pantallazo azul.,Hardware,Media
+Bloqueo por antivirus,No puedo abrir un archivo de trabajo porque el sistema de seguridad lo bloqueó.,Seguridad,Alta
+Batería de laptop no carga,"varias teclas de mi laptop dejaron de funcionar, especialmente la barra espaciadora.",Hardware,Alta
+Cable de red dañado,No tengo acceso a internet ni a la red local desde hace media hora.,Red,Critica
+Solicitud de ayuda,Necesito orientación sobre un procedimiento administrativo o técnico,Consulta general,Baja
+batería de laptop no carga,"Varias teclas de mi laptop dejaron de funcionar, especialmente la barra espaciadora.",Hardware,Media
+Equipo sobrecalentado,El monitor externo se apaga y enciende solo intermitentemente.,Hardware,Alta
+Cable de red dañado,No tengo acceso a internet ni a la red local desde hace media hora.,Red,Alta
+Posible correo phishing recibido,El antivirus detectó una amenaza y bloqueó varios archivos en mi disco C.,Seguridad,Critica
+Información de beneficios,Tengo una duda sobre cómo actualizar mi dirección particular en el sistema.,Consulta general,Media
+Batería de laptop no carga,La batería se agota en 10 minutos aunque esté conectada a la corriente.,Hardware,Media
+Equipo sobrecalentado,La impresora del segundo piso tiene papel atascado y marca error.,Hardware,Media
+inestabilidad en llamadas de teams,"No puedo mapear la unidad de red compartida Z:, dice acceso denegado.",Red,Media
+Credenciales revocadas en CRM,Mi usuario fue bloqueado tras varios intentos fallidos. Necesito ayuda.,Accesos,Alta
+Posible correo phishing recibido,Me robaron el computador y necesito bloquear todos mis accesos urgentemente.,Seguridad,Alta
+Licencia de Office expirada,se intentó actualizar crm pero dio un error a mitad de proceso.,Software,Baja
+Pantalla parpadea,La impresora del segundo piso tiene papel atascado y marca error.,Hardware,Alta
+Caída de ERP,Las videollamadas se cortan por la mala señal de red en mi sector.,Red,Media
+Computador se apaga,Mi computador se apaga inesperadamente por sobrecalentamiento,Hardware,Alta
+Alerta de virus en equipo,El antivirus detectó una amenaza y bloqueó varios archivos en mi disco C.,Seguridad,Alta
+Archivo adjunto sospechoso,Me robaron el computador y necesito bloquear todos mis accesos urgentemente.,Seguridad,Critica
+Sin conexión a internet,La conexión wifi en la sala de reuniones es muy inestable.,Red,Alta
+Equipo sobrecalentado,"Varias teclas de mi laptop dejaron de funcionar, especialmente la barra espaciadora.",Hardware,Baja
+Alerta de virus en equipo,El antivirus detectó una amenaza y bloqueó varios archivos en mi disco C.,Seguridad,Critica
+Error de login en ERP,He perdido el acceso al sistema. Solicito reseteo de password por favor.,Accesos,Media
+Cable de red dañado,"no puedo mapear la unidad de red compartida z:, dice acceso denegado.",Red,Critica
+Pantalla parpadea,"Varias teclas de mi laptop dejaron de funcionar, especialmente la barra espaciadora.",Hardware,Baja
+Falla de switch de red,Varios puestos de trabajo perdieron conexión de red simultáneamente,Red,Critica
+Información de beneficios,Necesito información sobre los beneficios de salud del mes.,Consulta general,Media
+Caída de Confluence,La conexión wifi en la sala de reuniones es muy inestable.,Red,Media
+Información de beneficios,Necesito información sobre los beneficios de salud del mes.,Consulta general,Media
+Cable de red dañado,"no puedo mapear la unidad de red compartida z:, dice acceso denegado.",Red,Media
+Caída de Jira,"La conexión Intranet se desconecta cada 5 minutos, es imposible trabajar.",Red,Media
+Restablecer contraseña de Intranet,He perdido el acceso al sistema. Solicito reseteo de password por favor.,Accesos,Baja
+inestabilidad en llamadas de teams,"La conexión SAP se desconecta cada 5 minutos, es imposible trabajar.",Red,Critica
+Información de beneficios,Necesito el manual de usuario para el nuevo portal de CRM.,Consulta general,Media
+Actualización fallida de Confluence,"al intentar abrir la aplicación sap, me arroja el código de error 500.",Software,Alta
+Consulta de feriados,¿Me podrían indicar dónde descargar la plantilla oficial para firmas de correo?,Consulta general,Media
+Aplicación se cierra inesperadamente,Necesito que instalen un visor de PDF especializado para mi trabajo.,Software,Alta
+Información de beneficios,Quisiera saber cómo ingresar mis días de vacaciones en la intranet.,Consulta general,Media
+Aplicación se cierra inesperadamente,Word y Excel me piden activar la licencia y no me dejan editar documentos.,Software,Alta
+Teclado no funciona,El equipo se reinicia solo de manera aleatoria arrojando un pantallazo azul.,Hardware,Media
+Credenciales revocadas en CRM,Necesito permisos para ingresar al sistema Jira por un nuevo proyecto.,Accesos,Media
+Instalación de programa requerida,El programa se congela constantemente y tengo que forzar el cierre.,Software,Baja
+Consulta de feriados,Quisiera saber cómo ingresar mis días de vacaciones en la intranet.,Consulta general,Media
+Pantalla parpadea,El equipo se reinicia solo de manera aleatoria arrojando un pantallazo azul.,Hardware,Media
+Licencia de Office expirada,"Al intentar abrir la aplicación Confluence, me arroja el código de error 500.",Software,Baja
+Actualización de datos personales,Quisiera saber cómo ingresar mis días de vacaciones en la intranet.,Consulta general,Media
+Error al instalar programa,No puedo instalar una aplicación en mi computador por error de instalador,Software,Media
+Bug en módulo de reportes,El programa se congela constantemente y tengo que forzar el cierre.,Software,Alta
+Inestabilidad en llamadas de Teams,Las videollamadas se cortan por la mala señal de red en mi sector.,Red,Media
+Acceso sospechoso detectado,Recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Alta
+Problema con navegador,Google Chrome se cierra inesperadamente al abrir pestañas,Software,Media
+Aplicación se cierra inesperadamente,El programa se congela constantemente y tengo que forzar el cierre.,Software,Media
+Acceso sospechoso detectado,No puedo abrir un archivo de trabajo porque el sistema de seguridad lo bloqueó.,Seguridad,Alta
+No hay acceso al servidor compartido,"No puedo mapear la unidad de red compartida Z:, dice acceso denegado.",Red,Critica
+Error al abrir Confluence,"Al intentar abrir la aplicación Intranet, me arroja el código de error 500.",Software,Alta
+Aplicación se cierra inesperadamente,word y excel me piden activar la licencia y no me dejan editar documentos.,Software,Baja
+Caída de Portal RRHH,"La conexión ERP se desconecta cada 5 minutos, es imposible trabajar.",Red,Media
+Actualización de datos personales,Necesito el manual de usuario para el nuevo portal de ERP.,Consulta general,Baja
+Impresora atascada,La batería se agota en 10 minutos aunque esté conectada a la corriente.,Hardware,Alta
+Error al abrir Portal RRHH,"Al intentar abrir la aplicación ERP, me arroja el código de error 500.",Software,Media
+Inestabilidad en llamadas de Teams,"No puedo mapear la unidad de red compartida Z:, dice acceso denegado.",Red,Media
+Acceso sospechoso detectado,Me llegó una alerta de inicio de sesión desde una ubicación desconocida.,Seguridad,Alta
+Excel se cierra,Microsoft Excel se cierra inesperadamente mientras trabajo con planillas,Software,Media
+Inestabilidad en llamadas de Teams,"No puedo mapear la unidad de red compartida Z:, dice acceso denegado.",Red,Alta
+Batería de laptop no carga,El monitor externo se apaga y enciende solo intermitentemente.,Hardware,Alta
+Batería de laptop no carga,El equipo se reinicia solo de manera aleatoria arrojando un pantallazo azul.,Hardware,Media
+error de login en portal rrhh,Mi usuario fue bloqueado tras varios intentos fallidos. Necesito ayuda.,Accesos,Media
+Duda sobre formato de firma,Quisiera saber cómo ingresar mis días de vacaciones en la intranet.,Consulta general,Baja
+Correo sospechoso,Recibí un correo electrónico con un enlace sospechoso pidiendo datos,Seguridad,Alta
+Inestabilidad en llamadas de Teams,"La conexión CRM se desconecta cada 5 minutos, es imposible trabajar.",Red,Media
+Teclado no funciona,"varias teclas de mi laptop dejaron de funcionar, especialmente la barra espaciadora.",Hardware,Media
+Batería de laptop no carga,El monitor externo se apaga y enciende solo intermitentemente.,Hardware,Baja
+error al abrir erp,Necesito que instalen un visor de PDF especializado para mi trabajo.,Software,Media
+Error al abrir Portal RRHH,Word y Excel me piden activar la licencia y no me dejan editar documentos.,Software,Baja
+Error de login en VPN,"Al poner mis credenciales en SAP, la página se queda cargando y no avanza.",Accesos,Media
+Sin conexión a internet,No tengo acceso a internet ni a la red local desde hace media hora.,Red,Alta
+Instalación de programa requerida,"Al intentar abrir la aplicación CRM, me arroja el código de error 500.",Software,Media
+Archivo sospechoso,Descargué un archivo adjunto que parece contener un virus,Seguridad,Critica
+Horario de atención,Quiero conocer el horario de atención presencial del área TI,Consulta general,Baja
+disco duro haciendo ruido,"Varias teclas de mi laptop dejaron de funcionar, especialmente la barra espaciadora.",Hardware,Baja
+Duda sobre vacaciones,Quisiera saber cómo ingresar mis días de vacaciones en la intranet.,Consulta general,Media
+Cable de red dañado,"No puedo mapear la unidad de red compartida Z:, dice acceso denegado.",Red,Alta
+Impresora atascada,La impresora del segundo piso tiene papel atascado y marca error.,Hardware,Media
+Cable de red dañado,"La conexión ERP se desconecta cada 5 minutos, es imposible trabajar.",Red,Alta
+Acceso sospechoso detectado,Recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Alta
+Cable de red dañado,Las videollamadas se cortan por la mala señal de red en mi sector.,Red,Media
+Solicitud de acceso a SAP,mi usuario fue bloqueado tras varios intentos fallidos. necesito ayuda.,Accesos,Media
+consulta de feriados,Tengo una duda sobre cómo actualizar mi dirección particular en el sistema.,Consulta general,Baja
+Lentitud en la red wifi,"La conexión Office 365 se desconecta cada 5 minutos, es imposible trabajar.",Red,Media
+Información de beneficios,Tengo una duda sobre cómo actualizar mi dirección particular en el sistema.,Consulta general,Media
+Cable de red dañado,La conexión wifi en la sala de reuniones es muy inestable.,Red,Critica
+Bloqueo por antivirus,Me llegó una alerta de inicio de sesión desde una ubicación desconocida.,Seguridad,Alta
+Credenciales revocadas en Office 365,He perdido el acceso al sistema. Solicito reseteo de password por favor.,Accesos,Baja
+Actualización fallida de Confluence,Se intentó actualizar SAP pero dio un error a mitad de proceso.,Software,Alta
+Archivo adjunto sospechoso,No puedo abrir un archivo de trabajo porque el sistema de seguridad lo bloqueó.,Seguridad,Critica
+Actualización fallida de Office 365,El programa se congela constantemente y tengo que forzar el cierre.,Software,Media
+Consulta de feriados,quisiera saber cómo ingresar mis días de vacaciones en la intranet.,Consulta general,Media
+Acceso sospechoso detectado,me llegó una alerta de inicio de sesión desde una ubicación desconocida.,Seguridad,Alta
+Archivo adjunto sospechoso,Recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Alta
+Sin conexión a internet,La conexión wifi en la sala de reuniones es muy inestable.,Red,Critica
+Licencia de Office expirada,El programa se congela constantemente y tengo que forzar el cierre.,Software,Media
+Actualización de datos personales,¿Me podrían indicar dónde descargar la plantilla oficial para firmas de correo?,Consulta general,Baja
+Instalación de programa requerida,El programa se congela constantemente y tengo que forzar el cierre.,Software,Baja
+Solicitud de manual de VPN,Necesito información sobre los beneficios de salud del mes.,Consulta general,Baja
+Caída de CRM,Las videollamadas se cortan por la mala señal de red en mi sector.,Red,Critica
+Equipo sobrecalentado,El monitor externo se apaga y enciende solo intermitentemente.,Hardware,Media
+Error al abrir Confluence,Necesito que instalen un visor de PDF especializado para mi trabajo.,Software,Alta
+Restablecer contraseña de Jira,He perdido el acceso al sistema. Solicito reseteo de password por favor.,Accesos,Alta
+Desbloqueo de cuenta,He perdido el acceso al sistema. Solicito reseteo de password por favor.,Accesos,Baja
+Sin conexión a internet,"La conexión VPN se desconecta cada 5 minutos, es imposible trabajar.",Red,Critica
+Sin conexión a internet,La conexión wifi en la sala de reuniones es muy inestable.,Red,Media
+Licencia de Office expirada,"Al intentar abrir la aplicación Portal RRHH, me arroja el código de error 500.",Software,Media
+Instalación de programa requerida,Word y Excel me piden activar la licencia y no me dejan editar documentos.,Software,Alta
+Restablecer contraseña de ERP,"Al poner mis credenciales en Office 365, la página se queda cargando y no avanza.",Accesos,Alta
+Problema de autenticación de doble factor,"No puedo acceder a mi cuenta, me indica que la contraseña es incorrecta al intentar entrar a SAP.",Accesos,Alta
+Pantalla azul,El equipo se reinicia solo de manera aleatoria arrojando un pantallazo azul.,Hardware,Baja
+Información de beneficios,Tengo una duda sobre cómo actualizar mi dirección particular en el sistema.,Consulta general,Baja
+Bug en módulo de reportes,word y excel me piden activar la licencia y no me dejan editar documentos.,Software,Baja
+Consulta de feriados,Quisiera saber cómo ingresar mis días de vacaciones en la intranet.,Consulta general,Media
+Problema con inicio de sesión,La página no me deja ingresar con mi clave,Accesos,Alta
+Solicitud de acceso a Portal RRHH,Mi usuario fue bloqueado tras varios intentos fallidos. Necesito ayuda.,Accesos,Baja
+Error de login en CRM,He perdido el acceso al sistema. Solicito reseteo de password por favor.,Accesos,Baja
+Disco duro haciendo ruido,"Varias teclas de mi laptop dejaron de funcionar, especialmente la barra espaciadora.",Hardware,Alta
+Error al abrir CRM,Necesito que instalen un visor de PDF especializado para mi trabajo.,Software,Media
+error al abrir crm,El programa se congela constantemente y tengo que forzar el cierre.,Software,Media
+Información de beneficios,Tengo una duda sobre cómo actualizar mi dirección particular en el sistema.,Consulta general,Baja
+Solicitud de acceso a Portal RRHH,"no puedo acceder a mi cuenta, me indica que la contraseña es incorrecta al intentar entrar a jira.",Accesos,Alta
+Acceso sospechoso detectado,El antivirus detectó una amenaza y bloqueó varios archivos en mi disco C.,Seguridad,Alta
+disco duro haciendo ruido,El monitor externo se apaga y enciende solo intermitentemente.,Hardware,Baja
+licencia de office expirada,Se intentó actualizar VPN pero dio un error a mitad de proceso.,Software,Baja
+duda sobre vacaciones,¿Me podrían indicar dónde descargar la plantilla oficial para firmas de correo?,Consulta general,Media
+Error al abrir Office 365,Necesito que instalen un visor de PDF especializado para mi trabajo.,Software,Media
+Aplicación se cierra inesperadamente,"Al intentar abrir la aplicación Portal RRHH, me arroja el código de error 500.",Software,Alta
+No hay acceso al servidor compartido,"La conexión VPN se desconecta cada 5 minutos, es imposible trabajar.",Red,Alta
+Archivo adjunto sospechoso,Me robaron el computador y necesito bloquear todos mis accesos urgentemente.,Seguridad,Alta
+Restablecer contraseña de Office 365,"Al poner mis credenciales en VPN, la página se queda cargando y no avanza.",Accesos,Media
+Bug en módulo de reportes,Se intentó actualizar VPN pero dio un error a mitad de proceso.,Software,Baja
+Cable de red dañado,No tengo acceso a internet ni a la red local desde hace media hora.,Red,Critica
+Inestabilidad en llamadas de Teams,Las videollamadas se cortan por la mala señal de red en mi sector.,Red,Alta
+Equipo sobrecalentado,El equipo se reinicia solo de manera aleatoria arrojando un pantallazo azul.,Hardware,Baja
+Robo de equipo informático,Recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Alta
+Instalación de programa requerida,"al intentar abrir la aplicación office 365, me arroja el código de error 500.",Software,Baja
+batería de laptop no carga,La impresora del segundo piso tiene papel atascado y marca error.,Hardware,Baja
+Mouse defectuoso,"Varias teclas de mi laptop dejaron de funcionar, especialmente la barra espaciadora.",Hardware,Media
+Restablecer contraseña de Confluence,"No puedo acceder a mi cuenta, me indica que la contraseña es incorrecta al intentar entrar a Confluence.",Accesos,Baja
+Restablecer contraseña de VPN,Necesito permisos para ingresar al sistema Intranet por un nuevo proyecto.,Accesos,Media
+Información de soporte,Necesito información sobre los horarios y canales del servicio técnico,Consulta general,Baja
+Información de beneficios,Quisiera saber cómo ingresar mis días de vacaciones en la intranet.,Consulta general,Media
+Sin conexión a internet,Las videollamadas se cortan por la mala señal de red en mi sector.,Red,Media
+Pantalla parpadea,El equipo se reinicia solo de manera aleatoria arrojando un pantallazo azul.,Hardware,Alta
+Impresora atascada,la batería se agota en 10 minutos aunque esté conectada a la corriente.,Hardware,Alta
+Licencia de Office expirada,Se intentó actualizar SAP pero dio un error a mitad de proceso.,Software,Media
+cable de red dañado,"La conexión ERP se desconecta cada 5 minutos, es imposible trabajar.",Red,Media
+Robo de equipo informático,Me llegó una alerta de inicio de sesión desde una ubicación desconocida.,Seguridad,Critica
+archivo adjunto sospechoso,Me llegó una alerta de inicio de sesión desde una ubicación desconocida.,Seguridad,Critica
+Solicitud de acceso a ERP,Mi usuario fue bloqueado tras varios intentos fallidos. Necesito ayuda.,Accesos,Media
+Archivo adjunto sospechoso,recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Critica
+Credenciales revocadas en SAP,Mi usuario fue bloqueado tras varios intentos fallidos. Necesito ayuda.,Accesos,Baja
+error de login en vpn,"No puedo acceder a mi cuenta, me indica que la contraseña es incorrecta al intentar entrar a ERP.",Accesos,Baja
+Sin conexión a internet,"No puedo mapear la unidad de red compartida Z:, dice acceso denegado.",Red,Alta
+Disco duro haciendo ruido,La impresora del segundo piso tiene papel atascado y marca error.,Hardware,Alta
+Restablecer contraseña de Jira,Necesito permisos para ingresar al sistema Jira por un nuevo proyecto.,Accesos,Alta
+Solicitud de acceso a SAP,"Al poner mis credenciales en SAP, la página se queda cargando y no avanza.",Accesos,Alta
+Información de beneficios,¿Me podrían indicar dónde descargar la plantilla oficial para firmas de correo?,Consulta general,Media
+Solicitud de manual de Intranet,Necesito información sobre los beneficios de salud del mes.,Consulta general,Media
+Error en programa,Una aplicación muestra un mensaje de error al ejecutarse en Windows,Software,Media
+Desbloqueo de cuenta,Mi usuario fue bloqueado tras varios intentos fallidos. Necesito ayuda.,Accesos,Media
+No abre Acrobat Reader,No puedo abrir documentos PDF con el lector oficial,Software,Baja
+Sistema se congela,La aplicación queda congelada sin responder y debo forzar cierre,Software,Alta
+Lentitud en la red wifi,"No puedo mapear la unidad de red compartida Z:, dice acceso denegado.",Red,Media
+Inestabilidad en llamadas de Teams,"No puedo mapear la unidad de red compartida Z:, dice acceso denegado.",Red,Media
+No hay acceso al servidor compartido,"No puedo mapear la unidad de red compartida Z:, dice acceso denegado.",Red,Critica
+Batería de laptop no carga,"varias teclas de mi laptop dejaron de funcionar, especialmente la barra espaciadora.",Hardware,Media
+Sin conexión,El equipo indica que no tiene conexión de red ni acceso a internet,Red,Alta
+Error al abrir Office 365,Necesito que instalen un visor de PDF especializado para mi trabajo.,Software,Alta
+Cómo usar el sistema,Necesito ayuda o capacitación para aprender a utilizar la plataforma,Consulta general,Baja
+Actualización fallida de Office 365,Se intentó actualizar ERP pero dio un error a mitad de proceso.,Software,Baja
+Duda sobre formato de firma,Quisiera saber cómo ingresar mis días de vacaciones en la intranet.,Consulta general,Baja
+Mouse defectuoso,la impresora del segundo piso tiene papel atascado y marca error.,Hardware,Alta
+Consulta de feriados,Quisiera saber cómo ingresar mis días de vacaciones en la intranet.,Consulta general,Media
+Disco duro haciendo ruido,La batería se agota en 10 minutos aunque esté conectada a la corriente.,Hardware,Media
+Licencia de Office expirada,Se intentó actualizar Confluence pero dio un error a mitad de proceso.,Software,Media
+Inestabilidad en llamadas de Teams,"La conexión Confluence se desconecta cada 5 minutos, es imposible trabajar.",Red,Critica
+Robo de equipo informático,El antivirus detectó una amenaza y bloqueó varios archivos en mi disco C.,Seguridad,Alta
+Sin conexión a internet,la conexión wifi en la sala de reuniones es muy inestable.,Red,Alta
+teclado no funciona,El equipo se reinicia solo de manera aleatoria arrojando un pantallazo azul.,Hardware,Alta
+Información de beneficios,Tengo una duda sobre cómo actualizar mi dirección particular en el sistema.,Consulta general,Media
+Posible correo phishing recibido,Me robaron el computador y necesito bloquear todos mis accesos urgentemente.,Seguridad,Critica
+Error de autenticación,No puedo autenticarme en el portal con mi usuario y clave,Accesos,Alta
+Bloqueo por antivirus,No puedo abrir un archivo de trabajo porque el sistema de seguridad lo bloqueó.,Seguridad,Alta
+Acceso sospechoso detectado,El antivirus detectó una amenaza y bloqueó varios archivos en mi disco C.,Seguridad,Alta
+Mensaje fraudulento,Recibí un mensaje que parece ser una estafa o suplantación,Seguridad,Alta
+Robo de equipo informático,No puedo abrir un archivo de trabajo porque el sistema de seguridad lo bloqueó.,Seguridad,Critica
+Disco duro con ruidos,El disco duro hace un sonido metálico tipo click,Hardware,Alta
+impresora atascada,la impresora del segundo piso tiene papel atascado y marca error.,Hardware,Media
+Cable de red dañado,No tengo acceso a internet ni a la red local desde hace media hora.,Red,Alta
+Desbloqueo de cuenta,"Al poner mis credenciales en Intranet, la página se queda cargando y no avanza.",Accesos,Alta
+Credenciales revocadas en Intranet,"Al poner mis credenciales en Portal RRHH, la página se queda cargando y no avanza.",Accesos,Baja
+Bug en módulo de reportes,"Al intentar abrir la aplicación VPN, me arroja el código de error 500.",Software,Baja
+Error al abrir CRM,Word y Excel me piden activar la licencia y no me dejan editar documentos.,Software,Baja
+Consulta de feriados,Quisiera saber cómo ingresar mis días de vacaciones en la intranet.,Consulta general,Baja
+Alerta de virus en equipo,Recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Alta
+Bug en módulo de reportes,Necesito que instalen un visor de PDF especializado para mi trabajo.,Software,Media
+Archivo adjunto sospechoso,Recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Alta
+Teclado no funciona,El equipo se reinicia solo de manera aleatoria arrojando un pantallazo azul.,Hardware,Media
+Permisos denegados,No tengo autorización para ingresar al módulo que necesito,Accesos,Media
+Aplicación se cierra inesperadamente,Necesito que instalen un visor de PDF especializado para mi trabajo.,Software,Media
+Información de beneficios,Necesito información sobre los beneficios de salud del mes.,Consulta general,Baja
+Archivo adjunto sospechoso,Recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Critica
+Amigo sabe mi contraseña,Un amigo o conocido sabe mi clave y temo por mi privacidad,Seguridad,Critica
+Información de beneficios,Tengo una duda sobre cómo actualizar mi dirección particular en el sistema.,Consulta general,Baja
+Solicitud de manual de Office 365,Quisiera saber cómo ingresar mis días de vacaciones en la intranet.,Consulta general,Media
+Acceso sospechoso detectado,Recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Critica
+Actualización de datos personales,¿Me podrían indicar dónde descargar la plantilla oficial para firmas de correo?,Consulta general,Media
+Restablecer contraseña de Office 365,"no puedo acceder a mi cuenta, me indica que la contraseña es incorrecta al intentar entrar a confluence.",Accesos,Baja
 Contacto con jefatura TI,Necesito contactar a la jefatura del departamento de informática,Consulta general,Baja
+Mouse defectuoso,La impresora del segundo piso tiene papel atascado y marca error.,Hardware,Baja
+Actualización fallida de Office 365,Word y Excel me piden activar la licencia y no me dejan editar documentos.,Software,Alta
+Archivo adjunto sospechoso,Recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Alta
+Desbloqueo de cuenta,"No puedo acceder a mi cuenta, me indica que la contraseña es incorrecta al intentar entrar a Confluence.",Accesos,Media
+Bloqueo por antivirus,No puedo abrir un archivo de trabajo porque el sistema de seguridad lo bloqueó.,Seguridad,Alta
+Acceso sospechoso detectado,Me robaron el computador y necesito bloquear todos mis accesos urgentemente.,Seguridad,Alta
+Aplicación se cierra inesperadamente,necesito que instalen un visor de pdf especializado para mi trabajo.,Software,Alta
+Mouse defectuoso,La batería se agota en 10 minutos aunque esté conectada a la corriente.,Hardware,Alta
+Amenaza de virus,Aparecen ventanas emergentes extrañas y el antivirus alerta peligro,Seguridad,Critica
+Inestabilidad en llamadas de Teams,"No puedo mapear la unidad de red compartida Z:, dice acceso denegado.",Red,Alta
+Aplicación se cierra inesperadamente,El programa se congela constantemente y tengo que forzar el cierre.,Software,Media
+Instalación de programa requerida,El programa se congela constantemente y tengo que forzar el cierre.,Software,Baja
+Aplicación se cierra inesperadamente,El programa se congela constantemente y tengo que forzar el cierre.,Software,Media
+Teclado no funciona,"Varias teclas de mi laptop dejaron de funcionar, especialmente la barra espaciadora.",Hardware,Baja
+Robo de equipo informático,No puedo abrir un archivo de trabajo porque el sistema de seguridad lo bloqueó.,Seguridad,Critica
+acceso sospechoso detectado,Me llegó una alerta de inicio de sesión desde una ubicación desconocida.,Seguridad,Alta
+actualización fallida de crm,El programa se congela constantemente y tengo que forzar el cierre.,Software,Alta
+Caída de Portal RRHH,La conexión wifi en la sala de reuniones es muy inestable.,Red,Media
+Credenciales revocadas en VPN,He perdido el acceso al sistema. Solicito reseteo de password por favor.,Accesos,Media
+Pantalla parpadea,El monitor externo se apaga y enciende solo intermitentemente.,Hardware,Baja
+Error al abrir SAP,El programa se congela constantemente y tengo que forzar el cierre.,Software,Media
+Batería de laptop no carga,La impresora del segundo piso tiene papel atascado y marca error.,Hardware,Alta
+actualización de datos personales,Tengo una duda sobre cómo actualizar mi dirección particular en el sistema.,Consulta general,Baja
+Pantalla azul,La batería se agota en 10 minutos aunque esté conectada a la corriente.,Hardware,Media
+Teclado no funciona,El equipo se reinicia solo de manera aleatoria arrojando un pantallazo azul.,Hardware,Media
+Duda sobre formato de firma,¿Me podrían indicar dónde descargar la plantilla oficial para firmas de correo?,Consulta general,Baja
+Consulta de feriados,Necesito el manual de usuario para el nuevo portal de Confluence.,Consulta general,Baja
+error al abrir sap,Word y Excel me piden activar la licencia y no me dejan editar documentos.,Software,Media
+Teclado no funciona,El equipo se reinicia solo de manera aleatoria arrojando un pantallazo azul.,Hardware,Alta
+Fuente de poder quemada,Salió olor a quemado de la torre y no volvió a encender,Hardware,Alta
+Inestabilidad en llamadas de Teams,Las videollamadas se cortan por la mala señal de red en mi sector.,Red,Critica
+Pantalla parpadea,El monitor externo se apaga y enciende solo intermitentemente.,Hardware,Media
+Instalación de programa requerida,Se intentó actualizar Confluence pero dio un error a mitad de proceso.,Software,Media
+Pantalla azul,El equipo se reinicia solo de manera aleatoria arrojando un pantallazo azul.,Hardware,Baja
+Actualización fallida de VPN,El programa se congela constantemente y tengo que forzar el cierre.,Software,Media
+Sin señal inalámbrica,El access point del piso parece estar apagado o sin señal,Red,Alta
+Alerta de virus en equipo,me robaron el computador y necesito bloquear todos mis accesos urgentemente.,Seguridad,Critica
+acceso sospechoso detectado,No puedo abrir un archivo de trabajo porque el sistema de seguridad lo bloqueó.,Seguridad,Alta
+equipo sobrecalentado,La batería se agota en 10 minutos aunque esté conectada a la corriente.,Hardware,Media
+Actualización de datos personales,Quisiera saber cómo ingresar mis días de vacaciones en la intranet.,Consulta general,Baja
+Archivo adjunto sospechoso,Me robaron el computador y necesito bloquear todos mis accesos urgentemente.,Seguridad,Critica
+Duda sobre vacaciones,¿me podrían indicar dónde descargar la plantilla oficial para firmas de correo?,Consulta general,Baja
+Lentitud en la red wifi,"No puedo mapear la unidad de red compartida Z:, dice acceso denegado.",Red,Critica
+Programa lento,El software contable tarda demasiado tiempo en responder consultas,Software,Baja
+Teclado no funciona,"Varias teclas de mi laptop dejaron de funcionar, especialmente la barra espaciadora.",Hardware,Alta
+No tengo internet,Mi computador no puede conectarse a internet ni navegar,Red,Alta
+Fallo en base de datos local,El sistema reporta error de conexión con la base de datos de la app,Software,Alta
+Cuenta comprometida,Creo que alguien ingresó a mi cuenta sin autorización,Seguridad,Critica
+Batería de laptop no carga,La batería se agota en 10 minutos aunque esté conectada a la corriente.,Hardware,Baja
+Archivo adjunto sospechoso,Recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Alta
+Equipo sobrecalentado,El equipo se reinicia solo de manera aleatoria arrojando un pantallazo azul.,Hardware,Alta
+Solicitud de acceso a VPN,"No puedo acceder a mi cuenta, me indica que la contraseña es incorrecta al intentar entrar a Portal RRHH.",Accesos,Alta
+Falla de memoria RAM,El computador pita al encender y no arranca el sistema,Hardware,Alta
+Disco duro haciendo ruido,El monitor externo se apaga y enciende solo intermitentemente.,Hardware,Media
+Error al abrir CRM,El programa se congela constantemente y tengo que forzar el cierre.,Software,Alta
+Impresora atascada,El equipo se reinicia solo de manera aleatoria arrojando un pantallazo azul.,Hardware,Baja
+Inestabilidad en llamadas de Teams,No tengo acceso a internet ni a la red local desde hace media hora.,Red,Media
+Equipo sobrecalentado,El monitor externo se apaga y enciende solo intermitentemente.,Hardware,Alta
+Aplicación no funciona,Un programa dejó de funcionar después de una actualización de software,Software,Alta
+No hay acceso al servidor compartido,No tengo acceso a internet ni a la red local desde hace media hora.,Red,Alta
+Bloqueo por antivirus,Me robaron el computador y necesito bloquear todos mis accesos urgentemente.,Seguridad,Critica
+Actualización de datos personales,¿Me podrían indicar dónde descargar la plantilla oficial para firmas de correo?,Consulta general,Media
+Inestabilidad en llamadas de Teams,No tengo acceso a internet ni a la red local desde hace media hora.,Red,Critica
+Consulta de feriados,Necesito información sobre los beneficios de salud del mes.,Consulta general,Baja
+Disco duro haciendo ruido,La batería se agota en 10 minutos aunque esté conectada a la corriente.,Hardware,Baja
+Consulta de feriados,¿Me podrían indicar dónde descargar la plantilla oficial para firmas de correo?,Consulta general,Baja
+Archivo adjunto sospechoso,Recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Critica
+Pantalla parpadea,El equipo se reinicia solo de manera aleatoria arrojando un pantallazo azul.,Hardware,Media
+Teclado no funciona,El equipo se reinicia solo de manera aleatoria arrojando un pantallazo azul.,Hardware,Baja
+Actualización fallida de VPN,Word y Excel me piden activar la licencia y no me dejan editar documentos.,Software,Baja
+Pantalla azul,La batería se agota en 10 minutos aunque esté conectada a la corriente.,Hardware,Alta
+No hay acceso al servidor compartido,"La conexión CRM se desconecta cada 5 minutos, es imposible trabajar.",Red,Alta
+Bloqueo por antivirus,me robaron el computador y necesito bloquear todos mis accesos urgentemente.,Seguridad,Alta
+No hay acceso al servidor compartido,No tengo acceso a internet ni a la red local desde hace media hora.,Red,Critica
+Credenciales revocadas en ERP,"No puedo acceder a mi cuenta, me indica que la contraseña es incorrecta al intentar entrar a Intranet.",Accesos,Media
+lentitud en la red wifi,"La conexión Office 365 se desconecta cada 5 minutos, es imposible trabajar.",Red,Media
+Licencia de Office expirada,Necesito que instalen un visor de PDF especializado para mi trabajo.,Software,Baja
+Inestabilidad en llamadas de Teams,"No puedo mapear la unidad de red compartida Z:, dice acceso denegado.",Red,Critica
+Robo de equipo informático,Me llegó una alerta de inicio de sesión desde una ubicación desconocida.,Seguridad,Critica
+Bug en módulo de reportes,El programa se congela constantemente y tengo que forzar el cierre.,Software,Media
+No hay acceso al servidor compartido,No tengo acceso a internet ni a la red local desde hace media hora.,Red,Media
+Licencia de Office expirada,word y excel me piden activar la licencia y no me dejan editar documentos.,Software,Baja
+Actualización de datos personales,Tengo una duda sobre cómo actualizar mi dirección particular en el sistema.,Consulta general,Media
+Duda sobre formato de firma,Necesito el manual de usuario para el nuevo portal de Confluence.,Consulta general,Baja
+Instalación de programa requerida,El programa se congela constantemente y tengo que forzar el cierre.,Software,Baja
+Consulta de feriados,Tengo una duda sobre cómo actualizar mi dirección particular en el sistema.,Consulta general,Media
+Problema de autenticación de doble factor,He perdido el acceso al sistema. Solicito reseteo de password por favor.,Accesos,Baja
+Acceso sospechoso detectado,Recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Critica
+Error al abrir Office 365,Necesito que instalen un visor de PDF especializado para mi trabajo.,Software,Alta
+Disco duro haciendo ruido,"Varias teclas de mi laptop dejaron de funcionar, especialmente la barra espaciadora.",Hardware,Alta
+Robo de credenciales,Creo que me robaron la contraseña en una página falsa,Seguridad,Critica
+impresora atascada,el monitor externo se apaga y enciende solo intermitentemente.,Hardware,Alta
+Acceso sospechoso detectado,Me llegó una alerta de inicio de sesión desde una ubicación desconocida.,Seguridad,Critica
+Acceso restringido,El sistema me dice que no tengo privilegios suficientes,Accesos,Media
+Posible correo phishing recibido,Me robaron el computador y necesito bloquear todos mis accesos urgentemente.,Seguridad,Alta
+Bug en módulo de reportes,Necesito que instalen un visor de PDF especializado para mi trabajo.,Software,Media
+Word no abre,Microsoft Word no inicia correctamente y arroja código de error,Software,Media
+Solicitud de manual de CRM,Tengo una duda sobre cómo actualizar mi dirección particular en el sistema.,Consulta general,Media
+Equipo sobrecalentado,La impresora del segundo piso tiene papel atascado y marca error.,Hardware,Alta
+Duda sobre vacaciones,Tengo una duda sobre cómo actualizar mi dirección particular en el sistema.,Consulta general,Baja
+Credenciales revocadas en Office 365,Mi usuario fue bloqueado tras varios intentos fallidos. Necesito ayuda.,Accesos,Baja
+Actualización de datos personales,Tengo una duda sobre cómo actualizar mi dirección particular en el sistema.,Consulta general,Baja
+Suplantación de identidad,Alguien se está haciendo pasar por un directivo pidiendo información,Seguridad,Critica
+Consulta de feriados,¿Me podrían indicar dónde descargar la plantilla oficial para firmas de correo?,Consulta general,Baja
+Cable de red dañado,No tengo acceso a internet ni a la red local desde hace media hora.,Red,Critica
+Error al abrir SAP,"Al intentar abrir la aplicación Jira, me arroja el código de error 500.",Software,Baja
+Error de login en Portal RRHH,Mi usuario fue bloqueado tras varios intentos fallidos. Necesito ayuda.,Accesos,Baja
+Mouse defectuoso,La batería se agota en 10 minutos aunque esté conectada a la corriente.,Hardware,Baja
+Credenciales revocadas en ERP,"Al poner mis credenciales en Jira, la página se queda cargando y no avanza.",Accesos,Media
+WiFi no funciona,No puedo conectarme a la red inalámbrica de la oficina,Red,Alta
+Duda sobre formato de firma,Necesito el manual de usuario para el nuevo portal de Intranet.,Consulta general,Media
+No hay acceso al servidor compartido,La conexión wifi en la sala de reuniones es muy inestable.,Red,Critica
+Inestabilidad en llamadas de Teams,No tengo acceso a internet ni a la red local desde hace media hora.,Red,Media
+Solicitud de acceso a Portal RRHH,He perdido el acceso al sistema. Solicito reseteo de password por favor.,Accesos,Baja
+Consulta de feriados,¿Me podrían indicar dónde descargar la plantilla oficial para firmas de correo?,Consulta general,Baja
+Error de login en Confluence,"Al poner mis credenciales en CRM, la página se queda cargando y no avanza.",Accesos,Baja
+Lentitud en la red wifi,"No puedo mapear la unidad de red compartida Z:, dice acceso denegado.",Red,Media
+Archivo adjunto sospechoso,No puedo abrir un archivo de trabajo porque el sistema de seguridad lo bloqueó.,Seguridad,Alta
+Contraseña comprometida,Creo que alguien descubrió mi clave de acceso institucional,Seguridad,Critica
+Batería de laptop no carga,El monitor externo se apaga y enciende solo intermitentemente.,Hardware,Baja
+Bloqueo por antivirus,No puedo abrir un archivo de trabajo porque el sistema de seguridad lo bloqueó.,Seguridad,Critica
+Sin acceso a red local,No tengo visibilidad de los demás equipos en la red LAN,Red,Alta
+Disco duro haciendo ruido,El equipo se reinicia solo de manera aleatoria arrojando un pantallazo azul.,Hardware,Media
+Posible correo phishing recibido,no puedo abrir un archivo de trabajo porque el sistema de seguridad lo bloqueó.,Seguridad,Alta
+Información de beneficios,Necesito el manual de usuario para el nuevo portal de Confluence.,Consulta general,Media
+Archivo adjunto sospechoso,Me robaron el computador y necesito bloquear todos mis accesos urgentemente.,Seguridad,Alta
+Error al abrir ERP,Se intentó actualizar Jira pero dio un error a mitad de proceso.,Software,Baja
+Pantalla azul,"Varias teclas de mi laptop dejaron de funcionar, especialmente la barra espaciadora.",Hardware,Media
+Disco duro haciendo ruido,El monitor externo se apaga y enciende solo intermitentemente.,Hardware,Baja
+Solicitud de acceso a Intranet,Mi usuario fue bloqueado tras varios intentos fallidos. Necesito ayuda.,Accesos,Media
+Batería de laptop no carga,La impresora del segundo piso tiene papel atascado y marca error.,Hardware,Media
+Actualización fallida de CRM,word y excel me piden activar la licencia y no me dejan editar documentos.,Software,Alta
+Desbloqueo de cuenta,He perdido el acceso al sistema. Solicito reseteo de password por favor.,Accesos,Alta
+Cable de red dañado,Las videollamadas se cortan por la mala señal de red en mi sector.,Red,Alta
+Restablecer contraseña de CRM,Mi usuario fue bloqueado tras varios intentos fallidos. Necesito ayuda.,Accesos,Baja
+Duda sobre formato de firma,Quisiera saber cómo ingresar mis días de vacaciones en la intranet.,Consulta general,Media
+Bloqueo por antivirus,El antivirus detectó una amenaza y bloqueó varios archivos en mi disco C.,Seguridad,Alta
+Robo de equipo informático,No puedo abrir un archivo de trabajo porque el sistema de seguridad lo bloqueó.,Seguridad,Alta
+error al abrir vpn,El programa se congela constantemente y tengo que forzar el cierre.,Software,Baja
+Robo de equipo informático,me llegó una alerta de inicio de sesión desde una ubicación desconocida.,Seguridad,Alta
+Preguntas frecuentes,Tienen disponible una sección de preguntas frecuentes o FAQ,Consulta general,Baja
+alerta de virus en equipo,No puedo abrir un archivo de trabajo porque el sistema de seguridad lo bloqueó.,Seguridad,Critica
+Bloqueo por antivirus,Me robaron el computador y necesito bloquear todos mis accesos urgentemente.,Seguridad,Critica
+Archivo adjunto sospechoso,El antivirus detectó una amenaza y bloqueó varios archivos en mi disco C.,Seguridad,Critica
+Mouse defectuoso,"Varias teclas de mi laptop dejaron de funcionar, especialmente la barra espaciadora.",Hardware,Baja
+Teams no abre,La aplicación de Microsoft Teams se queda cargando en bucle,Software,Media
+Acceso sospechoso detectado,Me llegó una alerta de inicio de sesión desde una ubicación desconocida.,Seguridad,Critica
+Bloqueo por antivirus,No puedo abrir un archivo de trabajo porque el sistema de seguridad lo bloqueó.,Seguridad,Critica
+Instalación de programa requerida,Se intentó actualizar Office 365 pero dio un error a mitad de proceso.,Software,Media
+Error en Windows,Windows muestra pantalla azul de error de software al abrir aplicaciones,Software,Alta
+Pantalla parpadea,El equipo se reinicia solo de manera aleatoria arrojando un pantallazo azul.,Hardware,Media
+Lentitud en la red wifi,las videollamadas se cortan por la mala señal de red en mi sector.,Red,Media
+Sin conexión a internet,No tengo acceso a internet ni a la red local desde hace media hora.,Red,Alta
+Mouse defectuoso,El monitor externo se apaga y enciende solo intermitentemente.,Hardware,Media
+Pantalla parpadea,El equipo se reinicia solo de manera aleatoria arrojando un pantallazo azul.,Hardware,Media
+Posible correo phishing recibido,No puedo abrir un archivo de trabajo porque el sistema de seguridad lo bloqueó.,Seguridad,Critica
+Duda sobre formato de firma,necesito el manual de usuario para el nuevo portal de erp.,Consulta general,Media
+Sin conexión a internet,"La conexión VPN se desconecta cada 5 minutos, es imposible trabajar.",Red,Critica
+Robo de equipo informático,El antivirus detectó una amenaza y bloqueó varios archivos en mi disco C.,Seguridad,Critica
+Batería de laptop no carga,El monitor externo se apaga y enciende solo intermitentemente.,Hardware,Media
+Robo de equipo informático,El antivirus detectó una amenaza y bloqueó varios archivos en mi disco C.,Seguridad,Critica
+Impresora no imprime,La impresora física recibe el documento pero no saca las hojas,Hardware,Media
+Credenciales revocadas en VPN,"Al poner mis credenciales en SAP, la página se queda cargando y no avanza.",Accesos,Alta
+No hay acceso al servidor compartido,"No puedo mapear la unidad de red compartida Z:, dice acceso denegado.",Red,Media
+Licencia de Office expirada,Se intentó actualizar Jira pero dio un error a mitad de proceso.,Software,Baja
+Solicitud de manual de Confluence,Necesito el manual de usuario para el nuevo portal de Jira.,Consulta general,Media
+Batería de laptop no carga,La impresora del segundo piso tiene papel atascado y marca error.,Hardware,Media
+error al abrir erp,Se intentó actualizar VPN pero dio un error a mitad de proceso.,Software,Media
+Alguien sabe mi clave,Un compañero o tercero conoce mi contraseña y necesito cambiarla urgente,Seguridad,Critica
+Bloqueo por antivirus,Me robaron el computador y necesito bloquear todos mis accesos urgentemente.,Seguridad,Alta
+Velocidad de red degradada,Las descargas y transferencias en la red están casi paralizadas,Red,Media
+Caída de Intranet,"La conexión Intranet se desconecta cada 5 minutos, es imposible trabajar.",Red,Alta
+batería de laptop no carga,La impresora del segundo piso tiene papel atascado y marca error.,Hardware,Alta
+Acceso sospechoso detectado,Recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Alta
+Batería de laptop no carga,El monitor externo se apaga y enciende solo intermitentemente.,Hardware,Media
+Pantalla azul,El equipo se reinicia solo de manera aleatoria arrojando un pantallazo azul.,Hardware,Baja
+Desbloqueo de cuenta,Necesito permisos para ingresar al sistema Office 365 por un nuevo proyecto.,Accesos,Alta
+Problema con mi usuario,No puedo acceder a mi cuenta corporativa con mis credenciales,Accesos,Alta
+Actualización fallida de ERP,Necesito que instalen un visor de PDF especializado para mi trabajo.,Software,Media
+Batería no carga,La batería del portátil no retiene carga al desconectar el cable,Hardware,Media
+Solicitar cuenta,Necesito crear una cuenta nueva para utilizar el sistema,Consulta general,Baja
+Pantalla azul,"varias teclas de mi laptop dejaron de funcionar, especialmente la barra espaciadora.",Hardware,Baja
+Credenciales revocadas en CRM,"No puedo acceder a mi cuenta, me indica que la contraseña es incorrecta al intentar entrar a Portal RRHH.",Accesos,Baja
+solicitud de acceso a vpn,"Al poner mis credenciales en Jira, la página se queda cargando y no avanza.",Accesos,Media
+Cuenta bloqueada,Mi cuenta fue bloqueada después de varios intentos fallidos,Accesos,Alta
+Lentitud en la red wifi,La conexión wifi en la sala de reuniones es muy inestable.,Red,Media
+Instalación de programa requerida,Se intentó actualizar SAP pero dio un error a mitad de proceso.,Software,Alta
+Disco duro haciendo ruido,El monitor externo se apaga y enciende solo intermitentemente.,Hardware,Alta
+Mouse no funciona,El mouse dejó de responder y la luz no enciende,Hardware,Baja
+Pantalla parpadea,el equipo se reinicia solo de manera aleatoria arrojando un pantallazo azul.,Hardware,Alta
+Inestabilidad en llamadas de Teams,"La conexión Jira se desconecta cada 5 minutos, es imposible trabajar.",Red,Alta
+Impresora atascada,"Varias teclas de mi laptop dejaron de funcionar, especialmente la barra espaciadora.",Hardware,Alta
+Bloqueo por antivirus,No puedo abrir un archivo de trabajo porque el sistema de seguridad lo bloqueó.,Seguridad,Alta
+Bloqueo por antivirus,El antivirus detectó una amenaza y bloqueó varios archivos en mi disco C.,Seguridad,Alta
+Alerta de virus en equipo,El antivirus detectó una amenaza y bloqueó varios archivos en mi disco C.,Seguridad,Critica
+Bloqueo por antivirus,Recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Critica
+Inestabilidad en llamadas de Teams,No tengo acceso a internet ni a la red local desde hace media hora.,Red,Critica
+Credenciales revocadas en Intranet,He perdido el acceso al sistema. Solicito reseteo de password por favor.,Accesos,Baja
+Actualización fallida de Office 365,word y excel me piden activar la licencia y no me dejan editar documentos.,Software,Baja
+Consulta de feriados,Necesito el manual de usuario para el nuevo portal de Jira.,Consulta general,Baja
+Pantalla azul,la impresora del segundo piso tiene papel atascado y marca error.,Hardware,Alta
+Credenciales revocadas en VPN,"Al poner mis credenciales en SAP, la página se queda cargando y no avanza.",Accesos,Alta
+Bloqueo por antivirus,Me llegó una alerta de inicio de sesión desde una ubicación desconocida.,Seguridad,Alta
+Computador no enciende,Mi computador no prende al presionar el botón de encendido,Hardware,Alta
+Información de beneficios,Necesito el manual de usuario para el nuevo portal de ERP.,Consulta general,Baja
+Instalación de programa requerida,El programa se congela constantemente y tengo que forzar el cierre.,Software,Alta
+Sin conexión a internet,La conexión wifi en la sala de reuniones es muy inestable.,Red,Critica
+Error de login en Office 365,Necesito permisos para ingresar al sistema CRM por un nuevo proyecto.,Accesos,Media
+Pantalla azul,La batería se agota en 10 minutos aunque esté conectada a la corriente.,Hardware,Baja
+Robo de equipo informático,Me robaron el computador y necesito bloquear todos mis accesos urgentemente.,Seguridad,Critica
+Bug en módulo de reportes,El programa se congela constantemente y tengo que forzar el cierre.,Software,Baja
+Batería de laptop no carga,El monitor externo se apaga y enciende solo intermitentemente.,Hardware,Media
+Consulta de feriados,¿Me podrían indicar dónde descargar la plantilla oficial para firmas de correo?,Consulta general,Baja
+Equipo sobrecalentado,La impresora del segundo piso tiene papel atascado y marca error.,Hardware,Media
+Inestabilidad en llamadas de Teams,No tengo acceso a internet ni a la red local desde hace media hora.,Red,Critica
+Archivo adjunto sospechoso,Me llegó una alerta de inicio de sesión desde una ubicación desconocida.,Seguridad,Alta
+Acceso sospechoso detectado,Recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Alta
+Cambio de clave,Deseo actualizar mi contraseña por una nueva,Accesos,Baja
+Restablecer contraseña de Jira,Necesito permisos para ingresar al sistema CRM por un nuevo proyecto.,Accesos,Media
+Tengo problemas con la contraseña ya que se la sabe un amigo,Tengo problemas con la contraseña ya que se la sabe un amigo y temo que ingrese,Seguridad,Critica
+Impresora atascada,El monitor externo se apaga y enciende solo intermitentemente.,Hardware,Alta
+Instalación de programa requerida,El programa se congela constantemente y tengo que forzar el cierre.,Software,Baja
+Consulta de feriados,Quisiera saber cómo ingresar mis días de vacaciones en la intranet.,Consulta general,Baja
+Robo de equipo informático,Me llegó una alerta de inicio de sesión desde una ubicación desconocida.,Seguridad,Alta
+no hay acceso al servidor compartido,No tengo acceso a internet ni a la red local desde hace media hora.,Red,Media
+Mouse defectuoso,La impresora del segundo piso tiene papel atascado y marca error.,Hardware,Media
+Robo de equipo informático,el antivirus detectó una amenaza y bloqueó varios archivos en mi disco c.,Seguridad,Alta
+Mouse defectuoso,El monitor externo se apaga y enciende solo intermitentemente.,Hardware,Alta
+Archivo adjunto sospechoso,Me robaron el computador y necesito bloquear todos mis accesos urgentemente.,Seguridad,Alta
+Lentitud en la red wifi,No tengo acceso a internet ni a la red local desde hace media hora.,Red,Alta
+Información de beneficios,Quisiera saber cómo ingresar mis días de vacaciones en la intranet.,Consulta general,Media
+Caída de enlace,Se cayó el enlace principal de fibra óptica de la sucursal,Red,Critica
+Bloqueo por antivirus,el antivirus detectó una amenaza y bloqueó varios archivos en mi disco c.,Seguridad,Alta
+Alerta de virus en equipo,Recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Alta
+Impresora atascada,La impresora tiene un atasco de papel y no permite imprimir,Hardware,Media
+Aplicación se cierra inesperadamente,se intentó actualizar vpn pero dio un error a mitad de proceso.,Software,Media
+Problema de autenticación de doble factor,"Al poner mis credenciales en ERP, la página se queda cargando y no avanza.",Accesos,Baja
+no hay acceso al servidor compartido,"la conexión crm se desconecta cada 5 minutos, es imposible trabajar.",Red,Alta
+Impresora atascada,El monitor externo se apaga y enciende solo intermitentemente.,Hardware,Media
+Desbloqueo de cuenta,Mi usuario fue bloqueado tras varios intentos fallidos. Necesito ayuda.,Accesos,Baja
+Problema al entrar,Ingreso mi clave pero me dice que no es correcta,Accesos,Media
+instalación de programa requerida,El programa se congela constantemente y tengo que forzar el cierre.,Software,Alta
+Actualización fallida de VPN,El programa se congela constantemente y tengo que forzar el cierre.,Software,Baja
+Lentitud en la red wifi,"No puedo mapear la unidad de red compartida Z:, dice acceso denegado.",Red,Alta
+Duda sobre vacaciones,Necesito información sobre los beneficios de salud del mes.,Consulta general,Baja
+Restablecer contraseña de VPN,"No puedo acceder a mi cuenta, me indica que la contraseña es incorrecta al intentar entrar a Intranet.",Accesos,Alta
+Inestabilidad en llamadas de Teams,"La conexión SAP se desconecta cada 5 minutos, es imposible trabajar.",Red,Alta
+Desbloqueo de cuenta,"Al poner mis credenciales en CRM, la página se queda cargando y no avanza.",Accesos,Baja
+Bloqueo por antivirus,Recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Critica
+Archivo adjunto sospechoso,Recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Critica
+Servidor de archivos caído,No es posible conectar a la unidad Z de red compartida,Red,Alta
+Sin conexión a internet,"La conexión Jira se desconecta cada 5 minutos, es imposible trabajar.",Red,Critica
+actualización de datos personales,tengo una duda sobre cómo actualizar mi dirección particular en el sistema.,Consulta general,Baja
+Duda sobre vacaciones,Necesito información sobre los beneficios de salud del mes.,Consulta general,Baja
+Robo de equipo informático,recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Critica
+posible correo phishing recibido,me robaron el computador y necesito bloquear todos mis accesos urgentemente.,Seguridad,Critica
+Solicitud de manual de ERP,Quisiera saber cómo ingresar mis días de vacaciones en la intranet.,Consulta general,Baja
+pantalla parpadea,El equipo se reinicia solo de manera aleatoria arrojando un pantallazo azul.,Hardware,Baja
+Bloqueo por antivirus,Recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Critica
+Inestabilidad en llamadas de Teams,"No puedo mapear la unidad de red compartida Z:, dice acceso denegado.",Red,Media
+Caída de Intranet,No tengo acceso a internet ni a la red local desde hace media hora.,Red,Critica
+Restablecer contraseña de Portal RRHH,mi usuario fue bloqueado tras varios intentos fallidos. necesito ayuda.,Accesos,Media
+Error al abrir Portal RRHH,Se intentó actualizar Confluence pero dio un error a mitad de proceso.,Software,Baja
+Problema con monitor,El monitor no muestra imagen o parpadea con líneas,Hardware,Alta
+Problema de autenticación de doble factor,"No puedo acceder a mi cuenta, me indica que la contraseña es incorrecta al intentar entrar a Portal RRHH.",Accesos,Media
+Inestabilidad en llamadas de Teams,Las videollamadas se cortan por la mala señal de red en mi sector.,Red,Alta
+Sin conexión a internet,Las videollamadas se cortan por la mala señal de red en mi sector.,Red,Media
+Necesito permisos,Necesito acceso a una carpeta compartida y permisos de lectura,Accesos,Media
+Teclado no funciona,El equipo se reinicia solo de manera aleatoria arrojando un pantallazo azul.,Hardware,Media
+Pantalla parpadea,El monitor externo se apaga y enciende solo intermitentemente.,Hardware,Alta
+Actividad extraña,Detecté actividad sospechosa y movimientos raros en mi cuenta,Seguridad,Critica
+Duda sobre formato de firma,Necesito el manual de usuario para el nuevo portal de VPN.,Consulta general,Baja
+caída de vpn,No tengo acceso a internet ni a la red local desde hace media hora.,Red,Critica
+Archivo adjunto sospechoso,El antivirus detectó una amenaza y bloqueó varios archivos en mi disco C.,Seguridad,Critica
+Pantalla parpadea,La impresora del segundo piso tiene papel atascado y marca error.,Hardware,Baja
+Disco duro haciendo ruido,La impresora del segundo piso tiene papel atascado y marca error.,Hardware,Media
+Duda sobre vacaciones,¿Me podrían indicar dónde descargar la plantilla oficial para firmas de correo?,Consulta general,Baja
+Licencia de Office expirada,Se intentó actualizar Confluence pero dio un error a mitad de proceso.,Software,Alta
+Duda sobre vacaciones,Necesito el manual de usuario para el nuevo portal de SAP.,Consulta general,Baja
+Batería de laptop no carga,El monitor externo se apaga y enciende solo intermitentemente.,Hardware,Media
+Archivo adjunto sospechoso,No puedo abrir un archivo de trabajo porque el sistema de seguridad lo bloqueó.,Seguridad,Alta
+Actualización fallida de Jira,Se intentó actualizar ERP pero dio un error a mitad de proceso.,Software,Baja
+Pregunta sobre plataforma,Tengo una pregunta relacionada con el flujo de solicitudes del sistema,Consulta general,Baja
+Batería de laptop no carga,La batería se agota en 10 minutos aunque esté conectada a la corriente.,Hardware,Media
+Aplicación se cierra inesperadamente,Word y Excel me piden activar la licencia y no me dejan editar documentos.,Software,Alta
+Actualización fallida de Office 365,"al intentar abrir la aplicación portal rrhh, me arroja el código de error 500.",Software,Baja
+Actualización de datos personales,Tengo una duda sobre cómo actualizar mi dirección particular en el sistema.,Consulta general,Media
+Acceso sospechoso detectado,El antivirus detectó una amenaza y bloqueó varios archivos en mi disco C.,Seguridad,Critica
+Robo de equipo informático,recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Critica
+Actualización de datos personales,Quisiera saber cómo ingresar mis días de vacaciones en la intranet.,Consulta general,Baja
+Alerta de virus en equipo,Me robaron el computador y necesito bloquear todos mis accesos urgentemente.,Seguridad,Alta
+Error al abrir CRM,Word y Excel me piden activar la licencia y no me dejan editar documentos.,Software,Media
+Batería de laptop no carga,La impresora del segundo piso tiene papel atascado y marca error.,Hardware,Baja
+Acceso sospechoso detectado,Recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Critica
+Contraseña vencida,El sistema me solicita cambiar mi contraseña porque venció el plazo,Accesos,Media
+Actualización de datos personales,Necesito información sobre los beneficios de salud del mes.,Consulta general,Media
+Teclado no funciona,El monitor externo se apaga y enciende solo intermitentemente.,Hardware,Baja
+Impresora atascada,El monitor externo se apaga y enciende solo intermitentemente.,Hardware,Baja
+Batería de laptop no carga,La batería se agota en 10 minutos aunque esté conectada a la corriente.,Hardware,Alta
+Pantalla parpadea,"Varias teclas de mi laptop dejaron de funcionar, especialmente la barra espaciadora.",Hardware,Media
+Licencia de Office expirada,necesito que instalen un visor de pdf especializado para mi trabajo.,Software,Media
+Instalación de programa requerida,"Al intentar abrir la aplicación Intranet, me arroja el código de error 500.",Software,Media
+Posible correo phishing recibido,recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Alta
+Pantalla rota,Se cayó el notebook y la pantalla LCD se quebró,Hardware,Alta
+lentitud en la red wifi,La conexión wifi en la sala de reuniones es muy inestable.,Red,Media
+Pantalla azul,El monitor externo se apaga y enciende solo intermitentemente.,Hardware,Alta
+Credenciales revocadas en ERP,"No puedo acceder a mi cuenta, me indica que la contraseña es incorrecta al intentar entrar a Portal RRHH.",Accesos,Media
+Acceso sospechoso detectado,No puedo abrir un archivo de trabajo porque el sistema de seguridad lo bloqueó.,Seguridad,Critica
+Sin conexión a internet,No tengo acceso a internet ni a la red local desde hace media hora.,Red,Critica
+Error al abrir Intranet,Necesito que instalen un visor de PDF especializado para mi trabajo.,Software,Alta
+Alerta de virus en equipo,Me llegó una alerta de inicio de sesión desde una ubicación desconocida.,Seguridad,Critica
+Instalación de programa requerida,El programa se congela constantemente y tengo que forzar el cierre.,Software,Media
+Licencia de Office expirada,Necesito que instalen un visor de PDF especializado para mi trabajo.,Software,Baja
+Actualización fallida de ERP,Se intentó actualizar CRM pero dio un error a mitad de proceso.,Software,Alta
+instalación de programa requerida,Necesito que instalen un visor de PDF especializado para mi trabajo.,Software,Alta
+Disco duro haciendo ruido,"Varias teclas de mi laptop dejaron de funcionar, especialmente la barra espaciadora.",Hardware,Baja
+Duda sobre formato de firma,Quisiera saber cómo ingresar mis días de vacaciones en la intranet.,Consulta general,Media
+No puedo acceder al servidor,El servidor principal no responde a las solicitudes de red,Red,Critica
+Instalación de programa requerida,"Al intentar abrir la aplicación SAP, me arroja el código de error 500.",Software,Media
+Acceso sospechoso detectado,Recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Critica
+Archivo adjunto sospechoso,No puedo abrir un archivo de trabajo porque el sistema de seguridad lo bloqueó.,Seguridad,Critica
+bloqueo por antivirus,Me llegó una alerta de inicio de sesión desde una ubicación desconocida.,Seguridad,Critica
+Desbloqueo de cuenta,He perdido el acceso al sistema. Solicito reseteo de password por favor.,Accesos,Media
+Caída de Jira,"La conexión Jira se desconecta cada 5 minutos, es imposible trabajar.",Red,Media
+Cable de red dañado,No tengo acceso a internet ni a la red local desde hace media hora.,Red,Alta
+No detecta WiFi,Mi notebook no encuentra ninguna red inalámbrica disponible,Red,Alta
+Vulnerabilidad detectada,Encontré un fallo de seguridad que expone información sensible,Seguridad,Alta
+Credenciales revocadas en Portal RRHH,Necesito permisos para ingresar al sistema Office 365 por un nuevo proyecto.,Accesos,Alta
+Restablecer contraseña de CRM,He perdido el acceso al sistema. Solicito reseteo de password por favor.,Accesos,Alta
+Instalación de programa requerida,"Al intentar abrir la aplicación Office 365, me arroja el código de error 500.",Software,Alta
+Problema de autenticación de doble factor,He perdido el acceso al sistema. Solicito reseteo de password por favor.,Accesos,Baja
+Error al abrir Intranet,Se intentó actualizar CRM pero dio un error a mitad de proceso.,Software,Baja
+Disco duro lleno,Mi computador indica que no tiene espacio físico disponible en disco,Hardware,Media
+Batería de laptop no carga,el equipo se reinicia solo de manera aleatoria arrojando un pantallazo azul.,Hardware,Baja
+Acceso sospechoso detectado,No puedo abrir un archivo de trabajo porque el sistema de seguridad lo bloqueó.,Seguridad,Alta
+Lentitud en la red wifi,La conexión wifi en la sala de reuniones es muy inestable.,Red,Alta
+solicitud de acceso a sap,He perdido el acceso al sistema. Solicito reseteo de password por favor.,Accesos,Alta
+Conexión intermitente,La red local se cae y vuelve de manera inestable,Red,Alta
+Caída de CRM,La conexión wifi en la sala de reuniones es muy inestable.,Red,Alta
+Error al exportar,El sistema falla cuando intento exportar un reporte a archivo Excel,Software,Media
+Instalación de programa requerida,se intentó actualizar confluence pero dio un error a mitad de proceso.,Software,Alta
+Desbloqueo de cuenta,"Al poner mis credenciales en VPN, la página se queda cargando y no avanza.",Accesos,Media
+Posible correo phishing recibido,No puedo abrir un archivo de trabajo porque el sistema de seguridad lo bloqueó.,Seguridad,Alta
+Duda sobre vacaciones,Tengo una duda sobre cómo actualizar mi dirección particular en el sistema.,Consulta general,Baja
+Restablecer contraseña de Office 365,"Al poner mis credenciales en Intranet, la página se queda cargando y no avanza.",Accesos,Baja
+Duda sobre formato de firma,Tengo una duda sobre cómo actualizar mi dirección particular en el sistema.,Consulta general,Baja
+Disco duro haciendo ruido,El monitor externo se apaga y enciende solo intermitentemente.,Hardware,Alta
+Credenciales revocadas en ERP,Mi usuario fue bloqueado tras varios intentos fallidos. Necesito ayuda.,Accesos,Media
+Licencia de Office expirada,Se intentó actualizar Portal RRHH pero dio un error a mitad de proceso.,Software,Alta
+Aplicación se cierra inesperadamente,word y excel me piden activar la licencia y no me dejan editar documentos.,Software,Baja
+Navegador no responde,Edge o Chrome quedan congelados al abrir el portal interno,Software,Media
+Cable de red dañado,No tengo acceso a internet ni a la red local desde hace media hora.,Red,Media
+actualización de datos personales,Necesito información sobre los beneficios de salud del mes.,Consulta general,Media
+Credenciales revocadas en SAP,"No puedo acceder a mi cuenta, me indica que la contraseña es incorrecta al intentar entrar a ERP.",Accesos,Media
+Acceso sospechoso detectado,Me robaron el computador y necesito bloquear todos mis accesos urgentemente.,Seguridad,Critica
+Caída de ERP,"La conexión Office 365 se desconecta cada 5 minutos, es imposible trabajar.",Red,Alta
+Posible correo phishing recibido,No puedo abrir un archivo de trabajo porque el sistema de seguridad lo bloqueó.,Seguridad,Alta
+Aplicación se cierra inesperadamente,Se intentó actualizar Intranet pero dio un error a mitad de proceso.,Software,Media
+Credenciales revocadas en CRM,Necesito permisos para ingresar al sistema Confluence por un nuevo proyecto.,Accesos,Baja
+Puerto USB no reconoce,Conecto dispositivos a los puertos USB y no los detecta,Hardware,Baja
+Posible correo phishing recibido,No puedo abrir un archivo de trabajo porque el sistema de seguridad lo bloqueó.,Seguridad,Alta
+Aplicación se cierra inesperadamente,Necesito que instalen un visor de PDF especializado para mi trabajo.,Software,Baja
+Archivo adjunto sospechoso,Me robaron el computador y necesito bloquear todos mis accesos urgentemente.,Seguridad,Critica
+Actualización fallida de Confluence,Word y Excel me piden activar la licencia y no me dejan editar documentos.,Software,Media
+Aplicación se cierra inesperadamente,word y excel me piden activar la licencia y no me dejan editar documentos.,Software,Media
+Caída de Intranet,"No puedo mapear la unidad de red compartida Z:, dice acceso denegado.",Red,Media
+Equipo sobrecalentado,La impresora del segundo piso tiene papel atascado y marca error.,Hardware,Media
+Teclado no funciona,La impresora del segundo piso tiene papel atascado y marca error.,Hardware,Media
+Duda sobre formato de firma,Tengo una duda sobre cómo actualizar mi dirección particular en el sistema.,Consulta general,Media
+No hay acceso al servidor compartido,No tengo acceso a internet ni a la red local desde hace media hora.,Red,Critica
+Pantalla azul,La batería se agota en 10 minutos aunque esté conectada a la corriente.,Hardware,Alta
+Lentitud en la red wifi,No tengo acceso a internet ni a la red local desde hace media hora.,Red,Critica
+No puedo iniciar sesión,El sistema indica que mi usuario o contraseña es incorrecto,Accesos,Media
+Duda sobre procedimiento,Quisiera consultar cuál es el proceso para pedir equipamiento,Consulta general,Baja
+Restablecer contraseña de CRM,"Al poner mis credenciales en Portal RRHH, la página se queda cargando y no avanza.",Accesos,Alta
+Pantalla azul,El equipo se reinicia solo de manera aleatoria arrojando un pantallazo azul.,Hardware,Media
+Archivo adjunto sospechoso,Me robaron el computador y necesito bloquear todos mis accesos urgentemente.,Seguridad,Critica
+Bloqueo por antivirus,El antivirus detectó una amenaza y bloqueó varios archivos en mi disco C.,Seguridad,Critica
+Solicitud de manual de SAP,Necesito el manual de usuario para el nuevo portal de SAP.,Consulta general,Media
+Posible correo phishing recibido,Recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Critica
+Consulta general,Tengo una duda general sobre el funcionamiento del sistema de tickets,Consulta general,Baja
+Archivo adjunto sospechoso,Me llegó una alerta de inicio de sesión desde una ubicación desconocida.,Seguridad,Critica
+Duda sobre vacaciones,Necesito el manual de usuario para el nuevo portal de VPN.,Consulta general,Media
+Ventilador ruidoso,El ventilador del procesador hace un zumbido fuerte y no enfría,Hardware,Media
+Posible correo phishing recibido,Me llegó una alerta de inicio de sesión desde una ubicación desconocida.,Seguridad,Alta
+Inestabilidad en llamadas de Teams,"La conexión Intranet se desconecta cada 5 minutos, es imposible trabajar.",Red,Alta
+Acceso sospechoso detectado,Me robaron el computador y necesito bloquear todos mis accesos urgentemente.,Seguridad,Alta
+No hay acceso al servidor compartido,"La conexión Jira se desconecta cada 5 minutos, es imposible trabajar.",Red,Media
+Desbloqueo de cuenta,He perdido el acceso al sistema. Solicito reseteo de password por favor.,Accesos,Baja
+solicitud de acceso a vpn,"Al poner mis credenciales en Portal RRHH, la página se queda cargando y no avanza.",Accesos,Alta
+Licencia de Office expirada,El programa se congela constantemente y tengo que forzar el cierre.,Software,Media
+Batería de laptop no carga,"Varias teclas de mi laptop dejaron de funcionar, especialmente la barra espaciadora.",Hardware,Baja
+Error de login en Office 365,"No puedo acceder a mi cuenta, me indica que la contraseña es incorrecta al intentar entrar a VPN.",Accesos,Baja
+Pantalla parpadea,El equipo se reinicia solo de manera aleatoria arrojando un pantallazo azul.,Hardware,Baja
+No hay acceso al servidor compartido,"La conexión Office 365 se desconecta cada 5 minutos, es imposible trabajar.",Red,Media
+Archivo adjunto sospechoso,El antivirus detectó una amenaza y bloqueó varios archivos en mi disco C.,Seguridad,Alta
+Pantalla azul,La batería se agota en 10 minutos aunque esté conectada a la corriente.,Hardware,Alta
+Recuperar cuenta,Necesito recuperar el acceso a mi perfil de usuario,Accesos,Media
+Caída de VPN,"La conexión Portal RRHH se desconecta cada 5 minutos, es imposible trabajar.",Red,Alta
+Credenciales revocadas en VPN,He perdido el acceso al sistema. Solicito reseteo de password por favor.,Accesos,Baja
+Caída de Confluence,Las videollamadas se cortan por la mala señal de red en mi sector.,Red,Alta
+Actualización de datos personales,¿Me podrían indicar dónde descargar la plantilla oficial para firmas de correo?,Consulta general,Baja
+Robo de equipo informático,Recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Alta
+Pantalla azul,El equipo se reinicia solo de manera aleatoria arrojando un pantallazo azul.,Hardware,Baja
+Sin conexión a internet,Las videollamadas se cortan por la mala señal de red en mi sector.,Red,Critica
+Aplicación se cierra inesperadamente,Word y Excel me piden activar la licencia y no me dejan editar documentos.,Software,Baja
+Solicitud de manual de Intranet,Tengo una duda sobre cómo actualizar mi dirección particular en el sistema.,Consulta general,Baja
+Error de login en Jira,Necesito permisos para ingresar al sistema ERP por un nuevo proyecto.,Accesos,Alta
+sin conexión a internet,"La conexión ERP se desconecta cada 5 minutos, es imposible trabajar.",Red,Media
+Instalación de programa requerida,"Al intentar abrir la aplicación Intranet, me arroja el código de error 500.",Software,Baja
+Problema con DNS,El navegador muestra error DNS no pudo resolver el nombre del sitio,Red,Media
+teclado no funciona,"varias teclas de mi laptop dejaron de funcionar, especialmente la barra espaciadora.",Hardware,Alta
+Mouse defectuoso,"Varias teclas de mi laptop dejaron de funcionar, especialmente la barra espaciadora.",Hardware,Baja
+Impresora atascada,la batería se agota en 10 minutos aunque esté conectada a la corriente.,Hardware,Alta
+Teclado no funciona,La impresora del segundo piso tiene papel atascado y marca error.,Hardware,Baja
+Bug en plataforma,Al presionar el botón de guardar se produce un error no controlado,Software,Media
+Pantalla parpadea,El monitor externo se apaga y enciende solo intermitentemente.,Hardware,Alta
+restablecer contraseña de sap,He perdido el acceso al sistema. Solicito reseteo de password por favor.,Accesos,Alta
+VPN no conecta,No puedo conectarme a la red interna mediante el cliente VPN,Red,Alta
+Instalación de programa requerida,Word y Excel me piden activar la licencia y no me dejan editar documentos.,Software,Media
+Desbloqueo de cuenta,Mi usuario fue bloqueado tras varios intentos fallidos. Necesito ayuda.,Accesos,Media
+Credenciales revocadas en Confluence,necesito permisos para ingresar al sistema portal rrhh por un nuevo proyecto.,Accesos,Alta
+Actualización de datos personales,Necesito el manual de usuario para el nuevo portal de CRM.,Consulta general,Media
+Posible correo phishing recibido,Me robaron el computador y necesito bloquear todos mis accesos urgentemente.,Seguridad,Critica
+Actualización fallida de Office 365,Word y Excel me piden activar la licencia y no me dejan editar documentos.,Software,Baja
+Mouse defectuoso,"Varias teclas de mi laptop dejaron de funcionar, especialmente la barra espaciadora.",Hardware,Baja
+Licencia de Office expirada,"Al intentar abrir la aplicación CRM, me arroja el código de error 500.",Software,Alta
+Equipo no da video,El computador arranca las luces pero no envía señal al monitor,Hardware,Alta
+No recuerdo mi clave,No me acuerdo de la contraseña del sistema,Accesos,Media
+Sin conexión a internet,La conexión wifi en la sala de reuniones es muy inestable.,Red,Media
+Alerta de virus en equipo,Me llegó una alerta de inicio de sesión desde una ubicación desconocida.,Seguridad,Alta
+Robo de equipo informático,Recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Critica
+Información sobre servicio,Quiero conocer qué catálogo de servicios ofrece el área informática,Consulta general,Baja
+Credenciales revocadas en Confluence,Mi usuario fue bloqueado tras varios intentos fallidos. Necesito ayuda.,Accesos,Baja
+Problema de autenticación de doble factor,necesito permisos para ingresar al sistema crm por un nuevo proyecto.,Accesos,Baja
+Lentitud en la red wifi,La conexión wifi en la sala de reuniones es muy inestable.,Red,Critica
+Error al abrir ERP,word y excel me piden activar la licencia y no me dejan editar documentos.,Software,Media
+Archivo adjunto sospechoso,Me robaron el computador y necesito bloquear todos mis accesos urgentemente.,Seguridad,Critica
+Credenciales revocadas en Office 365,"Al poner mis credenciales en SAP, la página se queda cargando y no avanza.",Accesos,Baja
+No hay acceso al servidor compartido,Las videollamadas se cortan por la mala señal de red en mi sector.,Red,Alta
+Credenciales revocadas en ERP,Mi usuario fue bloqueado tras varios intentos fallidos. Necesito ayuda.,Accesos,Media
+Cable de red dañado,"La conexión CRM se desconecta cada 5 minutos, es imposible trabajar.",Red,Critica
+Cable de red dañado,No tengo acceso a internet ni a la red local desde hace media hora.,Red,Media
+caída de vpn,No tengo acceso a internet ni a la red local desde hace media hora.,Red,Alta
+Bloqueo por antivirus,No puedo abrir un archivo de trabajo porque el sistema de seguridad lo bloqueó.,Seguridad,Alta
+Información de beneficios,necesito información sobre los beneficios de salud del mes.,Consulta general,Baja
+Actualización fallida de Portal RRHH,"Al intentar abrir la aplicación ERP, me arroja el código de error 500.",Software,Alta
+Mouse defectuoso,La batería se agota en 10 minutos aunque esté conectada a la corriente.,Hardware,Alta
+Sin conexión a internet,La conexión wifi en la sala de reuniones es muy inestable.,Red,Media
+Cable de red dañado,no tengo acceso a internet ni a la red local desde hace media hora.,Red,Alta
+Licencia de Office expirada,Se intentó actualizar Confluence pero dio un error a mitad de proceso.,Software,Alta
+Caída de Portal RRHH,"La conexión SAP se desconecta cada 5 minutos, es imposible trabajar.",Red,Critica
+Licencia de software,El sistema indica que la licencia del programa expiró,Software,Media
+Cable de red dañado,No tengo acceso a internet ni a la red local desde hace media hora.,Red,Alta
+Duda sobre vacaciones,Necesito el manual de usuario para el nuevo portal de Portal RRHH.,Consulta general,Media
+Disco duro haciendo ruido,"Varias teclas de mi laptop dejaron de funcionar, especialmente la barra espaciadora.",Hardware,Baja
+Credenciales inválidas,El sistema rechaza mis datos de acceso constantemente,Accesos,Alta
+Instalación de programa requerida,"Al intentar abrir la aplicación Intranet, me arroja el código de error 500.",Software,Alta
+Posible correo phishing recibido,El antivirus detectó una amenaza y bloqueó varios archivos en mi disco C.,Seguridad,Critica
+Error de login en ERP,He perdido el acceso al sistema. Solicito reseteo de password por favor.,Accesos,Alta
+Solicitud de acceso,Necesito que me habiliten usuario en el nuevo sistema,Accesos,Media
+equipo sobrecalentado,la batería se agota en 10 minutos aunque esté conectada a la corriente.,Hardware,Alta
+Duda sobre formato de firma,Necesito información sobre los beneficios de salud del mes.,Consulta general,Media
+Consulta de feriados,Necesito el manual de usuario para el nuevo portal de Jira.,Consulta general,Baja
+Pantalla parpadea,La impresora del segundo piso tiene papel atascado y marca error.,Hardware,Baja
+Actualización de datos personales,Tengo una duda sobre cómo actualizar mi dirección particular en el sistema.,Consulta general,Media
+Bloqueo por antivirus,me robaron el computador y necesito bloquear todos mis accesos urgentemente.,Seguridad,Critica
+Error al abrir ERP,Necesito que instalen un visor de PDF especializado para mi trabajo.,Software,Media
+IP no asignada,El computador indica configuración IP no válida o sin DHCP,Red,Media
+Licencia de Office expirada,Se intentó actualizar Intranet pero dio un error a mitad de proceso.,Software,Baja
+Sin conexión a internet,"La conexión Jira se desconecta cada 5 minutos, es imposible trabajar.",Red,Media
+solicitud de acceso a sap,"Al poner mis credenciales en CRM, la página se queda cargando y no avanza.",Accesos,Alta
+Archivo adjunto sospechoso,El antivirus detectó una amenaza y bloqueó varios archivos en mi disco C.,Seguridad,Critica
+Disco duro haciendo ruido,La batería se agota en 10 minutos aunque esté conectada a la corriente.,Hardware,Alta
+Acceso sospechoso detectado,Me llegó una alerta de inicio de sesión desde una ubicación desconocida.,Seguridad,Critica
+Problema de autenticación de doble factor,Necesito permisos para ingresar al sistema VPN por un nuevo proyecto.,Accesos,Media
+Acceso sospechoso detectado,No puedo abrir un archivo de trabajo porque el sistema de seguridad lo bloqueó.,Seguridad,Critica
+Pantalla azul,La impresora del segundo piso tiene papel atascado y marca error.,Hardware,Alta
+Licencia de Office expirada,necesito que instalen un visor de pdf especializado para mi trabajo.,Software,Baja
+archivo adjunto sospechoso,Me robaron el computador y necesito bloquear todos mis accesos urgentemente.,Seguridad,Critica
+Caída de Intranet,"la conexión portal rrhh se desconecta cada 5 minutos, es imposible trabajar.",Red,Media
+Pantalla parpadea,El monitor externo se apaga y enciende solo intermitentemente.,Hardware,Media
+Robo de equipo informático,El antivirus detectó una amenaza y bloqueó varios archivos en mi disco C.,Seguridad,Critica
+No hay acceso al servidor compartido,Las videollamadas se cortan por la mala señal de red en mi sector.,Red,Media
+Acceso sospechoso detectado,Recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Critica
+Cable de red dañado,"No puedo mapear la unidad de red compartida Z:, dice acceso denegado.",Red,Alta
+Lentitud en la red wifi,La conexión wifi en la sala de reuniones es muy inestable.,Red,Alta
+Licencia de Office expirada,El programa se congela constantemente y tengo que forzar el cierre.,Software,Baja
+Pantalla parpadea,La impresora del segundo piso tiene papel atascado y marca error.,Hardware,Alta
+Inestabilidad en llamadas de Teams,Las videollamadas se cortan por la mala señal de red en mi sector.,Red,Alta
+consulta de feriados,Quisiera saber cómo ingresar mis días de vacaciones en la intranet.,Consulta general,Media
+Disco duro haciendo ruido,El equipo se reinicia solo de manera aleatoria arrojando un pantallazo azul.,Hardware,Alta
+Actualización de datos personales,Quisiera saber cómo ingresar mis días de vacaciones en la intranet.,Consulta general,Baja
+Pantalla azul,El monitor externo se apaga y enciende solo intermitentemente.,Hardware,Alta
+error de login en confluence,Necesito permisos para ingresar al sistema Office 365 por un nuevo proyecto.,Accesos,Media
+Error de login en Portal RRHH,"Al poner mis credenciales en VPN, la página se queda cargando y no avanza.",Accesos,Alta
+Solicitud de manual de ERP,¿Me podrían indicar dónde descargar la plantilla oficial para firmas de correo?,Consulta general,Baja
+Bloqueo por antivirus,Recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Critica
+No hay acceso al servidor compartido,"No puedo mapear la unidad de red compartida Z:, dice acceso denegado.",Red,Critica
+actualización de datos personales,Tengo una duda sobre cómo actualizar mi dirección particular en el sistema.,Consulta general,Media
+Acceso sospechoso detectado,Me robaron el computador y necesito bloquear todos mis accesos urgentemente.,Seguridad,Alta
+Consulta de feriados,Quisiera saber cómo ingresar mis días de vacaciones en la intranet.,Consulta general,Media
+Posible phishing,Recibí un mensaje que solicita mis datos personales y credenciales,Seguridad,Critica
+Caída de Portal RRHH,La conexión wifi en la sala de reuniones es muy inestable.,Red,Media
+Sin conexión a internet,"La conexión Confluence se desconecta cada 5 minutos, es imposible trabajar.",Red,Media
+Teclado no funciona,La batería se agota en 10 minutos aunque esté conectada a la corriente.,Hardware,Baja
+Impresora atascada,"Varias teclas de mi laptop dejaron de funcionar, especialmente la barra espaciadora.",Hardware,Alta
+Acceso sospechoso detectado,Recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Alta
+Restablecimiento de credenciales,Olvidé los datos de inicio de sesión de mi cuenta,Accesos,Media
+Solicitud de acceso a Intranet,"Al poner mis credenciales en Jira, la página se queda cargando y no avanza.",Accesos,Media
+Notebook se calienta,El equipo se calienta demasiado después de algunos minutos de uso,Hardware,Alta
+mouse defectuoso,El monitor externo se apaga y enciende solo intermitentemente.,Hardware,Alta
+Inestabilidad en llamadas de Teams,No tengo acceso a internet ni a la red local desde hace media hora.,Red,Media
+No hay acceso al servidor compartido,La conexión wifi en la sala de reuniones es muy inestable.,Red,Media
+Desbloqueo de cuenta,"Al poner mis credenciales en VPN, la página se queda cargando y no avanza.",Accesos,Baja
+Posible virus,Mi computador muestra señales de estar infectado por malware,Seguridad,Critica
+Desbloqueo de cuenta,"No puedo acceder a mi cuenta, me indica que la contraseña es incorrecta al intentar entrar a Jira.",Accesos,Media
+Solicitud de acceso a Jira,He perdido el acceso al sistema. Solicito reseteo de password por favor.,Accesos,Baja
+Desbloqueo de cuenta,Mi usuario fue bloqueado tras varios intentos fallidos. Necesito ayuda.,Accesos,Baja
+Teclado no funciona,La impresora del segundo piso tiene papel atascado y marca error.,Hardware,Baja
+Acceso sospechoso detectado,me llegó una alerta de inicio de sesión desde una ubicación desconocida.,Seguridad,Critica
+Información de beneficios,¿Me podrían indicar dónde descargar la plantilla oficial para firmas de correo?,Consulta general,Media
+Inestabilidad en llamadas de Teams,"No puedo mapear la unidad de red compartida Z:, dice acceso denegado.",Red,Critica
+Solicitud de acceso a VPN,"No puedo acceder a mi cuenta, me indica que la contraseña es incorrecta al intentar entrar a ERP.",Accesos,Baja
+Consulta de feriados,Necesito información sobre los beneficios de salud del mes.,Consulta general,Baja
+Error de login en SAP,He perdido el acceso al sistema. Solicito reseteo de password por favor.,Accesos,Alta
+archivo adjunto sospechoso,No puedo abrir un archivo de trabajo porque el sistema de seguridad lo bloqueó.,Seguridad,Alta
+Actualización fallida de Jira,"Al intentar abrir la aplicación CRM, me arroja el código de error 500.",Software,Media
+Mouse defectuoso,El monitor externo se apaga y enciende solo intermitentemente.,Hardware,Alta
+No hay acceso al servidor compartido,No tengo acceso a internet ni a la red local desde hace media hora.,Red,Media
+Inestabilidad en llamadas de Teams,No tengo acceso a internet ni a la red local desde hace media hora.,Red,Media
+Teclado no funciona,"Varias teclas de mi laptop dejaron de funcionar, especialmente la barra espaciadora.",Hardware,Media
+Error al abrir ERP,Necesito que instalen un visor de PDF especializado para mi trabajo.,Software,Alta
+Equipo sobrecalentado,la impresora del segundo piso tiene papel atascado y marca error.,Hardware,Baja
+Bug en módulo de reportes,"Al intentar abrir la aplicación SAP, me arroja el código de error 500.",Software,Alta
+Bug en módulo de reportes,Se intentó actualizar SAP pero dio un error a mitad de proceso.,Software,Baja
+Disco duro haciendo ruido,el monitor externo se apaga y enciende solo intermitentemente.,Hardware,Alta
+Sin conexión a internet,Las videollamadas se cortan por la mala señal de red en mi sector.,Red,Media
+Problema con red,No puedo acceder a los recursos compartidos de la red interna,Red,Alta
+Sin conexión a internet,Las videollamadas se cortan por la mala señal de red en mi sector.,Red,Media
+Error al abrir Intranet,Se intentó actualizar SAP pero dio un error a mitad de proceso.,Software,Alta
+Pantalla parpadea,La impresora del segundo piso tiene papel atascado y marca error.,Hardware,Media
+Equipo sobrecalentado,El equipo se reinicia solo de manera aleatoria arrojando un pantallazo azul.,Hardware,Alta
+Información de beneficios,Necesito el manual de usuario para el nuevo portal de SAP.,Consulta general,Media
+Robo de equipo informático,No puedo abrir un archivo de trabajo porque el sistema de seguridad lo bloqueó.,Seguridad,Alta
+Credenciales revocadas en Jira,"Al poner mis credenciales en Confluence, la página se queda cargando y no avanza.",Accesos,Alta
+Error al abrir SAP,el programa se congela constantemente y tengo que forzar el cierre.,Software,Alta
+Problema de autenticación de doble factor,"Al poner mis credenciales en Jira, la página se queda cargando y no avanza.",Accesos,Baja
+Notebook lento,Mi notebook tarda demasiado tiempo en iniciar y el disco suena,Hardware,Media
+Actualización de datos personales,Tengo una duda sobre cómo actualizar mi dirección particular en el sistema.,Consulta general,Media
+No hay acceso al servidor compartido,No tengo acceso a internet ni a la red local desde hace media hora.,Red,Alta
+Teclado no funciona,El equipo se reinicia solo de manera aleatoria arrojando un pantallazo azul.,Hardware,Alta
+Bug en módulo de reportes,"Al intentar abrir la aplicación Office 365, me arroja el código de error 500.",Software,Baja
+duda sobre vacaciones,necesito información sobre los beneficios de salud del mes.,Consulta general,Baja
+Mouse defectuoso,El monitor externo se apaga y enciende solo intermitentemente.,Hardware,Media
+Intento de hackeo,Detecté múltiples intentos de ingreso no autorizados a mi perfil,Seguridad,Critica
+Internet se desconecta,La conexión a internet se corta constantemente cada cinco minutos,Red,Alta
+Solicitud de acceso a Jira,"Al poner mis credenciales en Confluence, la página se queda cargando y no avanza.",Accesos,Media
+Información de beneficios,Tengo una duda sobre cómo actualizar mi dirección particular en el sistema.,Consulta general,Media
+Desbloqueo de cuenta,"al poner mis credenciales en jira, la página se queda cargando y no avanza.",Accesos,Baja
+Problema de autenticación de doble factor,Necesito permisos para ingresar al sistema CRM por un nuevo proyecto.,Accesos,Media
+Bug en módulo de reportes,"Al intentar abrir la aplicación ERP, me arroja el código de error 500.",Software,Media
+Cable de red dañado,No tengo acceso a internet ni a la red local desde hace media hora.,Red,Alta
+Cable de red dañado,La conexión wifi en la sala de reuniones es muy inestable.,Red,Alta
+Batería de laptop no carga,La batería se agota en 10 minutos aunque esté conectada a la corriente.,Hardware,Baja
+Pantalla parpadea,El monitor externo se apaga y enciende solo intermitentemente.,Hardware,Alta
+Desbloqueo de cuenta,Por favor desbloquear mi usuario para poder continuar trabajando,Accesos,Alta
+Solicitud de manual de Office 365,Necesito el manual de usuario para el nuevo portal de VPN.,Consulta general,Baja
+Bloqueo por antivirus,Recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Alta
+Robo de equipo informático,no puedo abrir un archivo de trabajo porque el sistema de seguridad lo bloqueó.,Seguridad,Critica
+Lentitud en la red wifi,"La conexión Jira se desconecta cada 5 minutos, es imposible trabajar.",Red,Critica
+Duda sobre formato de firma,Necesito el manual de usuario para el nuevo portal de ERP.,Consulta general,Media
+Error al abrir VPN,Necesito que instalen un visor de PDF especializado para mi trabajo.,Software,Media
+Posible correo phishing recibido,Me llegó una alerta de inicio de sesión desde una ubicación desconocida.,Seguridad,Critica
+impresora atascada,La impresora del segundo piso tiene papel atascado y marca error.,Hardware,Media
+Duda sobre vacaciones,Necesito información sobre los beneficios de salud del mes.,Consulta general,Media
+Duda sobre formato de firma,Quisiera saber cómo ingresar mis días de vacaciones en la intranet.,Consulta general,Baja
+Pantalla parpadea,La impresora del segundo piso tiene papel atascado y marca error.,Hardware,Baja
+Mouse defectuoso,La batería se agota en 10 minutos aunque esté conectada a la corriente.,Hardware,Alta
+Bloqueo por antivirus,Recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Critica
+Robo de equipo informático,El antivirus detectó una amenaza y bloqueó varios archivos en mi disco C.,Seguridad,Critica
+Lentitud en la red wifi,No tengo acceso a internet ni a la red local desde hace media hora.,Red,Critica
+Archivo adjunto sospechoso,No puedo abrir un archivo de trabajo porque el sistema de seguridad lo bloqueó.,Seguridad,Critica
+Usuario bloqueado,Mi usuario aparece bloqueado en el sistema de tickets,Accesos,Alta
+Capacitación,Quisiera solicitar información sobre capacitaciones para nuevos ingresos,Consulta general,Baja
+No hay acceso al servidor compartido,no tengo acceso a internet ni a la red local desde hace media hora.,Red,Media
+Cable de red dañado,"No puedo mapear la unidad de red compartida Z:, dice acceso denegado.",Red,Alta
+Licencia de Office expirada,Se intentó actualizar Jira pero dio un error a mitad de proceso.,Software,Baja
+Enlace peligroso,Abrí un enlace que podría ser malicioso y me preocupa la seguridad,Seguridad,Critica
+Bloqueo por antivirus,Recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Alta
+Problema de autenticación de doble factor,"Al poner mis credenciales en Portal RRHH, la página se queda cargando y no avanza.",Accesos,Media
+Bug en módulo de reportes,Necesito que instalen un visor de PDF especializado para mi trabajo.,Software,Alta
+Bloqueo por antivirus,Recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Alta
+Lentitud en la red wifi,"la conexión intranet se desconecta cada 5 minutos, es imposible trabajar.",Red,Media
+Actualización fallida de Jira,Se intentó actualizar CRM pero dio un error a mitad de proceso.,Software,Baja
+Duda sobre vacaciones,Tengo una duda sobre cómo actualizar mi dirección particular en el sistema.,Consulta general,Media
+Bug en módulo de reportes,Necesito que instalen un visor de PDF especializado para mi trabajo.,Software,Media
+Consulta de feriados,Tengo una duda sobre cómo actualizar mi dirección particular en el sistema.,Consulta general,Baja
+Inestabilidad en llamadas de Teams,Las videollamadas se cortan por la mala señal de red en mi sector.,Red,Critica
+Alerta de virus en equipo,Me robaron el computador y necesito bloquear todos mis accesos urgentemente.,Seguridad,Critica
+Equipo sobrecalentado,el monitor externo se apaga y enciende solo intermitentemente.,Hardware,Media
+Problema de autenticación de doble factor,Necesito permisos para ingresar al sistema Jira por un nuevo proyecto.,Accesos,Media
+Duda sobre vacaciones,Quisiera saber cómo ingresar mis días de vacaciones en la intranet.,Consulta general,Baja
+Outlook no sincroniza,El cliente de correo Outlook no descarga los mensajes nuevos,Software,Media
+Solicitud de manual de Portal RRHH,¿Me podrían indicar dónde descargar la plantilla oficial para firmas de correo?,Consulta general,Baja
+Bloqueo por antivirus,No puedo abrir un archivo de trabajo porque el sistema de seguridad lo bloqueó.,Seguridad,Critica
+Instalación de programa requerida,Se intentó actualizar Office 365 pero dio un error a mitad de proceso.,Software,Alta
+Olvide mi contraseña,No puedo ingresar a mi cuenta porque olvide mi contraseña,Accesos,Media
+duda sobre vacaciones,Quisiera saber cómo ingresar mis días de vacaciones en la intranet.,Consulta general,Media
+error al abrir crm,Se intentó actualizar Confluence pero dio un error a mitad de proceso.,Software,Baja
+Bloqueo por antivirus,Recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Alta
+Solicitud de manual de Office 365,Tengo una duda sobre cómo actualizar mi dirección particular en el sistema.,Consulta general,Baja
+Pantalla parpadea,La batería se agota en 10 minutos aunque esté conectada a la corriente.,Hardware,Media
+Solicitud de manual de Confluence,Necesito información sobre los beneficios de salud del mes.,Consulta general,Media
+Pantalla azul,La impresora del segundo piso tiene papel atascado y marca error.,Hardware,Baja
+duda sobre formato de firma,¿Me podrían indicar dónde descargar la plantilla oficial para firmas de correo?,Consulta general,Media
+Archivo adjunto sospechoso,El antivirus detectó una amenaza y bloqueó varios archivos en mi disco C.,Seguridad,Alta
+Problema con contraseña,Tengo problemas con la contraseña no me deja ingresar,Accesos,Media
+error al abrir intranet,"Al intentar abrir la aplicación Jira, me arroja el código de error 500.",Software,Alta
+Error al abrir CRM,"Al intentar abrir la aplicación VPN, me arroja el código de error 500.",Software,Baja
+Caída de Confluence,La conexión wifi en la sala de reuniones es muy inestable.,Red,Critica
+Error de login en SAP,"Al poner mis credenciales en Portal RRHH, la página se queda cargando y no avanza.",Accesos,Alta
+Teclado no funciona,La impresora del segundo piso tiene papel atascado y marca error.,Hardware,Baja
+Posible correo phishing recibido,Recibí un correo sospechoso pidiendo mis credenciales con un link extraño.,Seguridad,Alta
+Aplicación se cierra inesperadamente,Word y Excel me piden activar la licencia y no me dejan editar documentos.,Software,Media
+Inestabilidad en llamadas de Teams,"La conexión Intranet se desconecta cada 5 minutos, es imposible trabajar.",Red,Critica
+Caída de VPN,"No puedo mapear la unidad de red compartida Z:, dice acceso denegado.",Red,Media
+Actualización fallida de Confluence,Se intentó actualizar SAP pero dio un error a mitad de proceso.,Software,Media
+No hay acceso al servidor compartido,"No puedo mapear la unidad de red compartida Z:, dice acceso denegado.",Red,Media
+pantalla azul,El monitor externo se apaga y enciende solo intermitentemente.,Hardware,Baja

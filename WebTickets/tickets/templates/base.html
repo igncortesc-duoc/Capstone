@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     
     <link rel="stylesheet" href="{% static 'css/global.css' %}">
-    <link rel="icon" type="image/png" href="{% static 'imgs/TIXAI.png' %}">
+    <link rel="icon" type="image/png" href="{% static 'imgs/Logo.png' %}">
 
     {% webpush_header %}
 
@@ -246,8 +246,7 @@
 
 <div class="tix-mobile-topbar">
     <a class="tix-logo" href="{% url 'index' %}">
-        <img src="{% static 'imgs/AAAA_LOGO_TIXAI.png' %}" alt="Logo" width="28" style="border-radius:6px;">
-        TIX AI
+        <img src="{% static 'imgs/Logo.png' %}" alt="Logo" width="28" style="border-radius:6px;">TIX AI
     </a>
     <button class="tix-mobile-toggle" type="button" onclick="document.getElementById('tixSidebar').classList.add('open'); document.getElementById('tixBackdrop').classList.add('show');">
         <i class="bi bi-list"></i>
