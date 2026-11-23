@@ -543,7 +543,112 @@ document.addEventListener('DOMContentLoaded', function () {
 
 <!-- Este botón pedirá permiso al usuario para enviarle notificaciones -->
 
+<!-- ========================================== -->
+<!-- TRADUCCIÓN AUTOMÁTICA -->
+<!-- ========================================== -->
+<div id="google_translate_element" style="display: none !important;"></div>
 
+<style>
+    /* Ocultar barra superior y marcos de Google Translate */
+    .goog-te-banner-frame,
+    iframe.goog-te-banner-frame,
+    .goog-te-menu-frame {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+    }
+
+    body {
+        top: 0px !important;
+        position: static !important;
+    }
+
+    /* Ocultar widget y contenedor inyectado */
+    #google_translate_element,
+    .goog-te-gadget,
+    .goog-te-combo,
+    body > .skiptranslate {
+        display: none !important;
+    }
+
+    /* Ocultar globos de texto flotantes al pasar el cursor */
+    #goog-gt-tt,
+    .goog-te-balloon-frame,
+    .goog-tooltip,
+    .goog-tooltip:hover {
+        display: none !important;
+    }
+
+    /* Evitar resaltado amarillo en textos traducidos */
+    .goog-text-highlight {
+        background-color: transparent !important;
+        box-shadow: none !important;
+        border: none !important;
+    }
+</style>
+
+<script type="text/javascript">
+(function() {
+    var idiomaDjango = "{{ user_settings.idioma|default:'Español' }}";
+    var esIngles = idiomaDjango.toLowerCase().indexOf('en') !== -1 || idiomaDjango.toLowerCase().indexOf('ing') !== -1;
+
+    window.aplicarIdiomaGoogle = function(idioma) {
+        var en = (idioma === 'en' || (typeof idioma === 'string' && (idioma.toLowerCase().indexOf('en') !== -1 || idioma.toLowerCase().indexOf('ing') !== -1)));
+        var hostname = window.location.hostname;
+        
+        if (en) {
+            document.cookie = "googtrans=/es/en; path=/";
+            if (hostname) {
+                document.cookie = "googtrans=/es/en; path=/; domain=" + hostname;
+            }
+        } else {
+            document.cookie = "googtrans=/es/es; path=/";
+            if (hostname) {
+                document.cookie = "googtrans=/es/es; path=/; domain=" + hostname;
+            }
+            document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            if (hostname) {
+                document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + hostname;
+            }
+        }
+    };
+
+    // Sincronizar cookie inicial según el idioma del usuario
+    window.aplicarIdiomaGoogle(esIngles ? 'en' : 'es');
+
+    window.googleTranslateElementInit = function() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'es',
+            includedLanguages: 'en,es',
+            autoDisplay: false
+        }, 'google_translate_element');
+
+        // Sincronizar combo interno si fuera necesario
+        var intentos = 0;
+        var intervalo = setInterval(function() {
+            var combo = document.querySelector('.goog-te-combo');
+            if (combo) {
+                clearInterval(intervalo);
+                if (esIngles && combo.value !== 'en') {
+                    combo.value = 'en';
+                    combo.dispatchEvent(new Event('change'));
+                } else if (!esIngles && combo.value === 'en') {
+                    combo.value = 'es';
+                    combo.dispatchEvent(new Event('change'));
+                }
+            }
+            intentos++;
+            if (intentos > 25) clearInterval(intervalo);
+        }, 200);
+    };
+
+    // Cargar script de Google Translate
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    document.body.appendChild(script);
+})();
+</script>
 
 </body>
 </html>

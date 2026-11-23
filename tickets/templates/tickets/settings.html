@@ -102,7 +102,17 @@ Configuración - TIX AI
         </div>
 
 
-        <input type="hidden" name="idioma" value="{{ settings.idioma|default:'Español' }}">
+            <!-- Idioma -->
+            <div class="cfg-row">
+                <div>
+                    <p class="cfg-label">Idioma</p>
+                    <p class="cfg-desc">Selecciona el idioma del portal</p>
+                </div>
+                <select name="idioma" class="form-select form-select-sm w-auto">
+                    <option value="Español" {% if settings.idioma == "Español" or not settings.idioma %} selected {% endif %}>Español</option>
+                    <option value="English" {% if settings.idioma == "English" %} selected {% endif %}>English</option>
+                </select>
+            </div>
 
 
         <!-- Notificaciones -->
@@ -839,6 +849,15 @@ form.addEventListener('change', async function(event) {
 
         if (data.status !== 'ok') {
             throw new Error('Django no confirmó el autoguardado.');
+        }
+
+        if (nombreOpcion === 'idioma') {
+            const nuevoIdioma = objetivo.value;
+            if (window.aplicarIdiomaGoogle) {
+                window.aplicarIdiomaGoogle(nuevoIdioma);
+            }
+            window.location.reload();
+            return;
         }
 
         if (nombreOpcion === 'tema' ||
